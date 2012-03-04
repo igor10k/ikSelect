@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+	<title>ikSelect 0.5</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.ikSelect.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			// custom syntax
+			$(".select_custom_syntax").ikSelect({
+				syntax: '<div class="ik_select_link"><span class="arr_t">&#x25B2;</span><span class="arr_b">&#x25BC;</span><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>'
+			});
+			$(".show_dropdown").click(function(){
+				$(".select_custom_syntax").ikSelect("show_dropdown");
+			})
+			
+			// autowidth
+			$(".select_autowidth").ikSelect();
+			
+			$(".change_selection").click(function(){
+				$(".select_autowidth").ikSelect("select", "value4");
+			});
+			
+			$(".add_options_to_fake").click(function(){
+				$(".select_autowidth1").ikSelect("add_options", {
+					0: {
+						"value5": "option5"
+					},
+					1: {
+						"value6": "option6"
+					}
+				});
+			});
+			
+			$(".remove_value4_value5").click(function(){
+				$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);
+			});
+			
+			$(".disable_select").click(function(){
+				$(".select_autowidth").ikSelect("disable");
+			});
+			
+			$(".enable_select").click(function(){
+				$(".select_autowidth").ikSelect("enable");
+			});
+			
+			$(".toggle_select").click(function(){
+				$(".select_autowidth").ikSelect("toggle");
+			});
+			
+			// fixed width for fake select, autowidth for dropdown
+			$(".select_dd_autowidth").ikSelect({
+				autowidth: false
+			});
+			
+			$(".add_options_to_fake2").click(function(){
+				$(".select_dd_autowidth").ikSelect("add_options", {
+					"value5": "option5"
+				});
+			});
+			
+			// no autowidth
+			$(".select_noautowidth").ikSelect({
+				autowidth: false,
+				ddfullwidth: false
+			});
+			
+			// custom class
+			$(".select_custom_class").ikSelect({
+				customClass: "select_black"
+			});
+			
+			$(".add_1000_options").click(function(){
+				var options_obj = {};
+				for(var i=5; i<1005; i++){
+					optionValue = 'value'+ i;
+					options_obj[optionValue] = 'option'+ i;
+				}
+				
+				var d0 = new Date();
+				$(".select_custom_class").ikSelect("add_options", options_obj);
+				var d1 = new Date();
+				$(this).append(", "+ (d1-d0) +"ms");
+			});
+			
+			// add option with JS to original select and then reset the fake one
+			$(".select_add_option").ikSelect();
+			
+			option_index = 5;
+			$(".add_option_to_real").click(function(){
+				$(".select_add_option").append("<option value='value"+ option_index +"'>option "+ option_index +"</option>");
+				option_index++;
+				$(this).html('add option "option '+ option_index +'" to the real select and reset the fake one');
+				$(".select_add_option").ikSelect("reset");
+			});
+			
+			// autowidth when select's width is bigger than available space
+			$(".select_autowidth2").ikSelect();
+			
+			// autowidth when select's width is bigger than available space with ddfullwidth:false
+			$(".select_autowidth_noddfullwidth").ikSelect({
+				ddfullwidth: false
+			});
+			
+			// generating a fake select from the select with 1000 options
+			$(".select_1000").each(function(){
+				var html = "";
+				for(var i=0; i<1000; i++){
+					if(i==4){
+						html += '<option selected="selected" value="value'+ i +'">option '+ i +'</option>';
+					} else{
+						html += '<option value="value'+ i +'">option '+ i +'</option>';
+					}
+				}
+				$(this).append(html);
+			});
+			
+			$(".generate_fake").click(function(){
+				var d0 = new Date();
+				$(".select_1000").ikSelect();
+				var d1 = new Date();
+				$(this).append(", "+ (d1-d0) +"ms");
+			});
+			
+			// ui elements
+			$(".code h4").click(function(){
+				if(! $(this).parent().hasClass("opened")){
+					$(this).parent().addClass("opened");
+					$(this).html("hide source");
+					$(this).next().slideDown();
+				} else{
+					$(this).parent().removeClass("opened");
+					$(this).html("view source");
+					$(this).next().slideUp();
+				}
+			});
+		})
+	</script>
+</head>
+<body>
+<div id="wrap2">
+<div id="wrap">
+	<h1>ikSelect 0.5</h1>
+	
+	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
+	
+	<div class="features">
+		<h2>Features</h2>
+		<ul>
+			<li>full customization!</li>
+			<li>use of custom syntax</li>
+			<li>behavior is as close as possible to the original selects in every browser</li>
+			<li>no z-index bugs in IE</li>
+			<li>
+				automatic calculations
+				<ul>
+					<li>dropdown position, so it's always visible when opened</li>
+					<li>width for the select or it's dropdown (can be disabled)</li>
+					<li>active options appears in the center of the dropdown when it's opened</li>
+				</ul>
+			</li>
+			<li>keyboard support
+				<ul>
+					<li>search by letters/numbers/etc</li>
+					<li>navigation using arrows, space, enter, pgup/pgdown, home/end, esc</li>
+					<li>tab</li>
+				</ul>
+			</li>
+			<li>add/remove options using API or make changes to the original select and then just reset the fake one</li>
+			<li>remove option with API using indexes or string</li>
+			<li>support for disabling</li>
+			<li>optgroups support</li>
+			<li>! compatible with iOS</li>
+			<li>fast</li>
+			<li>easy to use</li>
+			<li>built with attention to details</li>
+			<li>no animals were harmed in the making</li>
+		</ul>
+	</div>
+	
+	<div class="options">
+		<h2>Options</h2>
+		<dl>
+			<dt>syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'</dt>
+			<dd>
+				Passing custom syntax to create fake select.<br/>
+				The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".<br/>
+				Other than that any syntax can be passed to plugin.
+			</dd>
+			<dt>autowidth: true(/false)</dt>
+			<dd>Set width of the select according to the longest option.</dd>
+			<dt>ddfullwidth: true(/false)</dt>
+			<dd>Set width of the dropdown according to the longest option.</dd>
+			<dt>customClass: ""</dt>
+			<dd>Add custom class to the fake select's wrapper.</dd>
+		</dl>
+	</div>
+	
+	<div class="api options">
+		<h2>API</h2>
+		<dl>
+			<dt>ikSelect("add_options", &lt;optionsObject&gt;)</dt>
+			<dd>Add options by providing option values and strings.<br/> Specify optgroup index if needed.</dd>
+				
+			<dt>ikSelect("remove_options", &lt;optionsArray&gt;)</dt>
+			<dd>Remove options using array of values.</dd>
+			
+			<dt>ikSelect("select", &lt;optionValue&gt;)</dt>
+			<dd>Change selected option by value.</dd>
+			
+			<dt>ikSelect("show_dropdown")</dt>
+			<dd>Show dropdown assosiated with the passed select.</dd>
+			
+			<dt>ikSelect("enable")</dt>
+			<dd>Enable select.</dd>
+			
+			<dt>ikSelect("disable")</dt>
+			<dd>Disable select.</dd>
+			
+			<dt>ikSelect("toggle")</dt>
+			<dd>Disables enabled and enables disabled select.</dd>
+		</dl>
+		<div class="legend">
+			<dl>
+				<dt>&lt;optionsArray&gt;</dt>
+				<dd>
+					<pre>[&lt;optionValue&gt;, ...]</pre>
+				</dd>
+				<dt>&lt;optionsObject&gt;</dt>
+				<dd>
+					<pre>{
+	&lt;optionValue&gt;: &lt;optionString&gt;,
+	...
+}</pre>
+				</dd>
+				<dt>&lt;optionsObject&gt;</dt>
+				<dd>
+					<pre>{
+	&lt;optgroupIndex&gt;: {
+		&lt;optionValue&gt;: &lt;optionString&gt;,
+		...
+	},
+	...
+}</pre>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<div class="browsers">
+		<h2>Supported browsers</h2>
+		<p>Safari, Chrome, Firefox, Opera, IE6+</p>
+	</div>
+	
+	<div class="note">
+		<p>No arrows in most of the selects in IE, because of the :before and :after pseudo-selectors.</p>
+		<p>Some kind of workaround for IE is show in the "custom syntax" example.</p>
+	</div>
+	
+	<div class="examples">
+		<h2>Examples</h2>
+		
+		<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigations using tab"/></div>
+
+		<div class="row odd">
+			<div class="custom_syntax_wrap">
+				<h3>custom syntax (adding arrows without :before and :after)</h3>
+				<select class="select_custom_syntax">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/custom_class_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_custom_syntax").ikSelect({
+	syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="arr_t"&gt;&amp;#x25B2;&lt;/span&gt;&lt;span class="arr_b"&gt;&amp;#x25BC;&lt;/span&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
+});</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button show_dropdown">show dropdown</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_custom_syntax").ikSelect("show_dropdown");</pre>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="autowidth_wrap">
+				<h3>optgroups and autowidth</h3>
+				<select class="select_autowidth select_autowidth1">
+					<optgroup label="optgroup1">
+						<option value="value1">option 1</option>
+						<option value="value2" selected="selected">option 2 with quite a long name</option>
+					</optgroup>
+					<optgroup label="optgroup2">
+						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+						<option value="value4">o4</option>
+					</optgroup>
+					<optgroup label="optgroup3">
+						<option value="value111">dummy option 1</option>
+						<option value="value112">dummy option 2</option>
+					</optgroup>
+				</select>
+			</div><!--/autowidth_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth").ikSelect();</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button change_selection">change selection to the one with value "value4"</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth").ikSelect("select", "value4");</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button add_options_to_fake">add "option5" with value "value5" to "optgroup1" and "option6" with value "value6" to "optgroup2"</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth1").ikSelect("add_options", {
+	0: {
+		"value5": "option5"
+	},
+	1: {
+		"value6": "option6"
+	}
+});</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button remove_value4_value5">remove options with values "value4" and "value5"</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button disable_select">disable select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth").ikSelect("disable");</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button enable_select">enable select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth").ikSelect("enable");</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button toggle_select">toggle select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth").ikSelect("toggle");</pre>
+			</div>
+		</div>
+		
+		<div class="row odd">
+			<div class="dd_autowidth_wrap">
+				<h3>fixed width for fake select, autowidth for dropdown</h3>
+				<select class="select_dd_autowidth">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/dd_autowidth_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_dd_autowidth").ikSelect({
+	autowidth: false
+});</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button add_options_to_fake2">add "option5" with value "value5"</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_dd_autowidth").ikSelect("add_options", {
+	"value5": "option5"
+});</pre>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="noautowidth_wrap">
+				<h3>no autowidth</h3>
+				<select class="select_noautowidth">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/noautowidth_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_noautowidth").ikSelect({
+	autowidth: false,
+	ddfullwidth: false
+});</pre>
+			</div>
+		</div>
+		
+		<div class="row odd">
+			<div class="custom_class_wrap">
+				<h3>custom class</h3>
+				<select class="select_custom_class">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/custom_class_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_custom_class").ikSelect({
+	customClass: "select_black"
+});</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button add_1000_options">add 1000 options to the fake select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>var options_obj = {};
+for(var i=5; i&lt;1005; i++){
+	optionValue = 'value'+ i;
+	options_obj[optionValue] = 'option'+ i;
+}
+
+var d0 = new Date();
+$(".select_custom_class").ikSelect("add_options", options_obj);
+var d1 = new Date();
+$(this).append(", "+ (d1-d0) +"ms");</pre>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="add_option_wrap">
+				<h3>add option with JS to original select and then reset the fake one</h3>
+				<select class="select_add_option">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/custom_class_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_add_option").ikSelect();</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button add_option_to_real">add option "option 5" to the real select and reset the fake one</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>option_index = 5;
+	$(".add_option_to_real").click(function(){
+	$(".select_add_option").append("&lt;option value='value"+ option_index +"'&gt;option "+ option_index +"&lt;/option&gt;");
+	option_index++;
+	$(this).html('add option "option '+ option_index +'" to the real select and reset the fake one');
+	$(".select_add_option").ikSelect("reset");
+});</pre>
+			</div>
+		</div>
+		
+		<div class="row odd row_pad">
+			<div class="autowidth_wrap">
+				<h3>autowidth when select's width is bigger than available space</h3>
+				<select class="select_autowidth2">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/autowidth_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth2").ikSelect();</pre>
+			</div>
+		</div>
+		
+		<div class="row row_pad">
+			<div class="autowidth_wrap">
+				<h3>autowidth when select's width is bigger than available space with ddfullwidth:false</h3>
+				<select class="select_autowidth_noddfullwidth">
+					<option value="value1">option 1</option>
+					<option value="value2">option 2 with quite a long name</option>
+					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+					<option value="value4">o4</option>
+				</select>
+			</div><!--/autowidth_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_autowidth_noddfullwidth").ikSelect({
+	ddfullwidth: false
+});</pre>
+			</div>
+		</div>
+		
+		<div class="row odd">
+			<div class="autowidth_wrap">
+				<h3>generating a fake select from the select with 1000 options</h3>
+				<select class="select_1000" style="width:200px;"></select>
+			</div><!--/autowidth_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_1000").each(function(){
+	var html = "";
+	for(var i=0; i<1000; i++){
+		if(i==4){
+			html += '&lt;option selected="selected" value="value'+ i +'"&gt;option '+ i +'&lt;/option&gt;';
+		} else{
+			html += '&lt;option value="value'+ i +'"&gt;option '+ i +'&lt;/option&gt;';
+		}
+	}
+	$(this).append(html);
+});</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button generate_fake">generate fake select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_1000").ikSelect();</pre>
+			</div>
+		</div>
+	</div>
+	
+	<div id="footer">
+		author: <a href="http://i10k.ru">i10k.ru</a>
+	</div>
+</div><!--/wrap-->
+</div><!--/wrap2-->
+</body>
+</html>
