@@ -1,4 +1,4 @@
-// ikSelect 0.6
+// ikSelect 0.6.1
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -20,6 +20,13 @@
 
 		this.options = $.extend({}, defaults, options);
 		
+		this._defaults = defaults;
+		this._name = 'ikSelect';
+		
+		if(typeof this.element === 'undefined'){
+			return this;
+		}
+		
 		this.fakeSelect = $('<div class="ik_select">' + this.options['syntax'] + '</div>'); // fake select object made with passed syntax
 		this.select = $(this.element); // original select
 		this.link = $(".ik_select_link", this.fakeSelect); // fake select
@@ -30,9 +37,6 @@
 		
 		this.active = $([]);
 		this.hover = $([]);
-
-		this._defaults = defaults;
-		this._name = 'ikSelect';
 		
 		this.init();
 	};
@@ -207,7 +211,9 @@
 			if(autoWidth || ddFullWidth){
 				block.show().width(9999);
 				listInner.css("float", "left");
-				var maxWidth = list.css("position", "absolute").width();
+				list.css("position", "absolute");
+				var maxWidthOuter = list.outerWidth(true);
+				var maxWidthInner = list.width();
 				list.css("position", "static");
 				block.hide().css("width", "100%");
 				listInner.css("float", "none");
@@ -224,17 +230,19 @@
 
 				var parentWidth = select.parent().width();
 				if(ddFullWidth){
-					block.width(maxWidth);
-					listInner.width(maxWidth + scrollbarWidth);
-					$("ul", listInner).width(maxWidth);
+					block.width(maxWidthOuter);
+					listInner.width(maxWidthInner);
+					$("ul", listInner).width(maxWidthInner);
 				};
-				if(maxWidth > parentWidth){
-					maxWidth = parentWidth;
+				if(maxWidthOuter > parentWidth){
+					maxWidthOuter = parentWidth;
 				};
 				if(autoWidth){
-					fakeSelect.width(maxWidth);
+					fakeSelect.width(maxWidthOuter);
 				};
 			};
+
+			ikselect._fix_height();
 
 			// hide the original select
 			select.css({
@@ -283,8 +291,6 @@
 			};
 			listInner.append(newOptions);
 			ikselect._select_fake_option();
-
-			ikselect._fix_height();
 
 			ikselect._attach_list_events($("li", listInner));
 		},
@@ -541,18 +547,29 @@
 			var block = this.block;
 			var listInner = this.listInner;
 			var maxHeight = this.options['maxHeight'];
+			var ddFullWidth = this.options['ddFullWidth'];
 
 			block.show();
 			if(listInner.height() > maxHeight){
 				listInner.css({
 					overflow: "auto",
-					height: maxHeight
+					height: maxHeight,
+					position: "relative"
 				});
+				$.data(listInner, "ik_select_hasScrollbar", true);
+				if(ddFullWidth){
+					block.width(block.width() + scrollbarWidth);
+					listInner.width(listInner.width() + scrollbarWidth);
+				};
 			} else{
-				listInner.css({
-					overflow: "",
-					height: "auto"
-				});
+				if($.data(listInner, "ik_select_hasScrollbar")){
+					listInner.css({
+						overflow: "",
+						height: "auto"
+					});
+					listInner.width(listInner.width() - scrollbarWidth);
+					block.width(block.width() - scrollbarWidth);
+				};
 			};
 			block.hide();
 		}

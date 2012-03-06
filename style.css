@@ -59,9 +59,9 @@ h3{font-size:14px; font-weight:normal; line-height:18px; padding:0 0 10px; color
 
 /* custom syntax example */
 .custom_syntax_wrap .ik_select_link_text:after, .custom_syntax_wrap .ik_select_link_text:before{display:none;}
-.custom_syntax_wrap .arr_t, .custom_syntax_wrap .arr_b{position:absolute; right:7px; font-size:6px; color:#434343; font-family:"arial"; line-height:10px; top:50%;}
-.custom_syntax_wrap .arr_t{margin-top:-8px;}
-.custom_syntax_wrap .arr_b{margin-top:-2px;}
+.ik_select .arr_t, .ik_select .arr_b{position:absolute; right:7px; font-size:6px; color:#434343; font-family:"arial"; line-height:10px; top:50%;}
+.ik_select .arr_t{margin-top:-8px;}
+.ik_select .arr_b{margin-top:-2px;}
 /* /custom syntax example */
 
 /* black select example */

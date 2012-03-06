@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
-	<title>ikSelect 0.6</title>
+	<title>ikSelect 0.6.1</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="style.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.ikSelect.min.js"></script>
+	<script type="text/javascript" src="jquery.ikSelect.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			// custom syntax
@@ -15,7 +15,14 @@
 			});
 			$(".show_dropdown").click(function(){
 				$(".select_custom_syntax").ikSelect("show_dropdown");
-			})
+			});
+			
+			//setting defaults for ie
+			if($.browser.msie && $.browser.version.charAt(0) < 9){
+				$.ikSelect.set_defaults({
+					syntax: '<div class="ik_select_link"><span class="arr_t">&#x25B2;</span><span class="arr_b">&#x25BC;</span><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>'
+				});
+			}
 			
 			// autowidth
 			$(".select_autowidth").ikSelect();
@@ -143,7 +150,7 @@
 <body>
 <div id="wrap2">
 <div id="wrap">
-	<h1>ikSelect 0.6</h1>
+	<h1>ikSelect 0.6.1</h1>
 	
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
 	
@@ -163,7 +170,8 @@
 					<li>active options appears in the center of the dropdown when it's opened</li>
 				</ul>
 			</li>
-			<li>keyboard support
+			<li>
+				keyboard support
 				<ul>
 					<li>search by letters/numbers/etc</li>
 					<li>navigation using arrows, space, enter, pgup/pgdown, home/end, esc</li>
@@ -258,12 +266,12 @@
 	
 	<div class="browsers">
 		<h2>Supported browsers</h2>
-		<p>Safari, Chrome, Firefox, Opera, IE6+</p>
+		<p>Safari, Chrome, Firefox, Opera, IE7+, IE6 (scroll inside dropdown is not working correctly, "enter" inside dropdown is not working either, although "space" works)</p>
 	</div>
 	
 	<div class="note">
-		<p>No arrows in most of the selects in IE, because of the :before and :after pseudo-selectors.</p>
-		<p>Some kind of workaround for IE is show in the "custom syntax" example.</p>
+		<p>Arrows are made using :before and :after pseudo-selectors so in IE &lt; 9 they don't work.</p>
+		<p>As a workaround the default syntax for selects only for IE &lt; 9 is changed after the initiation of the first select.</p>
 	</div>
 	
 	<div class="examples">
