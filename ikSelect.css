@@ -1,31 +1,6 @@
-*{margin:0; padding:0;}
-html{height:100%;}
-body{font:12px "Helvetica Neue", helvetica, arial, sans-serif; line-height:1.2; height:100%; color:#333;}
-a{color:#000;}
-.clearfix{zoom:1;}
-.clearfix:after{content:" "; display:block; clear:both;}
-
-/* important css
----------------------------------------- */
-
-/* use this as a starting point
 .ik_select_original{position:relative; zoom:1;}
 .ik_select_original select{margin:0; padding:0;}
-.ik_select{position:relative;}
-.ik_select_link{overflow:hidden; white-space:nowrap; position:relative; cursor:default; zoom:1; background:#FFF; border:1px solid #000; height:16px; line-height:16px;}
-.ik_select_link.focus{border-color:#F00;}
-.ik_select_link_text{overflow:hidden; display:block; zoom:1;}
-.ik_select_block{position:absolute; z-index:9999; width:100%; display:none; left:0; top:0;}
-.ik_select_block_right{left:auto;}
-.ik_select_block ul{padding:0; margin:0; zoom:1; border:1px solid #000; background:#FFF;}
-.ik_select_block li{list-style:none; padding:0; margin:0; cursor:default; line-height:16px;}
-.ik_select_block li.hover{color:#0F0;}
-.ik_select_block li.active{color:#F00;}
-	/use this as a starting point */
-
-.ik_select_original{position:relative; zoom:1;}
-.ik_select_original select{margin:0; padding:0;}
-.ik_select{width:200px; position:relative; margin:0; font:11px/16px "Lucida Grande"; height:19px; zoom:1;}
+.ik_select{width:200px; position:relative; font:11px/16px "Lucida Grande"; height:19px; display:inline-block; *display:inline; zoom:1; vertical-align:middle;}
 .ik_select_link{border-radius:4px; padding:0 22px 0 7px; height:16px; overflow:hidden; border:1px solid #9c9c9c; white-space:nowrap; position:relative; cursor:default; zoom:1;
 	box-shadow:0 1px 0 #f0f0f0, inset 0 0 0 1px rgba(255,255,255,0.22);
 	background: #ffffff;
@@ -50,13 +25,14 @@ a{color:#000;}
 .ik_select_link_text:before{content:"\25BC"; margin-top:-2px;}
 .ik_select_block{position:absolute; z-index:9999; width:100%; left:0; top:-2px; display:none;}
 .ik_select_block_right{left:auto;}
-.ik_select_list{}
-.ik_select_list_inner{margin:0; padding:4px 0; overflow:auto; max-height:300px; position:relative; font:11px/16px "Lucida Grande"; line-height:16px; background:#FFF; zoom:1; *border:1px solid #000;
+.ik_select_list{padding:4px 0; position:relative; font:11px/16px "Lucida Grande"; line-height:16px; background:#FFF; zoom:1; *border:1px solid #000;
 	border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;
 	box-shadow:0 10px 15px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.08); -webkit-box-shadow:0 10px 15px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.08); -moz-box-shadow:0 10px 15px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.08);}
+.ik_select_list_inner{}
 .ik_select_optgroup{}
 .ik_select_optgroup_label{color:#7f8080; padding:0 21px;}
-.ik_select_list li{list-style:none; padding:0; margin:0; cursor:default; padding:0 21px; position:relative;}
+.ik_select_list ul{margin:0; padding:0;}
+.ik_select_list li{list-style:none; margin:0; cursor:default; padding:0 21px; position:relative;}
 .ik_select_optgroup li{padding-left:42px;}
 .ik_select_list li.ik_select_hover{
 	color:#FFF;
@@ -73,93 +49,3 @@ a{color:#000;}
 .ik_select_list li.ik_select_active span:after{content:"\2713"; position:absolute; left:5px; top:0;}
 
 .ik_select.ik_select_disabled .ik_select_link{top:0; box-shadow:none; opacity:0.5; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);}
-
-#wrap2{overflow:hidden; position:relative; zoom:1;}
-#wrap{padding:10px 20px; width:956px; margin:0 auto;}
-h1{font-size:24px; line-height:28px; font-weight:normal; padding-bottom:20px;}
-p{padding-bottom:16px; line-height:16px;}
-
-.features{border-top:3px solid #000; padding:16px 20px 18px; margin:0 -20px;}
-.features li{list-style:none; line-height:16px; position:relative; padding-left:20px; padding-bottom:2px;}
-.features li:before{content:"\2713"; position:absolute; left:0; top:0; color:#666;}
-.features li li{padding-left:15px; padding-bottom:0; color:#666;}
-.features li li:before{content:"-";}
-
-.options{border-top:3px solid #000; padding:16px 20px 4px; margin:0 -20px; zoom:1;}
-h2{font-size:16px; line-height:20px; font-weight:normal; padding-bottom:10px; color:#000;}
-.options dl{line-height:16px;}
-.options dt{font-weight:bold; color:#000;}
-.options dd{padding:0 0 16px 16px;}
-
-.api{position:relative;}
-.api .legend{position:absolute; right:20px; top:35px; border:solid #000; border-width:1px 0; padding-top:10px;}
-
-.browsers{border-top:3px solid #000; margin:0 -20px; zoom:1; padding:16px 20px 4px;}
-
-.note{border-top:3px solid #000; margin:0 -20px; padding:20px 20px 4px; position:relative; font-style:italic; zoom:1;}
-.note:before{content:"!"; position:absolute; left:-10px; top:-4px; width:20px; height:20px; color:#FCC; text-align:center; font-size:100px; line-height:104px; font-weight:bold; font-style:normal; font-family:"Courier New";
-	border-radius:10px; -webkit-border-radius:10px; -moz-border-radius:10px;}
-.note p{position:relative;}
-
-.examples{padding:16px 20px 0; margin:0 -20px; zoom:1; border-top:3px solid #000;}
-.inp_text{width:250px; margin-bottom:20px;}
-
-.row{border-top:2px solid #000; padding:16px 20px 20px; margin:0 -20px; zoom:1;}
-.row.odd{background:#f8f8f8;}
-h3{font-size:14px; font-weight:normal; line-height:18px; padding:0 0 10px; color:#000;}
-
-.noautowidth_wrap select{width:200px;}
-
-.code{border:solid #000; border-width:1px 0; padding:0 10px; margin-top:10px; zoom:1;
-	transition:all linear 0.2s; -webkit-transition:all linear 0.2s; -moz-transition:all linear 0.2s;}
-.code h4{font-size:12px; line-height:15px; margin:0 -10px; padding:0 10px 1px; cursor:pointer; zoom:1;
-	transition:all linear 0.2s; -webkit-transition:all linear 0.2s; -moz-transition:all linear 0.2s;}
-.code h4:hover{background:#DDD;}
-.code.opened{background:#EEE;}
-.code.opened h4{background:#DDD; text-shadow:0 1px 1px #FFF;}
-.code.opened h4:hover{background:#CCC;}
-.code pre{display:none; padding:10px 0;
-	white-space: pre-wrap;
-	white-space: -moz-pre-wrap;
-	white-space: -pre-wrap;
-	white-space: -o-pre-wrap;
-	word-wrap: break-word;
-	*white-space:pre;}
-
-.select_black .ik_select_link{background:#000; color:#FFF; border-color:#000;
-	background: rgb(69,72,77);
-	background: -moz-linear-gradient(top, rgba(69,72,77,1) 0%, rgba(69,72,77,1) 47%, rgba(55,56,61,1) 53%, rgba(0,0,0,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,1)), color-stop(47%,rgba(69,72,77,1)), color-stop(53%,rgba(55,56,61,1)), color-stop(100%,rgba(0,0,0,1)));
-	background: -webkit-linear-gradient(top, rgba(69,72,77,1) 0%,rgba(69,72,77,1) 47%,rgba(55,56,61,1) 53%,rgba(0,0,0,1) 100%);
-	background: -o-linear-gradient(top, rgba(69,72,77,1) 0%,rgba(69,72,77,1) 47%,rgba(55,56,61,1) 53%,rgba(0,0,0,1) 100%);
-	background: -ms-linear-gradient(top, rgba(69,72,77,1) 0%,rgba(69,72,77,1) 47%,rgba(55,56,61,1) 53%,rgba(0,0,0,1) 100%);
-	background: linear-gradient(top, rgba(69,72,77,1) 0%,rgba(69,72,77,1) 47%,rgba(55,56,61,1) 53%,rgba(0,0,0,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );}
-.select_black .ik_select_link_text:after, .select_black .ik_select_link_text:before{color:#DDD;}
-.select_black .ik_select_link.focus{
-	box-shadow:0 0 5px #000, 0 0 0 1px rgba(255,255,255,0.22) inset;
-	*border-color:#F00;}
-
-.custom_syntax_wrap .ik_select_link_text:after, .custom_syntax_wrap .ik_select_link_text:before{display:none;}
-.custom_syntax_wrap .arr_t, .custom_syntax_wrap .arr_b{position:absolute; right:7px; font-size:6px; color:#434343; font-family:"arial"; line-height:10px; top:50%;}
-.custom_syntax_wrap .arr_t{margin-top:-8px;}
-.custom_syntax_wrap .arr_b{margin-top:-2px;}
-
-.button{background:#DDD; border:1px solid #AAA; display:block; height:20px; text-align:center; line-height:20px; padding:0 20px; margin-top:10px; text-shadow:0 1px 1px #FFF; overflow:hidden; cursor:pointer; float:left;
-	border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;
-	background: rgb(255,255,255);
-	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(51%,rgba(225,225,225,1)), color-stop(100%,rgba(246,246,246,1)));
-	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
-	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
-	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
-	background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
-	transition:all linear 0.1s; -webkit-transition:all linear 0.1s; -moz-transition:all linear 0.1s;}
-.button:hover{line-height:24px; *line-height:20px;
-	box-shadow:inset 0 2px 1px #777; -webkit-box-shadow:inset 0 2px 1px #777; -moz-box-shadow:inset 0 2px 1px #777;}
-
-.row_pad{padding-left:500px;}
-
-#footer{padding:20px 20px 10px; text-align:right; border-top:3px solid #000; margin:0 -20px;}
-#footer a:hover{color:#F00;}

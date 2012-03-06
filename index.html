@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
-	<title>ikSelect 0.5</title>
+	<title>ikSelect 0.6</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="style.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.ikSelect.min.js"></script>
@@ -52,7 +53,7 @@
 			
 			// fixed width for fake select, autowidth for dropdown
 			$(".select_dd_autowidth").ikSelect({
-				autowidth: false
+				autoWidth: false
 			});
 			
 			$(".add_options_to_fake2").click(function(){
@@ -63,8 +64,8 @@
 			
 			// no autowidth
 			$(".select_noautowidth").ikSelect({
-				autowidth: false,
-				ddfullwidth: false
+				autoWidth: false,
+				ddFullWidth: false
 			});
 			
 			// custom class
@@ -101,7 +102,7 @@
 			
 			// autowidth when select's width is bigger than available space with ddfullwidth:false
 			$(".select_autowidth_noddfullwidth").ikSelect({
-				ddfullwidth: false
+				ddFullWidth: false
 			});
 			
 			// generating a fake select from the select with 1000 options
@@ -142,7 +143,7 @@
 <body>
 <div id="wrap2">
 <div id="wrap">
-	<h1>ikSelect 0.5</h1>
+	<h1>ikSelect 0.6</h1>
 	
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
 	
@@ -151,6 +152,7 @@
 		<ul>
 			<li>full customization!</li>
 			<li>use of custom syntax</li>
+			<li>works perfect as an inline-block</li>
 			<li>behavior is as close as possible to the original selects in every browser</li>
 			<li>no z-index bugs in IE</li>
 			<li>
@@ -172,7 +174,7 @@
 			<li>remove option with API using indexes or string</li>
 			<li>support for disabling</li>
 			<li>optgroups support</li>
-			<li>! compatible with iOS</li>
+			<li>compatible with mobile devices</li>
 			<li>fast</li>
 			<li>easy to use</li>
 			<li>built with attention to details</li>
@@ -191,35 +193,40 @@
 			</dd>
 			<dt>autowidth: true(/false)</dt>
 			<dd>Set width of the select according to the longest option.</dd>
-			<dt>ddfullwidth: true(/false)</dt>
+			<dt>ddFullWidth: true(/false)</dt>
 			<dd>Set width of the dropdown according to the longest option.</dd>
 			<dt>customClass: ""</dt>
 			<dd>Add custom class to the fake select's wrapper.</dd>
+			<dt>ddMaxHeight: 200</dt>
+			<dd>Maximum allowed height for dropdown.</dd>
 		</dl>
 	</div>
 	
 	<div class="api options">
 		<h2>API</h2>
 		<dl>
-			<dt>ikSelect("add_options", &lt;optionsObject&gt;)</dt>
+			<dt>$.ikSelect("set_defaults", &lt;settings&gt;)</dt>
+			<dd>Override defaults for new instances.</dd>
+			
+			<dt>$(selector).ikSelect("add_options", &lt;optionsObject&gt;)</dt>
 			<dd>Add options by providing option values and strings.<br/> Specify optgroup index if needed.</dd>
 				
-			<dt>ikSelect("remove_options", &lt;optionsArray&gt;)</dt>
+			<dt>$(selector).ikSelect("remove_options", &lt;optionsArray&gt;)</dt>
 			<dd>Remove options using array of values.</dd>
 			
-			<dt>ikSelect("select", &lt;optionValue&gt;)</dt>
+			<dt>$(selector).ikSelect("select", &lt;optionValue&gt;)</dt>
 			<dd>Change selected option by value.</dd>
 			
-			<dt>ikSelect("show_dropdown")</dt>
+			<dt>$(selector).ikSelect("show_dropdown")</dt>
 			<dd>Show dropdown assosiated with the passed select.</dd>
 			
-			<dt>ikSelect("enable")</dt>
+			<dt>$(selector).ikSelect("enable")</dt>
 			<dd>Enable select.</dd>
 			
-			<dt>ikSelect("disable")</dt>
+			<dt>$(selector).ikSelect("disable")</dt>
 			<dd>Disable select.</dd>
 			
-			<dt>ikSelect("toggle")</dt>
+			<dt>$(selector).ikSelect("toggle")</dt>
 			<dd>Disables enabled and enables disabled select.</dd>
 		</dl>
 		<div class="legend">
@@ -381,12 +388,14 @@
 		<div class="row odd">
 			<div class="dd_autowidth_wrap">
 				<h3>fixed width for fake select, autowidth for dropdown</h3>
+				by the way you can easily use these selects inline
 				<select class="select_dd_autowidth">
 					<option value="value1">option 1</option>
 					<option value="value2">option 2 with quite a long name</option>
 					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
 					<option value="value4">o4</option>
 				</select>
+				just like that
 			</div><!--/dd_autowidth_wrap-->
 
 			<div class="code">

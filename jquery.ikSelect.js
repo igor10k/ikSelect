@@ -1,30 +1,35 @@
-// ikSelect 0.5
+// ikSelect 0.6
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
 ;(function($, window, document, undefined){
 	defaults = {
 		syntax: '<div class="ik_select_link"><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>',
-		autowidth: true,
-		ddfullwidth: true,
-		customClass: ""
+		autoWidth: true,
+		ddFullWidth: true,
+		customClass: "",
+		maxHeight: 200
 	};
 	
-	var select_opened = $([]); // currently opened select
-	var shown_on_purpose = false; // true if show_dropdown was called using API
+	var selectOpened = $([]); // currently opened select
+	var shownOnPurpose = false; // true if show_dropdown was called using API
+	var scrollbarWidth = -1;
 
 	function ikSelect(element, options){
 		this.element = element;
 
 		this.options = $.extend({}, defaults, options);
 		
-		this.fake_select = $('<div class="ik_select">' + this.options['syntax'] + '</div>'); // fake select object made with passed syntax
+		this.fakeSelect = $('<div class="ik_select">' + this.options['syntax'] + '</div>'); // fake select object made with passed syntax
 		this.select = $(this.element); // original select
-		this.link = $(".ik_select_link", this.fake_select); // fake select
-		this.link_text = $(".ik_select_link_text", this.fake_select); // fake select's text
-		this.block = $(".ik_select_block", this.fake_select); // fake select's dropdown
-		this.list = $(".ik_select_list", this.fake_select); // fake select's list inside of dropdown
-		this.list_inner = $('<div class="ik_select_list_inner"/>'); // support block for scroll
+		this.link = $(".ik_select_link", this.fakeSelect); // fake select
+		this.linkText = $(".ik_select_link_text", this.fakeSelect); // fake select's text
+		this.block = $(".ik_select_block", this.fakeSelect); // fake select's dropdown
+		this.list = $(".ik_select_list", this.fakeSelect); // fake select's list inside of dropdown
+		this.listInner = $('<div class="ik_select_list_inner"/>'); // support block for scroll
+		
+		this.active = $([]);
+		this.hover = $([]);
 
 		this._defaults = defaults;
 		this._name = 'ikSelect';
@@ -32,465 +37,526 @@
 		this.init();
 	};
 
-	ikSelect.prototype.init = function(){
-		var ikselect = this;
-		
-		var autowidth = this.options['autowidth']; // set select width according to the longest option
-		var ddfullwidth = this.options['ddfullwidth']; // set dropdown width according to the longest option
-		
-		var fake_select = this.fake_select;
-		var select = this.select;
-		var link = this.link;
-		var link_text = this.link_text;
-		var block = this.block;
-		var list = this.list;
-		var list_inner = this.list_inner;
-		
-		list.append(list_inner);
+	$.extend(ikSelect.prototype, {
+		init: function(){
+			var ikselect = this;
 
-		fake_select.addClass(this.options['customClass']);
-		
-		//creating fake option list
-		ikselect.reset();
-		
-		if(select.attr("disabled")){
-			ikselect.disable_select();
-		};
-		
-		// click event for fake select
-		link.bind("click.ikSelect", function(){
-			if(fake_select.data("ik_select_disabled")){
-				return this;
+			var autoWidth = this.options['autoWidth']; // set select width according to the longest option
+			var ddFullWidth = this.options['ddFullWidth']; // set dropdown width according to the longest option
+
+			var fakeSelect = this.fakeSelect;
+			var select = this.select;
+			var link = this.link;
+			var linkText = this.linkText;
+			var block = this.block;
+			var list = this.list;
+			var listInner = this.listInner;
+
+			list.append(listInner);
+
+			fakeSelect.addClass(this.options['customClass']);
+
+			//creating fake option list
+			ikselect.reset();
+
+			if(select.attr("disabled")){
+				ikselect.disable_select();
 			};
-			if(select_opened.length){
-				select_opened.hide_block();
-			};
-			ikselect.show_block();
-			select.focus();
-		});
 
-		// when focus is on original select add "focus" class to the fake one
-		select.bind("focus.ikSelect", function(){
-			if(fake_select.data("ik_select_disabled")){
-				return this;
-			};
-			link.addClass("ik_select_focus");
-			if(fake_select.offset().top + fake_select.height() > $(window).scrollTop() + $(window).height()){
-				$(window).scrollTop(fake_select.offset().top - $(window).height()/2);
-			};
-		});
-
-		// when focus lost remove "focus" class from the fake one
-		select.bind("blur.ikSelect", function(){
-			if(fake_select.data("ik_select_disabled")){
-				return this;
-			};
-			link.removeClass("ik_select_focus");
-		});
-		
-		// a way to outplay the changing of select on scroll anywhere in IE6
-		select.bind("change.ikSelect", function(event){
-			event.preventDefault();
-			ikselect._select_fake_option();
-		});
-
-		// keyboard controls for the fake select and fake dropdown
-		select.bind("keydown.ikSelect keyup.ikSelect", function(event){
-			var keycode = event.which;
-			var active = $(".ik_select_active", list);
-			var hover = $(".ik_select_hover", list);
-
-			switch(keycode){
-				case 40: //down
-					if(event.type == "keydown"){
-						event.preventDefault();
-						var next;
-						if(hover.next("li").length){
-							next = hover.next("li");
-						} else if(hover.parents(".ik_select_optgroup").next().length){
-							next = hover.parents(".ik_select_optgroup").next().find("li:first");
-						};
-
-						if(next.length){
-							next.addClass("ik_select_hover");
-							hover.removeClass("ik_select_hover");
-							if($.browser.mozilla){
-								next.addClass("ik_select_active");
-								hover.removeClass("ik_select_active");
-							};
-							if(! block.is(":visible") || $.browser.mozilla) link_text.html($(".ik_select_option", next).html());
-						};
-					};
-					if(event.type == "keyup"){
-						if(! block.is(":visible") || $.browser.mozilla) select.val($(".ik_select_option", hover).html());
-					};
-					break;
-				case 38: //up
-					if(event.type == "keydown"){
-						event.preventDefault();
-						var prev;
-						if(hover.prev("li").length){
-							prev = hover.prev("li");
-						} else if(hover.parents(".ik_select_optgroup").prev().length){
-							prev = hover.parents(".ik_select_optgroup").prev().find("li:last");
-						};
-
-						if(prev.length){
-							prev.addClass("ik_select_hover");
-							hover.removeClass("ik_select_hover");
-							if($.browser.mozilla){
-								prev.addClass("ik_select_active");
-								hover.removeClass("ik_select_active");
-							};
-							if(! block.is(":visible") || $.browser.mozilla) link_text.html($(".ik_select_option", prev).html());
-						};
-					};
-					if(event.type == "keyup"){
-						if(! block.is(":visible") || $.browser.mozilla) select.val($(".ik_select_option", hover).html());
-					};
-					break;
-				case 33: //page up
-				case 36: //home
-					if(event.type == "keydown"){
-						event.preventDefault();
-						hover.removeClass("ik_select_hover");
-						$("li:first", list).addClass("ik_select_hover");
-					};
-					break;
-				case 34: //page down
-				case 35: //end
-					if(event.type == "keydown"){
-						event.preventDefault();
-						hover.removeClass("ik_select_hover");
-						$("li:last", list).addClass("ik_select_hover");
-					};
-					break;
-				case 32: //space
-					if(event.type == "keydown"){
-						event.preventDefault();
-						if(! block.is(":visible")){
-							ikselect.show_block();
-						} else{
-							ikselect._select_real_option();
-						};
-					};
-					break;
-				case 13: //enter
-					if(event.type == "keydown" && block.is(":visible")){
-						event.preventDefault();
-						ikselect._select_real_option();
-					};
-					break;
-				case 27: //esc
-					if(event.type == "keydown"){
-						event.preventDefault();
-						ikselect.hide_block();
-					};
-					break;
-				case 9: //tab
-					if(event.type == "keydown"){
-						event.preventDefault();
-						//ikselect._select_real_option();
-						//ikselect.hide_block();
-						if(! block.is(":visible")){
-							var fields = $("button,input,textarea,select");
-							var ind = fields.index(select);
-							fields.eq(ind+1).focus();
-						};
-					};
-					break;
-				default:
-					if(event.type == "keyup"){
-						ikselect._select_fake_option();
-					};
-					break;
-			};
-		});
-
-		select.width(1);
-
-		// appending fake select right after the original one
-		select.after(fake_select);
-
-		// width calculations for the fake select when "autowidth" is "true"
-		if(autowidth || ddfullwidth){
-			block.show().width(1000);
-			list_inner.css("float", "left");
-			var max_width = list.css("position", "absolute").width();
-			list.css("position", "static");
-			block.hide().css("width", "100%");
-			list_inner.css("float", "none");
-			var parent_width = select.parent().width();
-			if(ddfullwidth){
-				block.width(max_width);
-			};
-			if(max_width > parent_width){
-				max_width = parent_width;
-			};
-			if(autowidth){
-				fake_select.width(max_width);
-			};
-		};
-
-		// hide the original select
-		var select_wrap = $('<div class="ik_select_original"/>');
-		select.wrap(select_wrap).css({
-			position: "absolute",
-			left: -9999,
-			top: 0
-		});
-		
-		// save original dropdown's css properties
-		block.data("ik_select_block_left", block.css("left"));
-		block.data("ik_select_block_top", block.css("top"));
-	};
-	
-	ikSelect.prototype.reset = function(){
-		var ikselect = this;
-		var select = this.select;
-		var link_text = this.link_text;
-		var list_inner = this.list_inner;
-		
-		// init fake select's text
-		link_text.html(select.html());
-
-		list_inner.empty();
-		
-		// creating an ul->li list identical to original dropdown
-		var new_options = '';
-		var selected_ind;
-		if($("optgroup", select).length){
-			$("optgroup", select).each(function(){
-				new_options += '<div class="ik_select_optgroup">';
-				new_options += '<div class="ik_select_optgroup_label">'+ $(this).attr("label") +'</div>';
-				new_options += '<ul>';
-				$("option", this).each(function(){
-					new_options += '<li><span class="ik_select_option" title="'+ $(this).val() +'">'+ $(this).html() +'</span></li>';
-				});
-				new_options += '</ul>';
-				new_options += '</div>';
+			// click event for fake select
+			link.bind("click.ikSelect", function(){
+				if(fakeSelect.data("ik_select_disabled")){
+					return this;
+				};
+				if(selectOpened.length){
+					selectOpened.data("plugin_ikSelect").hide_block();
+				};
+				ikselect.show_block();
+				select.focus();
 			});
-		} else{
-			new_options += '<ul>';
-			$("option", select).each(function(){
-				new_options += '<li><span class="ik_select_option" title="'+ $(this).val() +'">'+ $(this).html() +'</span></li>';
-			});
-			new_options += '</ul>';
-		};
-		list_inner.append(new_options);
-		ikselect._select_fake_option();
-		
-		ikselect._attach_list_events($("li", list_inner));
-	};
-	
-	ikSelect.prototype._attach_list_events = function(jqObj){
-		var ikselect = this;
-		var select = this.select;
-		var link_text = this.link_text;
-		var list = this.list;
-		
-		// click events for the fake select's options
-		jqObj.bind("click.ikSelect", function(){
-			link_text.html($(".ik_select_option", this).html());
-			select.val($(".ik_select_option", this).attr("title"));
-			$("li", list).removeClass("ik_select_active");
-			$(this).addClass("ik_select_active");
-			ikselect.hide_block();
-			select.focus();
-		});
 
-		// hover event for the fake options
-		jqObj.bind("mouseover.ikSelect", function(){
-			$("li", list).removeClass("ik_select_hover");
-			$(this).addClass("ik_select_hover");
-		});
-		
-		jqObj.addClass("ik_select_has_events");
-	};
-	
-	// hides dropdown
-	ikSelect.prototype.hide_block = function(){
-		var fake_select = this.fake_select;
-		var block = this.block;
-		var select = this.select;
-		
-		block.hide().appendTo(fake_select).css({
-			"left": block.data("ik_select_block_left"),
-			"top": block.data("ik_select_block_top")
-		});
-		
-		select_opened = $([]);
-		
-		select.focus();
-	};
-	
-	// shows dropdown
-	ikSelect.prototype.show_block = function(){
-		var deviceAgent = navigator.userAgent.toLowerCase();
-		var isiOS = deviceAgent.match(/(iphone|ipod|ipad)/);
-		if(isiOS){
-			return true;
-		}
-		var ikselect = this;
-		var fake_select = this.fake_select;
-		var select = this.select;
-		var block = this.block;
-		var list = this.list;
-		var list_inner = this.list_inner;
-		
-		block.show();
-		var ind = $("option", select).index($("option:selected", select));
-		$("li", list).removeClass("ik_select_hover ik_select_active");
-		$("li:eq("+ ind +")", list).addClass("ik_select_hover ik_select_active");
-
-		// if the dropdown's right border is beyond window's edge then move the dropdown to the left so that it fits
-		block.removeClass("ik_select_block_right");
-		block.css("left", block.data("ik_select_block_left"));
-		if(this.options['ddfullwidth'] && fake_select.offset().left + block.outerWidth(true) > $(window).width()){
-			block.addClass("ik_select_block_right");
-			block.css("left", (block.offset().left + block.outerWidth(true) - $(window).width()) * (-1));
-		};
-		
-		// if the dropdown's bottom border is beyond window's edge then move the dropdown to the left so that it fits
-		block.removeClass("ik_select_block_up");
-		block.css("top", block.data("ik_select_block_top"));
-		if(block.offset().top + block.outerHeight(true) > $(window).scrollTop() + $(window).height()){
-			block.addClass("ik_select_block_up");
-			block.css("top", ((block.offset().top + block.outerHeight(true) - parseInt(block.data("ik_select_block_top"))) - ($(window).scrollTop() + $(window).height())) * (-1));
-		};
-		
-		var left = block.offset().left;
-		var top = block.offset().top;
-		block.width(block.width());
-		block.appendTo("body").css({
-			"left": left,
-			"top": top
-		});
-		
-		var scrollTop = $(".ik_select_active", list).position().top - list.height()/2;
-		list.data("ik_select_scrollTop", scrollTop);
-		list_inner.scrollTop(scrollTop);
-		
-		select_opened = select;
-	};
-	
-	// add options to the list
-	ikSelect.prototype.add_options = function(args){
-		var ikselect = this;
-		var select = this.select;
-		var list = this.list;
-		var list_inner = this.list_inner;
-		
-		var fakeSelectHtml = '', selectHtml = '';
-
-		$.each(args, function(index, value){
-			if(typeof value === 'string'){
-				fakeSelectHtml += '<li><span class="ik_select_option" title="'+ index +'">'+ value +'</span></li>';
-				selectHtml += '<option value="'+ index +'">'+ value +'</option>';
-			} else if(typeof value === 'object'){
-				var ul = $("ul:eq("+ index +")", list); // 'index' - optgroup index
-				var optgroup = $("optgroup:eq("+ index +")", select);
-				var new_options = value; // 'value' - new option objects
-				
-				$.each(new_options, function(index, value){
-					fakeSelectHtml += '<li><span class="ik_select_option" title="'+ index +'">'+ value +'</span></li>';
-					selectHtml += '<option value="'+ index +'">'+ value +'</option>';
-				});
-				
-				ul.append(fakeSelectHtml);
-				optgroup.append(selectHtml);
-				fakeSelectHtml = '';
-				selectHtml = '';
-			};
-		});
-		
-		if(selectHtml != ''){
-			$(":first", list_inner).append(fakeSelectHtml);
-			select.append(selectHtml);
-		}
-		
-		ikselect._attach_list_events($("li:not(.ik_select_has_events)", list_inner));
-	};
-	
-	// remove options from the list
-	ikSelect.prototype.remove_options = function(args){
-		var ikselect = this;
-		var select = this.select;
-		var list = this.list;
-		var removeList = $([]);
-		
-		$.each(args, function(index, value){
-			$("option", select).each(function(index){
-				if($(this).val() == value){
-					removeList = removeList.add($(this)).add($("li:eq("+ index +")", list));
+			// when focus is on original select add "focus" class to the fake one
+			select.bind("focus.ikSelect", function(){
+				if(fakeSelect.data("ik_select_disabled")){
+					return this;
+				};
+				link.addClass("ik_select_focus");
+				if(fakeSelect.offset().top + fakeSelect.height() > $(window).scrollTop() + $(window).height()){
+					$(window).scrollTop(fakeSelect.offset().top - $(window).height()/2);
 				};
 			});
-		});
-		
-		removeList.remove();
-		ikselect._select_fake_option();
-	};
 
-	// sync selected option in the fake select with the original one
-	ikSelect.prototype._select_real_option = function(){
-		var list = this.list;
-		
-		var ind = $("li", list).index($(".ik_select_hover", list));
-		$("li.ik_select_active", list).removeClass("ik_select_active");
-		$("li:eq("+ ind +")", list).addClass("ik_select_active").click();
-	};
+			// when focus lost remove "focus" class from the fake one
+			select.bind("blur.ikSelect", function(){
+				if(fakeSelect.data("ik_select_disabled")){
+					return this;
+				};
+				link.removeClass("ik_select_focus");
+			});
 
-	// sync selected option in the original select with the fake one
-	ikSelect.prototype._select_fake_option = function(){
-		var select = this.select;
-		var list = this.list;
-		var link_text = this.link_text;
-		
-		var selected = $(":selected", select);
-		var ind = $("option", select).index(selected);
-		link_text.html(selected.html());
-		$("li", list).removeClass("ik_select_hover").eq(ind).addClass("ik_select_hover");
-	};
-	
-	// disables select
-	ikSelect.prototype.disable_select = function(){
-		var fake_select = this.fake_select;
-		var select = this.select;
-		
-		select.attr("disabled", "disabled");
-		fake_select.addClass("ik_select_disabled");
-		fake_select.data("ik_select_disabled", true);
-	};
-	
-	// enables select
-	ikSelect.prototype.enable_select = function(){
-		var fake_select = this.fake_select;
-		var select = this.select;
-		
-		select.removeAttr("disabled");
-		fake_select.removeClass("ik_select_disabled");
-		fake_select.data("ik_select_disabled", false);
-	};
-	
-	// toggles select
-	ikSelect.prototype.toggle_select = function(){
-		var ikselect = this;
-		var fake_select = this.fake_select;
-		
-		if(fake_select.data("ik_select_disabled")){
-			ikselect.enable_select();
-		} else{
-			ikselect.disable_select();
-		};
-	};
+			// a way to outplay the changing of select on scroll anywhere in IE6
+			select.bind("change.ikSelect", function(event){
+				event.preventDefault();
+				ikselect._select_fake_option();
+			});
 
-	ikSelect.prototype.make_selection = function(args){
-		var ikselect = this;
-		var select = this.select;
+			// keyboard controls for the fake select and fake dropdown
+			select.bind("keydown.ikSelect keyup.ikSelect", function(event){
+				var keycode = event.which;
+				var active = ikselect.active;
+				var hover = ikselect.hover;
+
+				switch(keycode){
+					case 40: //down
+						if(event.type == "keydown"){
+							event.preventDefault();
+							var next;
+							if(hover.next("li").length){
+								next = hover.next("li");
+							} else if(hover.parents(".ik_select_optgroup").next().length){
+								next = hover.parents(".ik_select_optgroup").next().find("li:first");
+							};
+
+							if(next && next.length){
+								ikselect._move_to(next);
+							};
+						};
+						if(event.type == "keyup"){
+							if(! block.is(":visible") || $.browser.mozilla) select.val($(".ik_select_option", ikselect.hover).attr("title"));
+						};
+						break;
+					case 38: //up
+						if(event.type == "keydown"){
+							event.preventDefault();
+							var prev;
+							if(hover.prev("li").length){
+								prev = hover.prev("li");
+							} else if(hover.parents(".ik_select_optgroup").prev().length){
+								prev = hover.parents(".ik_select_optgroup").prev().find("li:last");
+							};
+
+							if(prev && prev.length){
+								ikselect._move_to(prev);
+							};
+						};
+						if(event.type == "keyup"){
+							if(! block.is(":visible") || $.browser.mozilla) select.val($(".ik_select_option", ikselect.hover).attr("title"));
+						};
+						break;
+					case 33: //page up
+					case 36: //home
+						if(event.type == "keydown"){
+							event.preventDefault();
+
+							ikselect._move_to($("li:first", list));
+						};
+						break;
+					case 34: //page down
+					case 35: //end
+						if(event.type == "keydown"){
+							event.preventDefault();
+							ikselect._move_to($("li:last", list));
+						};
+						break;
+					case 32: //space
+						if(event.type == "keydown"){
+							event.preventDefault();
+							if(! block.is(":visible")){
+								ikselect.show_block();
+							} else{
+								ikselect._select_real_option();
+							};
+						};
+						break;
+					case 13: //enter
+						if(event.type == "keydown" && block.is(":visible")){
+							event.preventDefault();
+							ikselect._select_real_option();
+						};
+						break;
+					case 27: //esc
+						if(event.type == "keydown"){
+							event.preventDefault();
+							ikselect.hide_block();
+						};
+						break;
+					case 9: //tab
+						if(event.type == "keydown"){
+							event.preventDefault();
+							if(! block.is(":visible")){
+								var fields = $("button,input,textarea,select");
+								var ind = fields.index(select);
+								fields.eq(ind+1).focus();
+							};
+						};
+						break;
+					default:
+						if(event.type == "keyup"){
+							ikselect._select_fake_option();
+						};
+						break;
+				};
+			});
+
+			select.width(1);
+
+			// appending fake select right after the original one
+			select.after(fakeSelect);
+
+			// width calculations for the fake select when "autoWidth" is "true"
+			if(autoWidth || ddFullWidth){
+				block.show().width(9999);
+				listInner.css("float", "left");
+				var maxWidth = list.css("position", "absolute").width();
+				list.css("position", "static");
+				block.hide().css("width", "100%");
+				listInner.css("float", "none");
+
+				if(scrollbarWidth == -1){
+					var calculationContent = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
+					$("body").append(calculationContent);
+					var w1 = $('div', calculationContent).innerWidth();
+					calculationContent.css('overflow-y', 'scroll');
+					var w2 = $('div', calculationContent).innerWidth();
+					$(calculationContent).remove();
+					scrollbarWidth = w1 - w2;
+				};
+
+				var parentWidth = select.parent().width();
+				if(ddFullWidth){
+					block.width(maxWidth);
+					listInner.width(maxWidth + scrollbarWidth);
+					$("ul", listInner).width(maxWidth);
+				};
+				if(maxWidth > parentWidth){
+					maxWidth = parentWidth;
+				};
+				if(autoWidth){
+					fakeSelect.width(maxWidth);
+				};
+			};
+
+			// hide the original select
+			select.css({
+				position: "absolute",
+				left: -9999,
+				top: 0
+			}).prependTo(fakeSelect);
+
+			// save original dropdown's css properties
+			block.data("ik_select_block_left", block.css("left"));
+			block.data("ik_select_block_top", block.css("top"));
+		},
+	
+		// creates or recreates dropdown and sets selected options's text into fake select
+		reset: function(){
+			var ikselect = this;
+			var select = this.select;
+			var linkText = this.linkText;
+			var listInner = this.listInner;
+
+			// init fake select's text
+			linkText.html(select.html());
+
+			listInner.empty();
+
+			// creating an ul->li list identical to original dropdown
+			var newOptions = '';
+
+			if($("optgroup", select).length){
+				$("optgroup", select).each(function(){
+					newOptions += '<div class="ik_select_optgroup">';
+					newOptions += '<div class="ik_select_optgroup_label">'+ $(this).attr("label") +'</div>';
+					newOptions += '<ul>';
+					$("option", this).each(function(){
+						newOptions += '<li><span class="ik_select_option" title="'+ $(this).val() +'">'+ $(this).html() +'</span></li>';
+					});
+					newOptions += '</ul>';
+					newOptions += '</div>';
+				});
+			} else{
+				newOptions += '<ul>';
+				$("option", select).each(function(){
+					newOptions += '<li><span class="ik_select_option" title="'+ $(this).val() +'">'+ $(this).html() +'</span></li>';
+				});
+				newOptions += '</ul>';
+			};
+			listInner.append(newOptions);
+			ikselect._select_fake_option();
+
+			ikselect._fix_height();
+
+			ikselect._attach_list_events($("li", listInner));
+		},
 		
-		select.val(args);
-		ikselect._select_fake_option();
-	};
+		// binds click and mouseover events to dropdown's options
+		_attach_list_events: function(jqObj){
+			var ikselect = this;
+			var select = this.select;
+			var linkText = this.linkText;
+			var list = this.list;
+
+			// click events for the fake select's options
+			jqObj.bind("click.ikSelect", function(){
+				linkText.html($(".ik_select_option", this).html());
+				select.val($(".ik_select_option", this).attr("title"));
+				ikselect.active.removeClass("ik_select_active");
+				$(this).addClass("ik_select_active");
+				ikselect.active = $(this);
+				ikselect.hide_block();
+				select.focus();
+			});
+
+			// hover event for the fake options
+			jqObj.bind("mouseover.ikSelect", function(){
+				ikselect.hover.removeClass("ik_select_hover");
+				ikselect.hover = $(this);
+				$(this).addClass("ik_select_hover");
+			});
+
+			jqObj.addClass("ik_select_has_events");
+		},
+
+		// change the defaults for all new instances
+		set_defaults: function(settings){
+			$.extend(this._defaults, settings || {});
+			return this;
+		},
+		
+		// hides dropdown
+		hide_block: function(){
+			var fakeSelect = this.fakeSelect;
+			var block = this.block;
+			var select = this.select;
+
+			block.hide().appendTo(fakeSelect).css({
+				"left": block.data("ik_select_block_left"),
+				"top": block.data("ik_select_block_top")
+			});
+
+			selectOpened = $([]);
+
+			select.focus();
+		},
+
+		// shows dropdown
+		show_block: function(){
+			var deviceAgent = navigator.userAgent.toLowerCase();
+			var isiOS = deviceAgent.match(/(iphone|ipod|ipad)/);
+			if(isiOS){
+				return true;
+			}
+			var ikselect = this;
+			var fakeSelect = this.fakeSelect;
+			var select = this.select;
+			var block = this.block;
+			var list = this.list;
+			var listInner = this.listInner;
+			var hover = this.hover;
+			var active = this.active;
+
+			block.show();
+			var ind = $("option", select).index($("option:selected", select));
+			hover.removeClass("ik_select_hover");
+			active.removeClass("ik_select_active");
+			var next = $("li:eq("+ ind +")", list);
+			next.addClass("ik_select_hover ik_select_active");
+			ikselect.hover = next;
+			ikselect.active = next;
+
+			// if the dropdown's right border is beyond window's edge then move the dropdown to the left so that it fits
+			block.removeClass("ik_select_block_right");
+			block.css("left", block.data("ik_select_block_left"));
+			if(this.options['ddFullWidth'] && fakeSelect.offset().left + block.outerWidth(true) > $(window).width()){
+				block.addClass("ik_select_block_right");
+				block.css("left", (block.offset().left + block.outerWidth(true) - $(window).width()) * (-1));
+			};
+
+			// if the dropdown's bottom border is beyond window's edge then move the dropdown to the left so that it fits
+			block.removeClass("ik_select_block_up");
+			block.css("top", block.data("ik_select_block_top"));
+			if(block.offset().top + block.outerHeight(true) > $(window).scrollTop() + $(window).height()){
+				block.addClass("ik_select_block_up");
+				block.css("top", ((block.offset().top + block.outerHeight(true) - parseInt(block.data("ik_select_block_top"))) - ($(window).scrollTop() + $(window).height())) * (-1));
+			};
+
+			var left = block.offset().left;
+			var top = block.offset().top;
+			block.width(block.width());
+			block.appendTo("body").css({
+				"left": left,
+				"top": top
+			});
+
+			var scrollTop = $(".ik_select_active", list).position().top - list.height()/2;
+			list.data("ik_select_scrollTop", scrollTop);
+			listInner.scrollTop(scrollTop);
+
+			selectOpened = select;
+		},
+		
+		// add options to the list
+		add_options: function(args){
+			var ikselect = this;
+			var select = this.select;
+			var list = this.list;
+			var listInner = this.listInner;
+
+			var fakeSelectHtml = '', selectHtml = '';
+
+			$.each(args, function(index, value){
+				if(typeof value === 'string'){
+					fakeSelectHtml += '<li><span class="ik_select_option" title="'+ index +'">'+ value +'</span></li>';
+					selectHtml += '<option value="'+ index +'">'+ value +'</option>';
+				} else if(typeof value === 'object'){
+					var ul = $("ul:eq("+ index +")", list); // 'index' - optgroup index
+					var optgroup = $("optgroup:eq("+ index +")", select);
+					var newOptions = value; // 'value' - new option objects
+
+					$.each(newOptions, function(index, value){
+						fakeSelectHtml += '<li><span class="ik_select_option" title="'+ index +'">'+ value +'</span></li>';
+						selectHtml += '<option value="'+ index +'">'+ value +'</option>';
+					});
+
+					ul.append(fakeSelectHtml);
+					optgroup.append(selectHtml);
+					fakeSelectHtml = '';
+					selectHtml = '';
+				};
+			});
+
+			if(selectHtml != ''){
+				$(":first", listInner).append(fakeSelectHtml);
+				select.append(selectHtml);
+			}
+
+			ikselect._fix_height();
+
+			ikselect._attach_list_events($("li:not(.ik_select_has_events)", listInner));
+		},
+
+		// remove options from the list
+		remove_options: function(args){
+			var ikselect = this;
+			var select = this.select;
+			var list = this.list;
+			var removeList = $([]);
+
+			$.each(args, function(index, value){
+				$("option", select).each(function(index){
+					if($(this).val() == value){
+						removeList = removeList.add($(this)).add($("li:eq("+ index +")", list));
+					};
+				});
+			});
+
+			removeList.remove();
+			ikselect._select_fake_option();
+
+			ikselect._fix_height();
+		},
+
+		// sync selected option in the fake select with the original one
+		_select_real_option: function(){
+			var list = this.list;
+			var hover = this.hover;
+			var active = this.active;
+
+			active.removeClass("ik_select_active");
+			hover.addClass("ik_select_active").click();
+		},
+
+		// sync selected option in the original select with the fake one
+		_select_fake_option: function(){
+			var select = this.select;
+			var list = this.list;
+			var linkText = this.linkText;
+
+			var selected = $(":selected", select);
+			var ind = $("option", select).index(selected);
+			linkText.html(selected.html());
+			$("li", list).removeClass("ik_select_hover").eq(ind).addClass("ik_select_hover");
+		},
+
+		// disables select
+		disable_select: function(){
+			var fakeSelect = this.fakeSelect;
+			var select = this.select;
+
+			select.attr("disabled", "disabled");
+			fakeSelect.addClass("ik_select_disabled");
+			fakeSelect.data("ik_select_disabled", true);
+		},
+
+		// enables select
+		enable_select: function(){
+			var fakeSelect = this.fakeSelect;
+			var select = this.select;
+
+			select.removeAttr("disabled");
+			fakeSelect.removeClass("ik_select_disabled");
+			fakeSelect.data("ik_select_disabled", false);
+		},
+
+		// toggles select
+		toggle_select: function(){
+			var ikselect = this;
+			var fakeSelect = this.fakeSelect;
+
+			if(fakeSelect.data("ik_select_disabled")){
+				ikselect.enable_select();
+			} else{
+				ikselect.disable_select();
+			};
+		},
+
+		// make option selected by value
+		make_selection: function(args){
+			var ikselect = this;
+			var select = this.select;
+
+			select.val(args);
+			ikselect._select_fake_option();
+		},
+
+		// controls class changes for options (hover/active states)
+		_move_to: function(jqObj){
+			var ikselect = this;
+			var block = this.block;
+			var linkText = this.linkText;
+
+			ikselect.hover.removeClass("ik_select_hover");
+			jqObj.addClass("ik_select_hover");
+			ikselect.hover = jqObj;
+			if($.browser.mozilla){
+				ikselect.active.removeClass("ik_select_active");
+				jqObj.addClass("ik_select_active");
+				ikselect.active = jqObj;
+			};
+			if(! block.is(":visible") || $.browser.mozilla) linkText.html($(".ik_select_option", jqObj).html());
+		},
+
+		// sets fixed height to dropdown if it's bigger than maxHeight
+		_fix_height: function(){
+			var block = this.block;
+			var listInner = this.listInner;
+			var maxHeight = this.options['maxHeight'];
+
+			block.show();
+			if(listInner.height() > maxHeight){
+				listInner.css({
+					overflow: "auto",
+					height: maxHeight
+				});
+			} else{
+				listInner.css({
+					overflow: "",
+					height: "auto"
+				});
+			};
+			block.hide();
+		}
+	});
 
 	$.fn['ikSelect'] = function(options){
 		var args = Array.prototype.slice.call(arguments);
@@ -504,26 +570,30 @@
 				switch(options){
 					case 'reset':			ikselect.reset(); break;
 					case 'hide_dropdown':	ikselect.hide_block(); break;
-					case 'show_dropdown':	ikselect.show_block(); shown_on_purpose = true; break;
+					case 'show_dropdown':	ikselect.show_block(); shownOnPurpose = true; break;
 					case 'add_options':		ikselect.add_options(args[1]); break;
 					case 'remove_options':	ikselect.remove_options(args[1]); break;
 					case 'enable':			ikselect.enable_select(); break;
 					case 'disable':			ikselect.disable_select(); break;
 					case 'toggle':			ikselect.toggle_select(); break;
 					case 'select':			ikselect.make_selection(args[1]); break;
+					case 'set_defaults':	ikselect.set_defaults(args[1]); break;
 				};
 			};
 		});
 	};
 	
+	// singleton instance
+	$.ikSelect = new ikSelect();
+	
 	// hide fake select list when clicking outside of it
 	$(document).bind("click.ikSelect", function(event){
-		if(! shown_on_purpose && select_opened.length && ! $(event.target).parents(".ik_select").length){
-			select_opened.ikSelect("hide_dropdown");
-			select_opened = $([]);
+		if(! shownOnPurpose && selectOpened.length && ! $(event.target).parents(".ik_select").length){
+			selectOpened.ikSelect("hide_dropdown");
+			selectOpened = $([]);
 		};
-		if(shown_on_purpose){
-			shown_on_purpose = false;
+		if(shownOnPurpose){
+			shownOnPurpose = false;
 		};
 	});
 })(jQuery, window, document);
