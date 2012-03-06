@@ -18,7 +18,6 @@ This plugin helps to stylize selects across all browsers with little effort. A [
 	* navigation using arrows, space, enter, pgup/pgdown, home/end, esc
 	* tab
 * add/remove options using API or make changes to the original select and then just reset the fake one
-* remove option with API using indexes or string
 * support for disabling
 * optgroups support
 * compatible with mobile devices
