@@ -98,3 +98,11 @@ Disables enabled and enables disabled select.
 ---
 
 *author: [i10k.ru](http://i10k.ru)*
+
+---
+
+Webmoney: Z334495514328, E409956596538, R182643156363
+
+Yandex.Money: 410011319936560
+
+Thanks for your support.
