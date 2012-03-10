@@ -348,7 +348,7 @@
 		// shows dropdown
 		show_block: function(){
 			var isMobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
-			if (isMmobile){
+			if(isMobile){
 				this.select.focus();
 				return true;
 			}
@@ -577,8 +577,8 @@
 
 	$.fn['ikSelect'] = function(options){
 		//do nothing if opera mini
-		is_operamini = Object.prototype.toString.call(window.operamini) === "[object OperaMini]";
-		if(is_operamini) return this;
+		isOperamini = Object.prototype.toString.call(window.operamini) === "[object OperaMini]";
+		if(isOperamini) return this;
 		
 		var args = Array.prototype.slice.call(arguments);
 
