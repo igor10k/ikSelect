@@ -1,4 +1,4 @@
-// ikSelect 0.6.1
+// ikSelect 0.6.2
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -347,9 +347,9 @@
 
 		// shows dropdown
 		show_block: function(){
-			var deviceAgent = navigator.userAgent.toLowerCase();
-			var isiOS = deviceAgent.match(/(iphone|ipod|ipad)/);
-			if(isiOS){
+			var isMobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+			if (isMmobile){
+				this.select.focus();
 				return true;
 			}
 			var ikselect = this;
@@ -576,6 +576,10 @@
 	});
 
 	$.fn['ikSelect'] = function(options){
+		//do nothing if opera mini
+		is_operamini = Object.prototype.toString.call(window.operamini) === "[object OperaMini]";
+		if(is_operamini) return this;
+		
 		var args = Array.prototype.slice.call(arguments);
 
 		return this.each(function(){

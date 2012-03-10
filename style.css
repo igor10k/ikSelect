@@ -6,7 +6,7 @@ a{color:#000;}
 .clearfix:after{content:" "; display:block; clear:both;}
 
 #wrap2{overflow:hidden; position:relative; zoom:1;}
-#wrap{padding:10px 20px; width:956px; margin:0 auto;}
+#wrap{padding:10px 20px; width:940px; margin:0 auto;}
 h1{font-size:24px; line-height:28px; font-weight:normal; padding-bottom:20px;}
 p{padding-bottom:16px; line-height:16px;}
 
