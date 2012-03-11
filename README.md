@@ -79,6 +79,8 @@ Change selected option by value.
 	$(selector).ikSelect("show_dropdown")
 Show dropdown assosiated with the passed select.
 
+*On Android this method shows the fake dropdown, not the native one!*
+
 ---
 
 	$(selector).ikSelect("enable")

@@ -97,5 +97,7 @@ h3{font-size:14px; font-weight:normal; line-height:18px; padding:0 0 10px; color
 
 .row_pad{padding-left:500px;}
 
-#footer{padding:20px 20px 10px; text-align:right; border-top:3px solid #000; margin:0 -20px;}
+#footer{padding:20px 20px 10px; border-top:3px solid #000; margin:0 -20px; overflow:hidden;}
 #footer a:hover{color:#F00;}
+#footer .support{float:left;}
+#footer .author{float:right;}

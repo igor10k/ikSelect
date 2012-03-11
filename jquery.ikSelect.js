@@ -1,4 +1,4 @@
-// ikSelect 0.6.2
+// ikSelect 0.6.3
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -14,6 +14,8 @@
 	var selectOpened = $([]); // currently opened select
 	var shownOnPurpose = false; // true if show_dropdown was called using API
 	var scrollbarWidth = -1;
+	var isMobile = (/iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()));
+	var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
 
 	function ikSelect(element, options){
 		this.element = element;
@@ -75,7 +77,9 @@
 				if(selectOpened.length){
 					selectOpened.data("plugin_ikSelect").hide_block();
 				};
-				ikselect.show_block();
+				if(!isMobile){
+					ikselect.show_block();
+				};
 				select.focus();
 			});
 
@@ -202,8 +206,6 @@
 				};
 			});
 
-			select.width(1);
-
 			// appending fake select right after the original one
 			select.after(fakeSelect);
 
@@ -245,11 +247,16 @@
 			ikselect._fix_height();
 
 			// hide the original select
-			select.css({
-				position: "absolute",
-				left: -9999,
-				top: 0
-			}).prependTo(fakeSelect);
+			if(!isMobile){
+				select.width(1);
+				select.css({
+					left: -9999,
+					top: 0,
+					height: fakeSelect.height()
+				});
+			};
+
+			select.prependTo(fakeSelect);
 
 			// save original dropdown's css properties
 			block.data("ik_select_block_left", block.css("left"));
@@ -347,11 +354,10 @@
 
 		// shows dropdown
 		show_block: function(){
-			var isMobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
-			if(isMobile){
+			if(isMobile && !isAndroid){
 				this.select.focus();
-				return true;
-			}
+				return this;
+			};
 			var ikselect = this;
 			var fakeSelect = this.fakeSelect;
 			var select = this.select;
