@@ -1,5 +1,5 @@
-LIB_ROOT = File.expand_path(File.dirname(__FILE__))
 LIB_NAME = "jquery.ikSelect"
+LIB_ROOT = File.expand_path(File.dirname(__FILE__))
 
 task :default => [:whitespace, :jshint, :clean, :dist]
 
@@ -65,7 +65,7 @@ end
 
 desc "Generates a minified version for distribution, using UglifyJS."
 task :dist do
-  src, target = File.join(LIB_SRC_DIR, LIB_NAME + ".js"), File.join(LIB_ROOT, LIB_NAME + ".min.js")
+  src, target = File.join(LIB_ROOT, LIB_NAME + ".js"), File.join(LIB_ROOT, LIB_NAME + ".min.js")
   uglifyjs src, target
   process_minified src, target
 end
@@ -105,6 +105,6 @@ Jshintrb::JshintTask.new :jshint do |t|
       :trailing => true,
       :browser => true,
       :undef => true,
-      :predef => []
+      :predef => ['jQuery']
   }
 end

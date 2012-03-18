@@ -21,7 +21,7 @@
   var isAndroid = (/android/i.test(navigator.userAgent.toLowerCase()));
   var isOperamini = ({}).toString.call(window.operamini) === "[object OperaMini]";
 
-  function ikSelect(element, options){
+  function IkSelect(element, options){
     var ikselect = this;
 
     ikselect.element = element;
@@ -35,7 +35,7 @@
       return ikselect;
     }
 
-    ikselect.fakeSelect = $('<div class="ik_select">' + ikselect.options['syntax'] + '</div>'); // fake select object made with passed syntax
+    ikselect.fakeSelect = $('<div class="ik_select">' + ikselect.options.syntax + '</div>'); // fake select object made with passed syntax
     ikselect.select = $(ikselect.element); // original select
     ikselect.link = $(".ik_select_link", ikselect.fakeSelect); // fake select
     ikselect.linkText = $(".ik_select_link_text", ikselect.fakeSelect); // fake select's text
@@ -47,14 +47,14 @@
     ikselect.hover = $([]);
 
     ikselect.init();
-  };
+  }
 
-  $.extend(ikSelect.prototype, {
+  $.extend(IkSelect.prototype, {
     init: function(){
       var ikselect = this;
 
-      var autoWidth = ikselect.options['autoWidth']; // set select width according to the longest option
-      var ddFullWidth = ikselect.options['ddFullWidth']; // set dropdown width according to the longest option
+      var autoWidth = ikselect.options.autoWidth; // set select width according to the longest option
+      var ddFullWidth = ikselect.options.ddFullWidth; // set dropdown width according to the longest option
 
       var fakeSelect = ikselect.fakeSelect;
       var select = ikselect.select;
@@ -66,26 +66,26 @@
 
       list.append(listInner);
 
-      fakeSelect.addClass(ikselect.options['customClass']);
+      fakeSelect.addClass(ikselect.options.customClass);
 
       //creating fake option list
       ikselect.reset();
 
       if(select.attr("disabled")){
         ikselect.disable_select();
-      };
+      }
 
       // click event for fake select
       link.bind("click.ikSelect", function(){
         if(fakeSelect.data("ik_select_disabled")){
           return this;
-        };
+        }
         if(selectOpened.length){
           selectOpened.data("plugin_ikSelect").hide_block();
-        };
+        }
         if(!isMobile){
           ikselect.show_block();
-        };
+        }
         select.focus();
       });
 
@@ -93,18 +93,18 @@
       select.bind("focus.ikSelect", function(){
         if(fakeSelect.data("ik_select_disabled")){
           return this;
-        };
+        }
         link.addClass("ik_select_focus");
         if(fakeSelect.offset().top + fakeSelect.height() > $window.scrollTop() + $window.height()){
           $window.scrollTop(fakeSelect.offset().top - $window.height()/2);
-        };
+        }
       });
 
       // when focus lost remove "focus" class from the fake one
       select.bind("blur.ikSelect", function(){
         if(fakeSelect.data("ik_select_disabled")){
           return this;
-        };
+        }
         link.removeClass("ik_select_focus");
       });
 
@@ -123,89 +123,93 @@
 
         switch(keycode){
           case 40: //down
-            if(type == "keydown"){
+            if(type === "keydown"){
               event.preventDefault();
               var next;
               if(hover.next("li").length){
                 next = hover.next("li");
               } else if(hover.parents(".ik_select_optgroup").next().length){
                 next = hover.parents(".ik_select_optgroup").next().find("li:first");
-              };
+              }
 
               if(next && next.length){
                 ikselect._move_to(next);
-              };
-            };
-            if(type == "keyup"){
-              if(! block.is(":visible") || $.browser.mozilla) select.val($(".ik_select_option", ikselect.hover).attr("title"));
-            };
+              }
+            }
+            if(type === "keyup"){
+              if(! block.is(":visible") || $.browser.mozilla) {
+                select.val($(".ik_select_option", ikselect.hover).attr("title"));
+              }
+            }
             break;
           case 38: //up
-            if(type == "keydown"){
+            if(type === "keydown"){
               event.preventDefault();
               var prev;
               if(hover.prev("li").length){
                 prev = hover.prev("li");
               } else if(hover.parents(".ik_select_optgroup").prev().length){
                 prev = hover.parents(".ik_select_optgroup").prev().find("li:last");
-              };
+              }
 
               if(prev && prev.length){
                 ikselect._move_to(prev);
-              };
-            };
-            if(type == "keyup"){
-              if(! block.is(":visible") || $.browser.mozilla) select.val($(".ik_select_option", ikselect.hover).attr("title"));
-            };
+              }
+            }
+            if(type === "keyup"){
+              if(! block.is(":visible") || $.browser.mozilla) {
+                select.val($(".ik_select_option", ikselect.hover).attr("title"));
+              }
+            }
             break;
           case 33: //page up
           case 36: //home
-            if(type == "keydown"){
+            if(type === "keydown"){
               event.preventDefault();
 
               ikselect._move_to($("li:first", list));
-            };
+            }
             break;
           case 34: //page down
           case 35: //end
-            if(type == "keydown"){
+            if(type === "keydown"){
               event.preventDefault();
               ikselect._move_to($("li:last", list));
-            };
+            }
             break;
           case 32: //space
-            if(type == "keydown"){
+            if(type === "keydown"){
               event.preventDefault();
               if(! block.is(":visible")){
                 ikselect.show_block();
               } else{
                 ikselect._select_real_option();
-              };
-            };
+              }
+            }
             break;
           case 13: //enter
-            if(type == "keydown" && block.is(":visible")){
+            if(type === "keydown" && block.is(":visible")){
               event.preventDefault();
               ikselect._select_real_option();
-            };
+            }
             break;
           case 27: //esc
-            if(type == "keydown"){
+            if(type === "keydown"){
               event.preventDefault();
               ikselect.hide_block();
-            };
+            }
             break;
           case 9: //tab
-            if(type == "keydown"){
+            if(type === "keydown"){
               ikselect.hide_block();
-            };
+            }
             break;
           default:
-            if(type == "keyup"){
+            if(type === "keyup"){
               ikselect._select_fake_option();
-            };
+            }
             break;
-        };
+        }
       });
 
       // appending fake select right after the original one
@@ -222,7 +226,7 @@
         block.hide().css("width", "100%");
         listInner.css("float", "none");
 
-        if(scrollbarWidth == -1){
+        if(scrollbarWidth === -1){
           var calculationContent = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
           $("body").append(calculationContent);
           var w1 = $('div', calculationContent).innerWidth();
@@ -230,21 +234,21 @@
           var w2 = $('div', calculationContent).innerWidth();
           $(calculationContent).remove();
           scrollbarWidth = w1 - w2;
-        };
+        }
 
         var parentWidth = select.parent().width();
         if(ddFullWidth){
           block.width(maxWidthOuter);
           listInner.width(maxWidthInner);
           $("ul", listInner).width(maxWidthInner);
-        };
+        }
         if(maxWidthOuter > parentWidth){
           maxWidthOuter = parentWidth;
-        };
+        }
         if(autoWidth){
           fakeSelect.width(maxWidthOuter);
-        };
-      };
+        }
+      }
 
       ikselect._fix_height();
 
@@ -256,7 +260,7 @@
           top: 0,
           height: fakeSelect.height()
         });
-      };
+      }
 
       select.prependTo(fakeSelect);
 
@@ -298,7 +302,7 @@
           newOptions += '<li><span class="ik_select_option" title="'+ $(this).val() +'">'+ $(this).html() +'</span></li>';
         });
         newOptions += '</ul>';
-      };
+      }
       listInner.append(newOptions);
       ikselect._select_fake_option();
 
@@ -362,7 +366,7 @@
       if(isMobile && !isAndroid){
         select.focus();
         return ikselect;
-      };
+      }
 
       var fakeSelect = ikselect.fakeSelect;
       var block = ikselect.block;
@@ -383,18 +387,18 @@
       // if the dropdown's right border is beyond window's edge then move the dropdown to the left so that it fits
       block.removeClass("ik_select_block_right");
       block.css("left", block.data("ik_select_block_left"));
-      if(ikselect.options['ddFullWidth'] && fakeSelect.offset().left + block.outerWidth(true) > $window.width()){
+      if(ikselect.options.ddFullWidth && fakeSelect.offset().left + block.outerWidth(true) > $window.width()){
         block.addClass("ik_select_block_right");
         block.css("left", (block.offset().left + block.outerWidth(true) - $window.width()) * (-1));
-      };
+      }
 
       // if the dropdown's bottom border is beyond window's edge then move the dropdown to the left so that it fits
       block.removeClass("ik_select_block_up");
       block.css("top", block.data("ik_select_block_top"));
       if(block.offset().top + block.outerHeight(true) > $window.scrollTop() + $window.height()){
         block.addClass("ik_select_block_up");
-        block.css("top", ((block.offset().top + block.outerHeight(true) - parseInt(block.data("ik_select_block_top"))) - ($window.scrollTop() + $window.height())) * (-1));
-      };
+        block.css("top", ((block.offset().top + block.outerHeight(true) - parseInt(block.data("ik_select_block_top"), 10)) - ($window.scrollTop() + $window.height())) * (-1));
+      }
 
       var left = block.offset().left;
       var top = block.offset().top;
@@ -439,10 +443,10 @@
           optgroup.append(selectHtml);
           fakeSelectHtml = '';
           selectHtml = '';
-        };
+        }
       });
 
-      if(selectHtml != ''){
+      if(selectHtml !== ''){
         $(":first", listInner).append(fakeSelectHtml);
         select.append(selectHtml);
       }
@@ -461,9 +465,9 @@
 
       $.each(args, function(index, value){
         $("option", select).each(function(index){
-          if($(this).val() == value){
+          if($(this).val() === value){
             removeList = removeList.add($(this)).add($("li:eq("+ index +")", list));
-          };
+          }
         });
       });
 
@@ -523,7 +527,7 @@
         ikselect.enable_select();
       } else{
         ikselect.disable_select();
-      };
+      }
     },
 
     // make option selected by value
@@ -548,8 +552,10 @@
         ikselect.active.removeClass("ik_select_active");
         jqObj.addClass("ik_select_active");
         ikselect.active = jqObj;
-      };
-      if(! block.is(":visible") || $.browser.mozilla) linkText.html($(".ik_select_option", jqObj).html());
+      }
+      if(! block.is(":visible") || $.browser.mozilla) {
+        linkText.html($(".ik_select_option", jqObj).html());
+      }
     },
 
     // sets fixed height to dropdown if it's bigger than maxHeight
@@ -557,8 +563,8 @@
       var ikselect = this;
       var block = ikselect.block;
       var listInner = ikselect.listInner;
-      var maxHeight = ikselect.options['maxHeight'];
-      var ddFullWidth = ikselect.options['ddFullWidth'];
+      var maxHeight = ikselect.options.maxHeight;
+      var ddFullWidth = ikselect.options.ddFullWidth;
 
       block.show();
       if(listInner.height() > maxHeight){
@@ -571,7 +577,7 @@
         if(ddFullWidth){
           block.width(block.width() + scrollbarWidth);
           listInner.width(listInner.width() + scrollbarWidth);
-        };
+        }
       } else{
         if($.data(listInner, "ik_select_hasScrollbar")){
           listInner.css({
@@ -580,21 +586,23 @@
           });
           listInner.width(listInner.width() - scrollbarWidth);
           block.width(block.width() - scrollbarWidth);
-        };
-      };
+        }
+      }
       block.hide();
     }
   });
 
-  $.fn['ikSelect'] = function(options){
+  $.fn.ikSelect = function(options){
     //do nothing if opera mini
-    if(isOperamini) return this;
+    if(isOperamini) {
+        return this;
+    }
 
     var args = [].slice.call(arguments);
 
     return this.each(function(){
       if (!$.data(this, 'plugin_ikSelect')){
-        $.data(this, 'plugin_ikSelect', new ikSelect(this, options));
+        $.data(this, 'plugin_ikSelect', new IkSelect(this, options));
       } else if(typeof options === 'string'){
         var ikselect = $.data(this, 'plugin_ikSelect');
         switch(options){
@@ -608,22 +616,22 @@
           case 'toggle':         ikselect.toggle_select(); break;
           case 'select':         ikselect.make_selection(args[1]); break;
           case 'set_defaults':   ikselect.set_defaults(args[1]); break;
-        };
-      };
+        }
+      }
     });
   };
 
   // singleton instance
-  $.ikSelect = new ikSelect();
+  $.ikSelect = new IkSelect();
 
   // hide fake select list when clicking outside of it
   $(document).bind("click.ikSelect", function(event){
     if(! shownOnPurpose && selectOpened.length && ! $(event.target).parents(".ik_select").length){
       selectOpened.ikSelect("hide_dropdown");
       selectOpened = $([]);
-    };
+    }
     if(shownOnPurpose){
       shownOnPurpose = false;
-    };
+    }
   });
-})(jQuery, window);
+}(jQuery, window));
