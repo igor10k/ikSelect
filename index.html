@@ -16,21 +16,21 @@
 			$(".show_dropdown").click(function(){
 				$(".select_custom_syntax").ikSelect("show_dropdown");
 			});
-			
+
 			//setting defaults for ie
 			if($.browser.msie && $.browser.version.charAt(0) < 9){
 				$.ikSelect.set_defaults({
 					syntax: '<div class="ik_select_link"><span class="arr_t">&#x25B2;</span><span class="arr_b">&#x25BC;</span><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>'
 				});
 			}
-			
+
 			// autowidth
 			$(".select_autowidth").ikSelect();
-			
+
 			$(".change_selection").click(function(){
 				$(".select_autowidth").ikSelect("select", "value4");
 			});
-			
+
 			$(".add_options_to_fake").click(function(){
 				$(".select_autowidth1").ikSelect("add_options", {
 					0: {
@@ -41,61 +41,61 @@
 					}
 				});
 			});
-			
+
 			$(".remove_value4_value5").click(function(){
 				$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);
 			});
-			
+
 			$(".disable_select").click(function(){
 				$(".select_autowidth").ikSelect("disable");
 			});
-			
+
 			$(".enable_select").click(function(){
 				$(".select_autowidth").ikSelect("enable");
 			});
-			
+
 			$(".toggle_select").click(function(){
 				$(".select_autowidth").ikSelect("toggle");
 			});
-			
+
 			// fixed width for fake select, autowidth for dropdown
 			$(".select_dd_autowidth").ikSelect({
 				autoWidth: false
 			});
-			
+
 			$(".add_options_to_fake2").click(function(){
 				$(".select_dd_autowidth").ikSelect("add_options", {
 					"value5": "option5"
 				});
 			});
-			
+
 			// no autowidth
 			$(".select_noautowidth").ikSelect({
 				autoWidth: false,
 				ddFullWidth: false
 			});
-			
+
 			// custom class
 			$(".select_custom_class").ikSelect({
 				customClass: "select_black"
 			});
-			
+
 			$(".add_1000_options").click(function(){
 				var options_obj = {};
 				for(var i=5; i<1005; i++){
 					optionValue = 'value'+ i;
 					options_obj[optionValue] = 'option'+ i;
 				}
-				
+
 				var d0 = new Date();
 				$(".select_custom_class").ikSelect("add_options", options_obj);
 				var d1 = new Date();
 				$(this).append(", "+ (d1-d0) +"ms");
 			});
-			
+
 			// add option with JS to original select and then reset the fake one
 			$(".select_add_option").ikSelect();
-			
+
 			option_index = 5;
 			$(".add_option_to_real").click(function(){
 				$(".select_add_option").append("<option value='value"+ option_index +"'>option "+ option_index +"</option>");
@@ -103,15 +103,15 @@
 				$(this).html('add option "option '+ option_index +'" to the real select and reset the fake one');
 				$(".select_add_option").ikSelect("reset");
 			});
-			
+
 			// autowidth when select's width is bigger than available space
 			$(".select_autowidth2").ikSelect();
-			
+
 			// autowidth when select's width is bigger than available space with ddfullwidth:false
 			$(".select_autowidth_noddfullwidth").ikSelect({
 				ddFullWidth: false
 			});
-			
+
 			// generating a fake select from the select with 1000 options
 			$(".select_1000").each(function(){
 				var html = "";
@@ -124,14 +124,14 @@
 				}
 				$(this).append(html);
 			});
-			
+
 			$(".generate_fake").click(function(){
 				var d0 = new Date();
 				$(".select_1000").ikSelect();
 				var d1 = new Date();
 				$(this).append(", "+ (d1-d0) +"ms");
 			});
-			
+
 			// ui elements
 			$(".code h4").click(function(){
 				if(! $(this).parent().hasClass("opened")){
@@ -151,9 +151,9 @@
 <div id="wrap2">
 <div id="wrap">
 	<h1>ikSelect 0.6.3</h1>
-	
+
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
-	
+
 	<div class="features">
 		<h2>Features</h2>
 		<ul>
@@ -188,7 +188,7 @@
 			<li>no animals were harmed in the making</li>
 		</ul>
 	</div>
-	
+
 	<div class="options">
 		<h2>Options</h2>
 		<dl>
@@ -208,34 +208,34 @@
 			<dd>Maximum allowed height for dropdown.</dd>
 		</dl>
 	</div>
-	
+
 	<div class="api options">
 		<h2>API</h2>
 		<dl>
 			<dt>$.ikSelect("set_defaults", &lt;settings&gt;)</dt>
 			<dd>Override defaults for new instances.</dd>
-			
+
 			<dt>$(selector).ikSelect("add_options", &lt;optionsObject&gt;)</dt>
 			<dd>Add options by providing option values and strings.<br/> Specify optgroup index if needed.</dd>
-				
+
 			<dt>$(selector).ikSelect("remove_options", &lt;optionsArray&gt;)</dt>
 			<dd>Remove options using array of values.</dd>
-			
+
 			<dt>$(selector).ikSelect("select", &lt;optionValue&gt;)</dt>
 			<dd>Change selected option by value.</dd>
-			
+
 			<dt>$(selector).ikSelect("show_dropdown")</dt>
 			<dd>
 				Show dropdown assosiated with the passed select.<br/>
 				<em>On Android this method shows the fake dropdown, not the native one!</em>
 			</dd>
-			
+
 			<dt>$(selector).ikSelect("enable")</dt>
 			<dd>Enable select.</dd>
-			
+
 			<dt>$(selector).ikSelect("disable")</dt>
 			<dd>Disable select.</dd>
-			
+
 			<dt>$(selector).ikSelect("toggle")</dt>
 			<dd>Disables enabled and enables disabled select.</dd>
 		</dl>
@@ -265,20 +265,20 @@
 			</dl>
 		</div>
 	</div>
-	
+
 	<div class="browsers">
 		<h2>Supported browsers</h2>
 		<p>Safari, Chrome, Firefox, Opera, IE7+, IE6 (scroll inside dropdown is not working correctly, "enter" inside dropdown is not working either, although "space" works)</p>
 	</div>
-	
+
 	<div class="note">
 		<p>Arrows are made using :before and :after pseudo-selectors so in IE &lt; 9 they don't work.</p>
 		<p>As a workaround the default syntax for selects only for IE &lt; 9 is changed after the initiation of the first select.</p>
 	</div>
-	
+
 	<div class="examples">
 		<h2>Examples</h2>
-		
+
 		<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigations using tab"/></div>
 
 		<div class="row odd">
@@ -298,7 +298,7 @@
 	syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="arr_t"&gt;&amp;#x25B2;&lt;/span&gt;&lt;span class="arr_b"&gt;&amp;#x25BC;&lt;/span&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
 });</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button show_dropdown">show dropdown</span>
 			</div>
@@ -308,7 +308,7 @@
 				<pre>$(".select_custom_syntax").ikSelect("show_dropdown");</pre>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="autowidth_wrap">
 				<h3>optgroups and autowidth</h3>
@@ -332,7 +332,7 @@
 				<h4>view source</h4>
 				<pre>$(".select_autowidth").ikSelect();</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button change_selection">change selection to the one with value "value4"</span>
 			</div>
@@ -341,7 +341,7 @@
 				<h4>view source</h4>
 				<pre>$(".select_autowidth").ikSelect("select", "value4");</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button add_options_to_fake">add "option5" with value "value5" to "optgroup1" and "option6" with value "value6" to "optgroup2"</span>
 			</div>
@@ -357,7 +357,7 @@
 	}
 });</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button remove_value4_value5">remove options with values "value4" and "value5"</span>
 			</div>
@@ -366,7 +366,7 @@
 				<h4>view source</h4>
 				<pre>$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button disable_select">disable select</span>
 			</div>
@@ -375,7 +375,7 @@
 				<h4>view source</h4>
 				<pre>$(".select_autowidth").ikSelect("disable");</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button enable_select">enable select</span>
 			</div>
@@ -384,7 +384,7 @@
 				<h4>view source</h4>
 				<pre>$(".select_autowidth").ikSelect("enable");</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button toggle_select">toggle select</span>
 			</div>
@@ -394,7 +394,7 @@
 				<pre>$(".select_autowidth").ikSelect("toggle");</pre>
 			</div>
 		</div>
-		
+
 		<div class="row odd">
 			<div class="dd_autowidth_wrap">
 				<h3>fixed width for fake select, autowidth for dropdown</h3>
@@ -414,7 +414,7 @@
 	autowidth: false
 });</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button add_options_to_fake2">add "option5" with value "value5"</span>
 			</div>
@@ -446,7 +446,7 @@
 });</pre>
 			</div>
 		</div>
-		
+
 		<div class="row odd">
 			<div class="custom_class_wrap">
 				<h3>custom class</h3>
@@ -464,7 +464,7 @@
 	customClass: "select_black"
 });</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button add_1000_options">add 1000 options to the fake select</span>
 			</div>
@@ -483,7 +483,7 @@ var d1 = new Date();
 $(this).append(", "+ (d1-d0) +"ms");</pre>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="add_option_wrap">
 				<h3>add option with JS to original select and then reset the fake one</h3>
@@ -499,7 +499,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 				<h4>view source</h4>
 				<pre>$(".select_add_option").ikSelect();</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button add_option_to_real">add option "option 5" to the real select and reset the fake one</span>
 			</div>
@@ -515,7 +515,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 });</pre>
 			</div>
 		</div>
-		
+
 		<div class="row odd row_pad">
 			<div class="autowidth_wrap">
 				<h3>autowidth when select's width is bigger than available space</h3>
@@ -532,7 +532,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 				<pre>$(".select_autowidth2").ikSelect();</pre>
 			</div>
 		</div>
-		
+
 		<div class="row row_pad">
 			<div class="autowidth_wrap">
 				<h3>autowidth when select's width is bigger than available space with ddfullwidth:false</h3>
@@ -551,7 +551,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 });</pre>
 			</div>
 		</div>
-		
+
 		<div class="row odd">
 			<div class="autowidth_wrap">
 				<h3>generating a fake select from the select with 1000 options</h3>
@@ -572,7 +572,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 	$(this).append(html);
 });</pre>
 			</div>
-			
+
 			<div class="clearfix">
 				<span class="button generate_fake">generate fake select</span>
 			</div>
@@ -583,7 +583,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="links features">
 		<h2>Links</h2>
 		<ul>
@@ -591,7 +591,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 			<li><a href="https://github.com/Igor10k/ikSelect/zipball/master">download</a></li>
 		</ul>
 	</div>
-	
+
 	<div id="footer">
 		<div class="support">
 			Webmoney: <strong>Z334495514328</strong>, E409956596538, R339823641213<br/>
