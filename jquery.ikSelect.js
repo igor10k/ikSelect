@@ -197,12 +197,7 @@
 						break;
 					case 9: //tab
 						if(type == "keydown"){
-							event.preventDefault();
-							if(! block.is(":visible")){
-								var fields = $("button,input,textarea,select");
-								var ind = fields.index(select);
-								fields.eq(ind+1).focus();
-							};
+							ikselect.hide_block();
 						};
 						break;
 					default:
