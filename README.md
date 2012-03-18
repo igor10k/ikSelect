@@ -33,7 +33,7 @@ Passing custom syntax to create fake select.
 The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".
 Other than that any syntax can be passed to plugin.
 
---- 
+---
 
 	autowidth: true(/false)
 Set width of the select according to the longest option.
@@ -89,7 +89,7 @@ Enable select.
 ---
 
 	$(selector).ikSelect("disable")
-  
+
 Disable select.
 
 ---
