@@ -318,6 +318,10 @@
 				ikselect.active = $(this);
 				ikselect.hide_block();
 				select.focus();
+				
+				//TheKIP added
+                		//Trigger the onchange event on original select
+             			select.change();
 			});
 
 			// hover event for the fake options
