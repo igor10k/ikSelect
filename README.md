@@ -1,4 +1,4 @@
-# ikSelect
+# ikSelect 0.7
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
@@ -16,7 +16,7 @@ This plugin helps to stylize selects across all browsers with little effort. A [
 * keyboard support
 	* search by letters/numbers/etc
 	* navigation using arrows, space, enter, pgup/pgdown, home/end, esc
-	* tab
+	* tab and shift+tab
 * add/remove options using API or make changes to the original select and then just reset the fake one
 * support for disabling
 * optgroups support

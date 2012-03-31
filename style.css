@@ -39,6 +39,7 @@ h2{font-size:16px; line-height:20px; font-weight:normal; padding-bottom:10px; co
 .row.odd{background:#f8f8f8;}
 h3{font-size:14px; font-weight:normal; line-height:18px; padding:0 0 10px; color:#000;}
 
+select{width:100%;}
 .noautowidth_wrap select{width:200px;}
 
 .code{border:solid #000; border-width:1px 0; padding:0 10px; margin-top:10px; zoom:1;
@@ -99,7 +100,7 @@ h3{font-size:14px; font-weight:normal; line-height:18px; padding:0 0 10px; color
 
 .links li:before{content:"-";}
 
-#footer{padding:20px 20px 10px; border-top:3px solid #000; margin:0 -20px; overflow:hidden;}
+#footer{padding:20px 20px 10px; border-top:3px solid #000; margin:0 -20px; overflow:hidden; zoom:1;}
 #footer a:hover{color:#F00;}
 #footer .support{float:left;}
 #footer .author{float:right;}

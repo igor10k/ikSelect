@@ -1,4 +1,4 @@
-.ik_select select{margin:0; padding:0; position:absolute; width:100%; opacity:0;}
+.ik_select select{margin:0; padding:0; width:100%; opacity:0; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0); position:absolute;}
 .ik_select{width:200px; position:relative; font:11px/16px "Lucida Grande"; height:19px; display:inline-block; *display:inline; zoom:1; vertical-align:middle;}
 .ik_select_link{border-radius:4px; padding:0 22px 0 7px; height:16px; overflow:hidden; border:1px solid #9c9c9c; white-space:nowrap; position:relative; cursor:default; zoom:1;
 	box-shadow:0 1px 0 #f0f0f0, inset 0 0 0 1px rgba(255,255,255,0.22);
