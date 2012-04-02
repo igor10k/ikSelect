@@ -80,6 +80,8 @@ select{width:100%;}
 	box-shadow:0 0 5px #000, 0 0 0 1px rgba(255,255,255,0.22) inset;
 	*border-color:#F00;}
 	
+.select_black_block .ik_select_list{background:#000; color:#888;}
+	
 /* /black select example */
 
 .button{background:#DDD; border:1px solid #AAA; display:block; height:20px; text-align:center; line-height:20px; padding:0 20px; margin-top:10px; text-shadow:0 1px 1px #FFF; overflow:hidden; cursor:pointer; float:left;

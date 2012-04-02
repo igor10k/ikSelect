@@ -1,4 +1,4 @@
-// ikSelect 0.7
+// ikSelect 0.7.1
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -9,6 +9,7 @@
 		autoWidth: true,
 		ddFullWidth: true,
 		customClass: "",
+		ddCustomClass: "",
 		ddMaxHeight: 200
 	};
 	
@@ -66,6 +67,7 @@
 			list.append(listInner);
 
 			fakeSelect.addClass(ikselect.options.customClass);
+			block.addClass(ikselect.options.ddCustomClass);
 
 			//creating fake option list
 			ikselect.reset();

@@ -1,4 +1,4 @@
-# ikSelect 0.7
+# ikSelect 0.7.1
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
@@ -48,6 +48,11 @@ Set width of the dropdown according to the longest option.
 	customClass: ""
 Add custom class to the fake select's wrapper.
 
+---
+
+	ddCustomClass: ""
+Add custom class to the fake select's dropdown.
+			
 ---
 
 	ddMaxHeight: 200
