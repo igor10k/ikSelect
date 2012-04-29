@@ -20,6 +20,7 @@ This plugin helps to stylize selects across all browsers with little effort. A [
 * add/remove options using API or make changes to the original select and then just reset the fake one
 * support for disabling
 * optgroups support
+* can be used with hidden parents
 * compatible with mobile devices
 * fast
 * easy to use
