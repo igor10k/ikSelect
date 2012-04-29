@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
-	<title>ikSelect 0.7.1</title>
+	<title>ikSelect 0.7.2</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="style.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
@@ -133,6 +133,14 @@
 				$(this).append(", "+ (d1-d0) +"ms");
 			});
 			
+			// using with hidden parents
+			$(".select_hidden").ikSelect();
+			
+			$(".show_select").click(function(){
+				$(".select_hidden_wrap").fadeIn();
+				$(".select_hidden").ikSelect("redraw");
+			});
+			
 			// ui elements
 			$(".code h4").click(function(){
 				if(! $(this).parent().hasClass("opened")){
@@ -151,7 +159,7 @@
 <body>
 <div id="wrap2">
 <div id="wrap">
-	<h1>ikSelect 0.7.1</h1>
+	<h1>ikSelect 0.7.2</h1>
 	
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
 	
@@ -182,6 +190,7 @@
 			<li>add/remove options using API or make changes to the original select and then just reset the fake one</li>
 			<li>support for disabling</li>
 			<li>optgroups support</li>
+			<li>can be used with hidden parents</li>
 			<li>compatible with mobile devices</li>
 			<li>fast</li>
 			<li>easy to use</li>
@@ -282,7 +291,7 @@
 	<div class="examples">
 		<h2>Examples</h2>
 		
-		<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigations using tab"/></div>
+		<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigation using tab"/></div>
 
 		<div class="row odd">
 			<div class="custom_syntax_wrap">
@@ -584,6 +593,35 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 			<div class="code">
 				<h4>view source</h4>
 				<pre>$(".select_1000").ikSelect();</pre>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="hidden_wrap">
+				<h3>hidden select's parent</h3>
+				<div class="select_hidden_wrap" style="display:none;">
+					<select class="select_hidden">
+						<option value="value1">option 1</option>
+						<option value="value2">option 2 with quite a long name</option>
+						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence...</option>
+						<option value="value4">o4</option>
+					</select>
+				</div>
+			</div><!--/custom_class_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_hidden").ikSelect();</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button show_select">show select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_hidden_wrap").fadeIn();
+$(".select_hidden").ikSelect("redraw");</pre>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-// ikSelect 0.7.1
+// ikSelect 0.7.2
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -52,9 +52,6 @@
 	$.extend(IkSelect.prototype, {
 		init: function(){
 			var ikselect = this;
-
-			var autoWidth = ikselect.options.autoWidth; // set select width according to the longest option
-			var ddFullWidth = ikselect.options.ddFullWidth; // set dropdown width according to the longest option
 
 			var fakeSelect = ikselect.fakeSelect;
 			var select = ikselect.select;
@@ -210,8 +207,33 @@
 			// appending fake select right after the original one
 			select.after(fakeSelect);
 
+			// set correct dimensions
+			ikselect.redraw();
+
+			select.prependTo(fakeSelect);
+
+			// save original dropdown's css properties
+			block.data("ik_select_block_left", block.css("left"));
+			block.data("ik_select_block_top", block.css("top"));
+		},
+	
+		redraw: function(){
+			var ikselect = this;
+			var select = ikselect.select;
+			var fakeSelect = ikselect.fakeSelect;
+			var block = ikselect.block;
+			var list = ikselect.list;
+			var listInner = ikselect.listInner;
+			
+			var autoWidth = ikselect.options.autoWidth; // set select width according to the longest option
+			var ddFullWidth = ikselect.options.ddFullWidth; // set dropdown width according to the longest option
+			
 			// width calculations for the fake select when "autoWidth" is "true"
 			if(autoWidth || ddFullWidth){
+				listInner.width("auto");
+				$("ul", listInner).width("auto");
+				fakeSelect.width("auto");
+				
 				block.show().width(9999);
 				listInner.css("float", "left");
 				list.css("position", "absolute");
@@ -231,7 +253,7 @@
 					scrollbarWidth = w1 - w2;
 				}
 
-				var parentWidth = select.parent().width();
+				var parentWidth = fakeSelect.parent().width();
 				if(ddFullWidth){
 					block.width(maxWidthOuter);
 					listInner.width(maxWidthInner);
@@ -256,12 +278,6 @@
 					height: fakeSelect.height()
 				});
 			}
-
-			select.prependTo(fakeSelect);
-
-			// save original dropdown's css properties
-			block.data("ik_select_block_left", block.css("left"));
-			block.data("ik_select_block_top", block.css("top"));
 		},
 	
 		// creates or recreates dropdown and sets selected options's text into fake select
@@ -627,6 +643,7 @@
 					case 'toggle':			ikselect.toggle_select(); break;
 					case 'select':			ikselect.make_selection(args[1]); break;
 					case 'set_defaults':	ikselect.set_defaults(args[1]); break;
+					case 'redraw':			ikselect.redraw(); break;
 				}
 			}
 		});
