@@ -379,6 +379,12 @@
 				return ikselect;
 			}
 			
+			if(selectOpened.is(ikselect.select)){
+				return ikselect;
+			} else if(selectOpened.length){
+				selectOpened.data("plugin_ikSelect").hide_block();
+			}
+			
 			var fakeSelect = ikselect.fakeSelect;
 			var block = ikselect.block;
 			var list = ikselect.list;
@@ -635,7 +641,7 @@
 				switch(options){
 					case 'reset':			ikselect.reset(); break;
 					case 'hide_dropdown':	ikselect.hide_block(); break;
-					case 'show_dropdown':	ikselect.show_block(); shownOnPurpose = true; break;
+					case 'show_dropdown':	shownOnPurpose = true; ikselect.show_block(); break;
 					case 'add_options':		ikselect.add_options(args[1]); break;
 					case 'remove_options':	ikselect.remove_options(args[1]); break;
 					case 'enable':			ikselect.enable_select(); break;

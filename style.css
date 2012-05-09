@@ -1,6 +1,6 @@
 *{margin:0; padding:0;}
 html{height:100%;}
-body{font:12px "Helvetica Neue", helvetica, arial, sans-serif; line-height:1.2; height:100%; color:#333;}
+body{font:12px helvetica, arial, sans-serif; line-height:1.2; height:100%; color:#333;}
 a{color:#000;}
 .clearfix{zoom:1;}
 .clearfix:after{content:" "; display:block; clear:both;}
