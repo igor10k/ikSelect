@@ -1,4 +1,4 @@
-# ikSelect 0.7.3
+# ikSelect 0.8
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
@@ -18,7 +18,7 @@ This plugin helps to stylize selects across all browsers with little effort. A [
 	* navigation using arrows, space, enter, pgup/pgdown, home/end, esc
 	* tab and shift+tab
 * add/remove options using API or make changes to the original select and then just reset the fake one
-* support for disabling
+* support for disabling/enabling anything (select, optgoup, option)
 * optgroups support
 * can be used with hidden parents
 * compatible with mobile devices
@@ -89,14 +89,15 @@ Show dropdown assosiated with the passed select.
 
 ---
 
-	$(selector).ikSelect("enable")
-Enable select.
-
----
-
 	$(selector).ikSelect("disable")
   
 Disable select.
+
+---
+
+	$(selector).ikSelect("enable")
+Enable select.
+
 
 ---
 
@@ -105,12 +106,35 @@ Disables enabled and enables disabled select.
 
 ---
 
+	$(selector).ikSelect()"disable_options", &lt;optionsArray&gt;)
+Disable specific options.
+
+---
+			
+	$(selector).ikSelect("enable_options", &lt;optionsArray&gt;)
+Enable specific options.
+
+---
+			
+	$(selector).ikSelect("disable_optgroups", &lt;optgroupIndex&gt;)
+Disable specific optgroups.
+
+---
+			
+	$(selector).ikSelect("enable_optgroups", &lt;optgroupIndex&gt;)
+Enable specific optgroups.
+
+---
+			
+	$(selector).ikSelect("detach")
+Detach plugin from select and remove all traces.
+
+---
+
 *author: [i10k.ru](http://i10k.ru)*
 
 ---
 
 Webmoney: Z334495514328, E409956596538, R182643156363
-
-Yandex.Money: 410011319936560
 
 Thanks for your support.

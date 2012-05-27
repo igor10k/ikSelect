@@ -46,5 +46,6 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6288f7', endColorstr='#2260f6',GradientType=0 );
 }
 .ik_select_list li.ik_select_active span:after{content:"\2713"; position:absolute; left:5px; top:0;}
+.ik_select_list .ik_select_optgroup_disabled .ik_select_optgroup_label, .ik_select_list li.ik_select_option_disabled{color:#999;}
 
 .ik_select.ik_select_disabled .ik_select_link{top:0; box-shadow:none; opacity:0.5; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);}

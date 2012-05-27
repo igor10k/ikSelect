@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
-	<title>ikSelect 0.7.3</title>
+	<title>ikSelect 0.8</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="style.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
@@ -44,18 +44,6 @@
 			
 			$(".remove_value4_value5").click(function(){
 				$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);
-			});
-			
-			$(".disable_select").click(function(){
-				$(".select_autowidth").ikSelect("disable");
-			});
-			
-			$(".enable_select").click(function(){
-				$(".select_autowidth").ikSelect("enable");
-			});
-			
-			$(".toggle_select").click(function(){
-				$(".select_autowidth").ikSelect("toggle");
 			});
 			
 			// fixed width for fake select, autowidth for dropdown
@@ -141,6 +129,41 @@
 				$(".select_hidden").ikSelect("redraw");
 			});
 			
+			// disabling different things
+			$(".select_disable").ikSelect();
+			
+			$(".disable_select").click(function(){
+				$(".select_disable").ikSelect("disable");
+			});
+			
+			$(".enable_select").click(function(){
+				$(".select_disable").ikSelect("enable");
+			});
+			
+			$(".toggle_select").click(function(){
+				$(".select_disable").ikSelect("toggle");
+			});
+			
+			$(".disable_optgroup").click(function(){
+				$(".select_disable").ikSelect("disable_optgroups", [0]);
+			});
+			
+			$(".enable_optgroup").click(function(){
+				$(".select_disable").ikSelect("enable_optgroups", [0]);
+			});
+			
+			$(".disable_option").click(function(){
+				$(".select_disable").ikSelect("disable_options", ['value3']);
+			});
+			
+			$(".enable_option").click(function(){
+				$(".select_disable").ikSelect("enable_options", ['value3']);
+			});
+			
+			$(".detach").click(function(){
+				$(".select_disable").ikSelect("detach");
+			});
+			
 			// ui elements
 			$(".code h4").click(function(){
 				if(! $(this).parent().hasClass("opened")){
@@ -159,7 +182,7 @@
 <body>
 <div id="wrap2">
 <div id="wrap">
-	<h1>ikSelect 0.7.3</h1>
+	<h1>ikSelect 0.8</h1>
 	
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
 	
@@ -188,7 +211,7 @@
 				</ul>
 			</li>
 			<li>add/remove options using API or make changes to the original select and then just reset the fake one</li>
-			<li>support for disabling</li>
+			<li>support for disabling/enabling anything (select, optgoup, option)</li>
 			<li>optgroups support</li>
 			<li>can be used with hidden parents</li>
 			<li>compatible with mobile devices</li>
@@ -242,14 +265,29 @@
 				<em>On Android this method shows the fake dropdown, not the native one!</em>
 			</dd>
 			
-			<dt>$(selector).ikSelect("enable")</dt>
-			<dd>Enable select.</dd>
-			
 			<dt>$(selector).ikSelect("disable")</dt>
 			<dd>Disable select.</dd>
 			
+			<dt>$(selector).ikSelect("enable")</dt>
+			<dd>Enable select.</dd>
+			
 			<dt>$(selector).ikSelect("toggle")</dt>
 			<dd>Disables enabled and enables disabled select.</dd>
+			
+			<dt>$(selector).ikSelect("disable_options", &lt;optionsArray&gt;)</dt>
+			<dd>Disable specific options.</dd>
+			
+			<dt>$(selector).ikSelect("enable_options", &lt;optionsArray&gt;)</dt>
+			<dd>Enable specific options.</dd>
+			
+			<dt>$(selector).ikSelect("disable_optgroups", &lt;optgroupIndex&gt;)</dt>
+			<dd>Disable specific optgroups.</dd>
+			
+			<dt>$(selector).ikSelect("enable_optgroups", &lt;optgroupIndex&gt;)</dt>
+			<dd>Enable specific optgroups.</dd>
+			
+			<dt>$(selector).ikSelect("detach")</dt>
+			<dd>Detach plugin from select and remove all traces.</dd>
 		</dl>
 		<div class="legend">
 			<dl>
@@ -298,7 +336,7 @@
 				<h3>custom syntax (adding arrows without :before and :after)</h3>
 				<select class="select_custom_syntax">
 					<option value="value1">option 1</option>
-					<option value="value2">option 2 with quite a long name</option>
+					<option value="value2" selected="selected">option 2 with quite a long name</option>
 					<option value="value3">option 3 with a very long name that contains many letters almost like a sentence...</option>
 					<option value="value4">o4</option>
 				</select>
@@ -327,10 +365,10 @@
 				<select class="select_autowidth select_autowidth1">
 					<optgroup label="optgroup1">
 						<option value="value1">option 1</option>
-						<option value="value2" selected="selected">option 2 with quite a long name</option>
+						<option value="value2">option 2 with quite a long name</option>
 					</optgroup>
 					<optgroup label="optgroup2">
-						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+						<option value="value3" selected="selected">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
 						<option value="value4">o4</option>
 					</optgroup>
 					<optgroup label="optgroup3">
@@ -377,33 +415,6 @@
 			<div class="code">
 				<h4>view source</h4>
 				<pre>$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);</pre>
-			</div>
-			
-			<div class="clearfix">
-				<span class="button disable_select">disable select</span>
-			</div>
-
-			<div class="code">
-				<h4>view source</h4>
-				<pre>$(".select_autowidth").ikSelect("disable");</pre>
-			</div>
-			
-			<div class="clearfix">
-				<span class="button enable_select">enable select</span>
-			</div>
-
-			<div class="code">
-				<h4>view source</h4>
-				<pre>$(".select_autowidth").ikSelect("enable");</pre>
-			</div>
-			
-			<div class="clearfix">
-				<span class="button toggle_select">toggle select</span>
-			</div>
-
-			<div class="code">
-				<h4>view source</h4>
-				<pre>$(".select_autowidth").ikSelect("toggle");</pre>
 			</div>
 		</div>
 		
@@ -624,6 +635,103 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 $(".select_hidden").ikSelect("redraw");</pre>
 			</div>
 		</div>
+		
+		<div class="row odd">
+			<div class="disabled_wrap">
+				<h3>disabling different things</h3>
+				<select class="select_disable">
+					<optgroup label="optgroup1">
+						<option value="value1">option 1</option>
+						<option value="value2">option 2 with quite a long name</option>
+					</optgroup>
+					<optgroup label="optgroup2">
+						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
+						<option value="value4" selected="selected">o4</option>
+					</optgroup>
+					<optgroup label="optgroup3">
+						<option value="value111">dummy option 1</option>
+						<option value="value112">dummy option 2</option>
+					</optgroup>
+				</select>
+			</div><!--/disabled_wrap-->
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect();</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button disable_select">disable select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("disable");</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button enable_select">enable select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("enable");</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button toggle_select">toggle select</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("toggle");</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button disable_optgroup">disable first optgroup</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("disable_optgroups", [0]);</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button enable_optgroup">enable first optgroup</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("enable_optgroups", [0]);</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button disable_option">disable third option</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("disable_options", ['value3']);</pre>
+			</div>
+			
+			<div class="clearfix">
+				<span class="button enable_option">enable third option</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("enable_options", ['value3']);</pre>
+			</div>
+
+			<div class="clearfix">
+				<span class="button detach">detach</span>
+			</div>
+
+			<div class="code">
+				<h4>view source</h4>
+				<pre>$(".select_disable").ikSelect("detach");</pre>
+			</div>
+		</div>
 	</div>
 	
 	<div class="links features">
@@ -637,7 +745,6 @@ $(".select_hidden").ikSelect("redraw");</pre>
 	<div id="footer">
 		<div class="support">
 			Webmoney: <strong>Z334495514328</strong>, E409956596538, R339823641213<br/>
-			Yandex.Money: 410011319936560<br/>
 			Thanks for your support.
 		</div>
 		<div class="author">author: <a href="http://i10k.ru">i10k.ru</a></div>

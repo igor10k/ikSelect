@@ -29,7 +29,7 @@ h2{font-size:16px; line-height:20px; font-weight:normal; padding-bottom:10px; co
 
 .note{border-top:3px solid #000; margin:0 -20px; padding:20px 20px 4px; position:relative; font-style:italic; zoom:1;}
 .note:before{content:"!"; position:absolute; left:-10px; top:-4px; width:20px; height:20px; color:#FCC; text-align:center; font-size:100px; line-height:104px; font-weight:bold; font-style:normal; font-family:"Courier New";
-	border-radius:10px; -webkit-border-radius:10px; -moz-border-radius:10px;}
+	-webkit-border-radius:10px; -moz-border-radius:10px; border-radius:10px;}
 .note p{position:relative;}
 
 .examples{padding:16px 20px 0; margin:0 -20px; zoom:1; border-top:3px solid #000;}
@@ -43,9 +43,9 @@ select{width:100%;}
 .noautowidth_wrap select{width:200px;}
 
 .code{border:solid #000; border-width:1px 0; padding:0 10px; margin-top:10px; zoom:1;
-	transition:all linear 0.2s; -webkit-transition:all linear 0.2s; -moz-transition:all linear 0.2s;}
+	-webkit-transition:all linear 0.2s; -moz-transition:all linear 0.2s; transition:all linear 0.2s;}
 .code h4{font-size:12px; line-height:15px; margin:0 -10px; padding:0 10px 1px; cursor:pointer; zoom:1;
-	transition:all linear 0.2s; -webkit-transition:all linear 0.2s; -moz-transition:all linear 0.2s;}
+	-webkit-transition:all linear 0.2s; -moz-transition:all linear 0.2s; transition:all linear 0.2s;}
 .code h4:hover{background:#DDD;}
 .code.opened{background:#EEE;}
 .code.opened h4{background:#DDD; text-shadow:0 1px 1px #FFF;}
@@ -85,7 +85,7 @@ select{width:100%;}
 /* /black select example */
 
 .button{background:#DDD; border:1px solid #AAA; display:block; height:20px; text-align:center; line-height:20px; padding:0 20px; margin-top:10px; text-shadow:0 1px 1px #FFF; overflow:hidden; cursor:pointer; float:left;
-	border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;
+	-webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;
 	background: rgb(255,255,255);
 	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(51%,rgba(225,225,225,1)), color-stop(100%,rgba(246,246,246,1)));
@@ -94,9 +94,10 @@ select{width:100%;}
 	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
 	background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
-	transition:all linear 0.1s; -webkit-transition:all linear 0.1s; -moz-transition:all linear 0.1s;}
+	-webkit-transition:all linear 0.1s; -moz-transition:all linear 0.1s; transition:all linear 0.1s;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; -user-select:none;}
 .button:hover{line-height:24px; *line-height:20px;
-	box-shadow:inset 0 2px 1px #777; -webkit-box-shadow:inset 0 2px 1px #777; -moz-box-shadow:inset 0 2px 1px #777;}
+	-webkit-box-shadow:inset 0 2px 1px #777; -moz-box-shadow:inset 0 2px 1px #777; box-shadow:inset 0 2px 1px #777;}
 
 .row_pad{padding-left:500px;}
 
