@@ -1,4 +1,4 @@
-# ikSelect 0.8
+# ikSelect 0.8.1
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
@@ -63,6 +63,17 @@ Maximum allowed height for dropdown.
 
 	$.ikSelect("set_defaults", <settings>)
 Override defaults for new instances.
+
+---
+
+	$.ikSelect("reset")
+Recreates content in the dropdown.
+
+---
+
+	$.ikSelect("redraw")
+Recalculates dimensions for the dropdown.
+*Use this if the dropdown was hidden right after the animation begins.*
 
 ---
 

@@ -1,4 +1,4 @@
-// ikSelect 0.8
+// ikSelect 0.8.1
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -271,9 +271,9 @@
 				if(scrollbarWidth === -1){
 					var calculationContent = $('<div style="width:50px;height:50px;overflow:hidden;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
 					$("body").append(calculationContent);
-					var w1 = $('div', calculationContent).innerWidth();
-					calculationContent.css('overflow-y', 'scroll');
-					var w2 = $('div', calculationContent).innerWidth();
+					var w1 = $("div", calculationContent).innerWidth();
+					calculationContent.css("overflow", "auto");
+					var w2 = $("div", calculationContent).innerWidth();
 					$(calculationContent).remove();
 					scrollbarWidth = w1 - w2;
 				}

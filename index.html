@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
-	<title>ikSelect 0.8</title>
+	<title>ikSelect 0.8.1</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="style.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
@@ -96,7 +96,7 @@
 			// autowidth when select's width is bigger than available space
 			$(".select_autowidth2").ikSelect();
 			
-			// autowidth when select's width is bigger than available space with ddfullwidth:false
+			// autowidth when select's width is bigger than available space with ddFullWidth:false
 			$(".select_autowidth_noddfullwidth").ikSelect({
 				ddFullWidth: false
 			});
@@ -182,7 +182,7 @@
 <body>
 <div id="wrap2">
 <div id="wrap">
-	<h1>ikSelect 0.8</h1>
+	<h1>ikSelect 0.8.1</h1>
 	
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
 	
@@ -231,7 +231,7 @@
 				The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".<br/>
 				Other than that any syntax can be passed to plugin.
 			</dd>
-			<dt>autowidth: true(/false)</dt>
+			<dt>autoWidth: true(/false)</dt>
 			<dd>Set width of the select according to the longest option.</dd>
 			<dt>ddFullWidth: true(/false)</dt>
 			<dd>Set width of the dropdown according to the longest option.</dd>
@@ -249,6 +249,15 @@
 		<dl>
 			<dt>$.ikSelect("set_defaults", &lt;settings&gt;)</dt>
 			<dd>Override defaults for new instances.</dd>
+			
+			<dt>$.ikSelect("reset")</dt>
+			<dd>Recreates content in the dropdown.</dd>
+			
+			<dt>$.ikSelect("redraw")</dt>
+			<dd>
+				Recalculates dimensions for the dropdown.<br/>
+				<strong>Use this if the dropdown was hidden right after the animation begins.</strong>
+			</dd>
 			
 			<dt>$(selector).ikSelect("add_options", &lt;optionsObject&gt;)</dt>
 			<dd>Add options by providing option values and strings.<br/> Specify optgroup index if needed.</dd>
@@ -434,7 +443,7 @@
 			<div class="code">
 				<h4>view source</h4>
 				<pre>$(".select_dd_autowidth").ikSelect({
-	autowidth: false
+	autoWidth: false
 });</pre>
 			</div>
 			
@@ -464,8 +473,8 @@
 			<div class="code">
 				<h4>view source</h4>
 				<pre>$(".select_noautowidth").ikSelect({
-	autowidth: false,
-	ddfullwidth: false
+	autoWidth: false,
+	ddFullWidth: false
 });</pre>
 			</div>
 		</div>
@@ -559,7 +568,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 		
 		<div class="row row_pad">
 			<div class="autowidth_wrap">
-				<h3>autowidth when select's width is bigger than available space with ddfullwidth:false</h3>
+				<h3>autowidth when select's width is bigger than available space with ddFullWidth:false</h3>
 				<select class="select_autowidth_noddfullwidth">
 					<option value="value1">option 1</option>
 					<option value="value2">option 2 with quite a long name</option>
@@ -571,7 +580,7 @@ $(this).append(", "+ (d1-d0) +"ms");</pre>
 			<div class="code">
 				<h4>view source</h4>
 				<pre>$(".select_autowidth_noddfullwidth").ikSelect({
-	ddfullwidth: false
+	ddFullWidth: false
 });</pre>
 			</div>
 		</div>
