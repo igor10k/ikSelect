@@ -117,22 +117,22 @@ Disables enabled and enables disabled select.
 
 ---
 
-	$(selector).ikSelect()"disable_options", &lt;optionsArray&gt;)
+	$(selector).ikSelect()"disable_options", <optionsArray>)
 Disable specific options.
 
 ---
 			
-	$(selector).ikSelect("enable_options", &lt;optionsArray&gt;)
+	$(selector).ikSelect("enable_options", <optionsArray>)
 Enable specific options.
 
 ---
 			
-	$(selector).ikSelect("disable_optgroups", &lt;optgroupIndex&gt;)
+	$(selector).ikSelect("disable_optgroups", <optgroupIndex>)
 Disable specific optgroups.
 
 ---
 			
-	$(selector).ikSelect("enable_optgroups", &lt;optgroupIndex&gt;)
+	$(selector).ikSelect("enable_optgroups", <optgroupIndex>)
 Enable specific optgroups.
 
 ---
