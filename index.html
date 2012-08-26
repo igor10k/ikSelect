@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<!DOCTYPE HTML>
+<html lang="en-EN">
 <head>
-	<title>ikSelect 0.8.1</title>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="style.css" media="all"/>
-	<link rel="stylesheet" type="text/css" href="ikSelect.css" media="all"/>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.ikSelect.js"></script>
+	<meta charset="UTF-8">
+	<title>ikSelect 0.8.5</title>
+	<link rel="stylesheet" href="style.css" media="all">
+	<link rel="stylesheet" href="ikSelect.css" media="all">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script src="jquery.ikSelect.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			// custom syntax
@@ -18,7 +18,7 @@
 			});
 			
 			//setting defaults for ie
-			if($.browser.msie && $.browser.version.charAt(0) < 9){
+			if($.browser.msie && $.browser.version.charAt(0) < 8){
 				$.ikSelect.set_defaults({
 					syntax: '<div class="ik_select_link"><span class="arr_t">&#x25B2;</span><span class="arr_b">&#x25BC;</span><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>'
 				});
@@ -182,7 +182,7 @@
 <body>
 <div id="wrap2">
 <div id="wrap">
-	<h1>ikSelect 0.8.1</h1>
+	<h1>ikSelect 0.8.5</h1>
 	
 	<p>This plugin helps to stylize selects across all browsers with little effort.</p>
 	
@@ -227,8 +227,8 @@
 		<dl>
 			<dt>syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'</dt>
 			<dd>
-				Passing custom syntax to create fake select.<br/>
-				The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".<br/>
+				Passing custom syntax to create fake select.<br>
+				The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".<br>
 				Other than that any syntax can be passed to plugin.
 			</dd>
 			<dt>autoWidth: true(/false)</dt>
@@ -255,12 +255,12 @@
 			
 			<dt>$.ikSelect("redraw")</dt>
 			<dd>
-				Recalculates dimensions for the dropdown.<br/>
+				Recalculates dimensions for the dropdown.<br>
 				<strong>Use this if the dropdown was hidden right after the animation begins.</strong>
 			</dd>
 			
 			<dt>$(selector).ikSelect("add_options", &lt;optionsObject&gt;)</dt>
-			<dd>Add options by providing option values and strings.<br/> Specify optgroup index if needed.</dd>
+			<dd>Add options by providing option values and strings.<br> Specify optgroup index if needed.</dd>
 				
 			<dt>$(selector).ikSelect("remove_options", &lt;optionsArray&gt;)</dt>
 			<dd>Remove options using array of values.</dd>
@@ -270,7 +270,7 @@
 			
 			<dt>$(selector).ikSelect("show_dropdown")</dt>
 			<dd>
-				Show dropdown assosiated with the passed select.<br/>
+				Show dropdown assosiated with the passed select.<br>
 				<em>On Android this method shows the fake dropdown, not the native one!</em>
 			</dd>
 			
@@ -331,14 +331,14 @@
 	</div>
 	
 	<div class="note">
-		<p>Arrows are made using :before and :after pseudo-selectors so in IE &lt; 9 they don't work.</p>
-		<p>As a workaround the default syntax for selects only for IE &lt; 9 is changed after the initiation of the first select.</p>
+		<p>Arrows are made using :before and :after pseudo-selectors so in IE &lt; 8 they don't work.</p>
+		<p>As a workaround the default syntax for selects only for IE &lt; 8 is changed after the initiation of the first select.</p>
 	</div>
 	
 	<div class="examples">
 		<h2>Examples</h2>
 		
-		<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigation using tab"/></div>
+		<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigation using tab"></div>
 
 		<div class="row odd">
 			<div class="custom_syntax_wrap">
@@ -384,6 +384,7 @@
 						<option value="value111">dummy option 1</option>
 						<option value="value112">dummy option 2</option>
 					</optgroup>
+					<option value="113">option out of optgroup</option>
 				</select>
 			</div><!--/autowidth_wrap-->
 
@@ -753,7 +754,7 @@ $(".select_hidden").ikSelect("redraw");</pre>
 	
 	<div id="footer">
 		<div class="support">
-			Webmoney: <strong>Z334495514328</strong>, E409956596538, R339823641213<br/>
+			Webmoney: <strong>Z334495514328</strong>, E409956596538, R339823641213<br>
 			Thanks for your support.
 		</div>
 		<div class="author">author: <a href="http://i10k.ru">i10k.ru</a></div>
