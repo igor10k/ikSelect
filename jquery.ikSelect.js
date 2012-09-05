@@ -1,4 +1,4 @@
-// ikSelect 0.8.5
+// ikSelect 0.8.6
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -711,8 +711,10 @@
 		_move_to: function(jqObj){
 			var ikselect = this;
 			var select = ikselect.select;
-			var block = ikselect.block;
 			var linkText = ikselect.linkText;
+			var block = ikselect.block;
+			var list = ikselect.list;
+			var listInner = ikselect.listInner;
 
 			if(! block.is(":visible") && $.browser.webkit){
 				ikselect.show_block();
@@ -733,6 +735,14 @@
 					select.change();
 				}
 				linkText.html($(".ik_select_option", jqObj).html());
+			}
+
+			var jqObjTopLine = jqObj.offset().top - list.offset().top - parseInt(list.css("paddingTop"), 10);
+			var jqObjBottomLine = jqObjTopLine + jqObj.outerHeight();
+			if(jqObjBottomLine > list.height()){
+				listInner.scrollTop(listInner.scrollTop() + jqObjBottomLine - list.height());
+			} else if(jqObjTopLine < 0){
+				listInner.scrollTop(listInner.scrollTop() + jqObjTopLine);
 			}
 		},
 
