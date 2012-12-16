@@ -1,40 +1,45 @@
-# ikSelect 0.8.6
+# ikSelect 0.9
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
 ## Features
 
-* full customization!
-* use of custom syntax
-* works perfect as an inline-block
-* behavior is as close as possible to the original selects in every browser
-* no z-index bugs in IE
-* automatic calculations
+* **custom syntax**  support
+* works perfect as an **inline-block**
+* **no z-index bugs**  in IE
+* **optgroups**  support
+* great **API**
+* **add/remove** `<option>`s and `<optgroup>`s
+* **disable/enable anything**  (select, optgoup, option)
+* optional **filter**  text field
+* can be used with **hidden parents**
+* compatible with **mobile devices**
+* behavior is as **authentic**  as possible
+* **callbacks**  and **event triggers**
+* **automatic calculations**
 	* dropdown position, so it's always visible when opened
-	* width for the select or it's dropdown (can be disabled)
-	* active options appears in the center of the dropdown when it's opened
-* keyboard support
+	* needed width for the select or it's dropdown (can be disabled)
+	* active option appears in the center of the opened dropdown
+
+* **keyboard support**
 	* search by letters/numbers/etc
-	* navigation using arrows, space, enter, pgup/pgdown, home/end, esc
+	* navigation
 	* tab and shift+tab
-* add/remove options using API or make changes to the original select and then just reset the fake one
-* support for disabling/enabling anything (select, optgoup, option)
-* optgroups support
-* can be used with hidden parents
-* compatible with mobile devices
-* fast
-* easy to use
+
+* **fast**  and **easy**  to use
 * built with attention to details
-* no animals were harmed in the making
+* according to the poll, **100% of people love it** *
+
+	<small>*of all the five friends I asked</small>
 
 ## Options
 
 	syntax: '<div class="ik_select_link"><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>'
 Passing custom syntax to create fake select.
 The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".
-Other than that any syntax can be passed to plugin.
+Other than that any syntax can be used.
 
---- 
+---
 
 	autowidth: true(/false)
 Set width of the select according to the longest option.
@@ -53,25 +58,57 @@ Add custom class to the fake select's wrapper.
 
 	ddCustomClass: ""
 Add custom class to the fake select's dropdown.
-			
+
 ---
 
 	ddMaxHeight: 200
 Maximum allowed height for dropdown.
 
+---
+
+	filter: false(/true)
+Appends filter text input.
+
+## Callbacks and events
+	onShow: function (inst) {}
+*- also available as a __ikshow__ event*
+
+Called when dropdown is shown.
+
+---
+
+	onKeyDown: function (inst) {}
+*- also available as a __ikkeydown__ event*
+
+Called when any key on a keyboard is pressed.
+
+---
+
+	onKeyUp: function (inst) {}
+*- also available as a __ikkeyup__ event*
+
+Called when any key on a keyboard is released.
+
+---
+
+	onHoverMove: function (hoverEl, inst) {}
+*- also available as a __ikhovermove__ event*
+
+Called when any hover state of an option changes.
+
 ## API
 
-	$.ikSelect("set_defaults", <settings>)
+	$(selector).ikSelect("set_defaults", <settings>)
 Override defaults for new instances.
 
 ---
 
-	$.ikSelect("reset")
+	$(selector).ikSelect("reset")
 Recreates content in the dropdown.
 
 ---
 
-	$.ikSelect("redraw")
+	$(selector).ikSelect("redraw")
 Recalculates dimensions for the dropdown.
 *Use this if the dropdown was hidden right after the animation begins.*
 
@@ -96,12 +133,17 @@ Change selected option by value.
 	$(selector).ikSelect("show_dropdown")
 Show dropdown assosiated with the passed select.
 
-*On Android this method shows the fake dropdown, not the native one!*
+*On mobile devices this method shows the fake dropdown, not the native one!*
+
+---
+
+	$(selector).ikSelect("hide_dropdown")
+Hide dropdown assosiated with the passed select.
 
 ---
 
 	$(selector).ikSelect("disable")
-  
+
 Disable select.
 
 ---
@@ -121,22 +163,22 @@ Disables enabled and enables disabled select.
 Disable specific options.
 
 ---
-			
+
 	$(selector).ikSelect("enable_options", <optionsArray>)
 Enable specific options.
 
 ---
-			
+
 	$(selector).ikSelect("disable_optgroups", <optgroupIndex>)
 Disable specific optgroups.
 
 ---
-			
+
 	$(selector).ikSelect("enable_optgroups", <optgroupIndex>)
 Enable specific optgroups.
 
 ---
-			
+
 	$(selector).ikSelect("detach")
 Detach plugin from select and remove all traces.
 

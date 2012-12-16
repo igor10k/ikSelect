@@ -1,0 +1,64 @@
+.ik_select{
+	display:inline-block; *display:inline;
+	vertical-align:middle;
+	position:relative;
+	*zoom:1;
+}
+
+.ik_select_link{
+	height:16px;
+	padding:0 22px 0 7px;
+	overflow:hidden;
+	border:1px solid #999;
+	cursor:default;
+	white-space:nowrap;
+	*zoom:1;
+}
+.ik_select_link_text{
+	display:block;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.ik_select_block{
+	display:none;
+	position:absolute; z-index:9999;
+	width:100%;
+	left:0; top:0;
+	cursor:default;
+}
+.ik_select_list{
+	position:relative;
+	border:1px solid #999;
+	background:#FFF;
+	*zoom:1;
+}
+.ik_select_list ul{
+	margin:0; padding:0;
+	list-style:none;
+}
+.ik_select_list li{
+	position:relative;
+	padding:0 7px;
+	overflow:hidden;
+}
+.ik_select_list li.ik_select_optgroup{
+	padding-left:0;
+}
+.ik_select_optgroup_label{
+	padding:0 7px;
+	color:#7f8080;
+}
+.ik_select_optgroup li{
+	padding-left:14px;
+}
+.ik_select_hover{
+	background: #EEE;
+}
+.ik_select_optgroup_disabled .ik_select_optgroup_label,
+.ik_select_option_disabled{
+	color:#999;
+}
+.ik_select_link_disabled{
+	opacity:0.5; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+}
