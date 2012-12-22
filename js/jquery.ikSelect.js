@@ -511,7 +511,7 @@
 			var ikselect = this;
 			var select = ikselect.select;
 
-			if (selectOpened.is(ikselect.select)) {
+			if (selectOpened.is(ikselect.select) || ! ikselect.listItems.length) {
 				return ikselect;
 			} else if (selectOpened.length) {
 				selectOpened.data("plugin_ikSelect").hide_block();
@@ -654,7 +654,7 @@
 			var ind = $("option", select).index(selected);
 			linkText.html(selected.html());
 
-			if (selected[0].getAttribute("value")) {
+			if (selected.length && selected[0].getAttribute("value")) {
 				link.removeClass("ik_select_link_novalue");
 			} else {
 				link.addClass("ik_select_link_novalue");
