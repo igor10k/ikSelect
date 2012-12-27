@@ -1,4 +1,4 @@
-# ikSelect 0.9
+# ikSelect 0.9.1
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
@@ -73,7 +73,14 @@ Appends filter text input.
 	onShow: function (inst) {}
 *- also available as a __ikshow__ event*
 
-Called when dropdown is shown.
+Called when dropdown shows up.
+
+---
+
+	onHide: function (inst) {}
+*- also available as a __ikhide__ event*
+
+Called when dropdown hides.
 
 ---
 

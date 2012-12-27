@@ -1,4 +1,4 @@
-// ikSelect 0.9
+// ikSelect 0.9.1
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -13,6 +13,7 @@
 		ddMaxHeight: 200,
 		filter: false,
 		onShow: function () {},
+		onHide: function () {},
 		onKeyUp: function () {},
 		onKeyDown: function () {},
 		onHoverMove: function () {}
@@ -504,6 +505,9 @@
 			selectOpened = $([]);
 
 			select.focus();
+
+			ikselect.options.onHide(ikselect);
+			select.trigger("ikhide", [ikselect]);
 		},
 
 		// shows dropdown
