@@ -1,4 +1,4 @@
-// ikSelect 0.9.1
+// ikSelect 0.9.2
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -23,6 +23,8 @@
 	var shownOnPurpose = false; // true if show_dropdown was called using API
 	var scrollbarWidth = -1;
 
+	$.browser = $.browser || {};
+	$.browser.webkit = $.browser.webkit || (/webkit/i.test(navigator.userAgent.toLowerCase()));
 	$.browser.mobile = (/iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()));
 	$.browser.operamini = Object.prototype.toString.call(window.operamini) === "[object OperaMini]";
 
