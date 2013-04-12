@@ -107,6 +107,7 @@
 				}
 				if (selectOpened.length) {
 					selectOpened.data("plugin_ikSelect").hide_block();
+					return this;
 				}
 				ikselect.show_block();
 				if (ikselect.options.filter) {
