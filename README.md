@@ -1,4 +1,4 @@
-# ikSelect 0.9.2
+# ikSelect 0.9.3
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 

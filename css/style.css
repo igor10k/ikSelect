@@ -169,8 +169,11 @@ p{
 select{
 	width:100%;
 }
-.noautowidth_wrap select{
+.select_noautowidth_wrap{
 	width:200px;
+}
+.select_dd_autowidth_wrap{
+	width:400px;
 }
 
 .code,

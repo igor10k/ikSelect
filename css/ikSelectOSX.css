@@ -101,10 +101,7 @@
 	padding:0 4px 4px;
 }
 .ik_select_filter{
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing   :border-box;
-	box-sizing        :border-box;
-	width:100%; height:20px;
+	height:20px;
 	padding:0 5px;
 	border:none;
 	-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.4);

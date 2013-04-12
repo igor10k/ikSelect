@@ -1,8 +1,11 @@
 .ik_select{
-	display:inline-block; *display:inline;
-	vertical-align:middle;
 	position:relative;
 	*zoom:1;
+}
+
+.ik_select_autowidth{
+	display:inline-block; *display:inline;
+	vertical-align:middle;
 }
 
 .ik_select_link{
