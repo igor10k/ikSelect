@@ -1,4 +1,4 @@
-# ikSelect 0.9.3
+# ikSelect 0.9.4
 
 This plugin helps to stylize selects across all browsers with little effort. A [demo](http://igor10k.github.com/ikSelect/) is available.
 
@@ -34,6 +34,8 @@ This plugin helps to stylize selects across all browsers with little effort. A [
 
 ## Options
 
+All the options can be set using HTML5 *data-* attributes or as an object passed to the plugin. For the *data-* attibutes use lowercase!
+
 	syntax: '<div class="ik_select_link"><span class="ik_select_link_text"></span></div><div class="ik_select_block"><div class="ik_select_list"></div></div>'
 Passing custom syntax to create fake select.
 The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".
@@ -48,6 +50,11 @@ Set width of the select according to the longest option.
 
 	ddFullWidth: true(/false)
 Set width of the dropdown according to the longest option.
+
+---
+
+	equalWidths: true(/false)
+Make the fake select and the dropdown of the same width.
 
 ---
 
@@ -68,6 +75,11 @@ Maximum allowed height for dropdown.
 
 	filter: false(/true)
 Appends filter text input.
+
+---
+
+	nothingFoundText: "Nothing found"
+The text to show when filter is on and nothing is found.
 
 ## Callbacks and events
 	onShow: function (inst) {}

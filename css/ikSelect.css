@@ -46,7 +46,7 @@
 	overflow:hidden;
 }
 .ik_select_list li.ik_select_optgroup{
-	padding-left:0;
+	padding-right:0; padding-left:0;
 }
 .ik_select_optgroup_label{
 	padding:0 7px;

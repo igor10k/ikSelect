@@ -5,7 +5,7 @@
 	<meta name="description" content="Stylize selects across all browsers with little effort">
 	<meta name="keywords" content="select,stylize,jquery,javascript,ikselect">
 	<meta name="author" content="Igor Kozlov">
-	<title>ikSelect 0.9.3</title>
+	<title>ikSelect 0.9.4</title>
 	<link rel="stylesheet" href="css/normalize.min.css" media="all">
 	<link rel="stylesheet" href="css/ikSelect.css" media="all">
 	<link rel="stylesheet" href="css/ikSelectOSX.css" media="all">
@@ -16,7 +16,7 @@
 <div id="wrap">
 	<div id="header">
 		<div class="limit">
-			<h1>ikSelect 0.9.3</h1>
+			<h1>ikSelect 0.9.4</h1>
 
 			<p>Stylize selects across all browsers with little effort.</p>
 		</div>
@@ -74,6 +74,7 @@
 		<div class="limit clearfix">
 			<div class="col">
 				<h2>Options</h2>
+				<p>All the options can be set using HTML5 <strong>data-</strong> attributes or as an object passed to the plugin. For the <strong>data-</strong> attibutes use lowercase!</p>
 				<dl>
 					<dt>syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'</dt>
 					<dd>
@@ -85,6 +86,8 @@
 					<dd>Set width of the select according to the longest option.</dd>
 					<dt>ddFullWidth: true(/false)</dt>
 					<dd>Set width of the dropdown according to the longest option.</dd>
+					<dt>equalWidths: true(/false)</dt>
+					<dd>Make the fake select and the dropdown of the same width.</dd>
 					<dt>customClass: ""</dt>
 					<dd>Add custom class to the fake select's wrapper.</dd>
 					<dt>ddCustomClass: ""</dt>
@@ -93,6 +96,8 @@
 					<dd>Maximum allowed height for dropdown.</dd>
 					<dt>filter: false(/true)</dt>
 					<dd>Appends filter text input.</dd>
+					<dt>nothingFoundText: "Nothing found"</dt>
+					<dd>The text to show when filter is on and nothing is found.</dd>
 				</dl>
 			</div>
 			<div class="col">

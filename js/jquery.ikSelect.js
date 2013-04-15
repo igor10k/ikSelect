@@ -1,4 +1,4 @@
-// ikSelect 0.9.3
+// ikSelect 0.9.4
 // Copyright (c) 2012 Igor Kozlov
 // i10k.ru
 
@@ -8,10 +8,12 @@
 		syntax: "<div class=\"ik_select_link\"><span class=\"ik_select_link_text\"></span></div><div class=\"ik_select_block\"><div class=\"ik_select_list\"></div></div>",
 		autoWidth: true,
 		ddFullWidth: true,
+		equalWidths: true,
 		customClass: "",
 		ddCustomClass: "",
 		ddMaxHeight: 200,
 		filter: false,
+		nothingFoundText: "Nothing found",
 		onShow: function () {},
 		onHide: function () {},
 		onKeyUp: function () {},
@@ -32,17 +34,21 @@
 		var ikselect = this;
 
 		ikselect.element = element;
-
-		ikselect.options = $.extend({}, defaults, options);
-
 		ikselect._defaults = defaults;
 
 		if (ikselect.element === undefined) {
 			return ikselect;
 		}
+		ikselect.select = $(element); // original select
+
+		var dataOptions = {};
+		for (var key in defaults) {
+			dataOptions[key] = ikselect.select.data(key.toLowerCase());
+		}
+
+		ikselect.options = $.extend({}, defaults, options, dataOptions);
 
 		ikselect.fakeSelect = $("<div class=\"ik_select\">" + ikselect.options.syntax + "</div>"); // fake select object made with passed syntax
-		ikselect.select = $(ikselect.element); // original select
 		ikselect.link = $(".ik_select_link", ikselect.fakeSelect); // fake select
 		ikselect.linkText = $(".ik_select_link_text", ikselect.fakeSelect); // fake select's text
 		ikselect.block = $(".ik_select_block", ikselect.fakeSelect); // fake select's dropdown
@@ -51,7 +57,7 @@
 
 		ikselect.filter = $([]); // filter text input
 		ikselect.listItemsOriginal = $([]); // contains original list items when filtering
-		ikselect.nothingFoundText = $("<div class=\"ik_nothing_found\"/>").html(ikselect.select.data("nothingfoundtext"));
+		ikselect.nothingFoundText = $("<div class=\"ik_nothing_found\"/>").html(ikselect.options.nothingFoundText);
 
 		if (ikselect.options.filter && ! $.browser.mobile) {
 			ikselect.filterWrap = $(".ik_select_filter_wrap", ikselect.fakeSelect);
@@ -333,6 +339,7 @@
 			var ikselect = this;
 			var select = ikselect.select;
 			var fakeSelect = ikselect.fakeSelect;
+			var link = ikselect.link;
 			var block = ikselect.block;
 			var list = ikselect.list;
 			var listInner = ikselect.listInner;
@@ -348,7 +355,7 @@
 			// width calculations for the fake select when "autoWidth" is "true"
 			if (autoWidth || ddFullWidth) {
 				listInner.width("auto");
-				$("ul", listInner).width("auto");
+				$("ul:first", listInner).width("auto");
 				fakeSelect.width("auto");
 
 				block.show().width(9999);
@@ -374,13 +381,16 @@
 				if (ddFullWidth) {
 					block.width(maxWidthOuter);
 					listInner.width(maxWidthInner);
-					$("ul", listInner).width(maxWidthInner);
+					$("ul:first", listInner).width(maxWidthInner);
 				}
 				if (maxWidthOuter > parentWidth) {
 					maxWidthOuter = parentWidth;
 				}
 				if (autoWidth) {
-					fakeSelect.width(maxWidthOuter).addClass("ik_select_autowidth");
+					var liFirst = ikselect.listItems.first();
+					var liPaddings = parseInt(liFirst.css("paddingLeft"), 10) + parseInt(liFirst.css("paddingRight"), 10);
+					var linkPaddings = link.outerWidth(true) - link.width();
+					fakeSelect.width(linkPaddings > liPaddings ? maxWidthOuter - liPaddings + linkPaddings : maxWidthOuter).addClass("ik_select_autowidth");
 				}
 			}
 
