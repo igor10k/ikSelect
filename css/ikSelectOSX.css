@@ -111,3 +111,6 @@
 .ik_select_filter:focus{
 	outline:none;
 }
+.ik_nothing_found {
+	padding:0 5px;
+}
