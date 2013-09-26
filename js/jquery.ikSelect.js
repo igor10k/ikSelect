@@ -184,7 +184,7 @@
 						ikselect.listItems = $([]);
 						ikselect.listOptgroupItems.show();
 						ikselect.listItemsOriginal.each(function (index) {
-							if (searchIndexes[index].indexOf(filterVal) >= 0) {
+							if (searchIndexes[index].indexOf(filterVal.toLowerCase()) >= 0) {
 								ikselect.listItems = ikselect.listItems.add(this);
 								$(this).show();
 							} else {
