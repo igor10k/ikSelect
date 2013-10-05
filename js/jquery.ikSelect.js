@@ -93,7 +93,7 @@
 			var list = ikselect.list;
 			var listInner = ikselect.listInner;
 
-			var isDisabled = link.hasClass("ik_select_link_disabled");
+			ikselect.isDisabled = link.hasClass("ik_select_link_disabled");
 
 			var filter = ikselect.filter;
 			var filterValOld = "";
@@ -115,7 +115,7 @@
 
 			// click event for fake select
 			link.bind("click.ikSelect", function () {
-				if (isDisabled) {
+				if (ikselect.isDisabled) {
 					return;
 				}
 				if (selectOpened.length && selectOpened.is(select)) {
@@ -132,7 +132,7 @@
 
 			// when focus is on original select add "focus" class to the fake one
 			select.bind("focus.ikSelect", function () {
-				if (isDisabled) {
+				if (ikselect.isDisabled) {
 					return this;
 				}
 				link.addClass("ik_select_link_focus");
@@ -152,7 +152,7 @@
 
 			// when focus lost remove "focus" class from the fake one
 			select.bind("blur.ikSelect", function () {
-				if (isDisabled) {
+				if (ikselect.isDisabled) {
 					return this;
 				}
 				link.removeClass("ik_select_link_focus");
@@ -768,20 +768,24 @@
 
 		// disables select
 		disable_select: function () {
+			var ikselect = this;
 			var select = this.select;
 			var link = this.link;
 
 			select.attr("disabled", "disabled");
 			link.addClass("ik_select_link_disabled");
+			ikselect.isDisabled = true;
 		},
 
 		// enables select
 		enable_select: function () {
+			var ikselect = this;
 			var select = this.select;
 			var link = this.link;
 
 			select.removeAttr("disabled");
 			link.removeClass("ik_select_link_disabled");
+			ikselect.isDisabled = false;
 		},
 
 		// toggles select
