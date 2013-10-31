@@ -1,0 +1,633 @@
+DARK_EBONY = #3D1805
+SYCAMORE = #A59641
+LA_RIOJA = #AECE15
+CLOVER = #3E5318
+DARK_FERN = #094D24
+
+@import 'nib'
+@import 'normalize'
+@import 'icons'
+
+html
+	background #FFF
+	font 200 16px/1.3 'Helvetica Neue', Helvetica, Arial, FreeSans, "Liberation Sans", "Nimbus Sans L", sans-serif
+	color #444
+
+.font-monotype
+	font 14px/1.3 Menlo, "Courier New", Courier, FreeMono, "Nimbus Mono L", "Liberation Mono", monospace
+
+pre
+code
+pre code
+	@extend .font-monotype
+	margin 0; padding 0
+	tab-size 4
+
+a
+	text-decoration none
+	color SYCAMORE
+
+	&:hover
+	&:focus
+	&.active
+		outline none
+		color DARK_EBONY
+
+h1
+h2
+h3
+	margin 0 0 1em
+	font-weight 200
+	color DARK_FERN
+
+h1
+	font-size 40px
+
+h2
+	font-size 30px
+
+h3
+	font-size 20px
+
+p
+	margin 0 0 1em
+
+li p
+	margin-bottom 0.5em
+
+.list-clean
+	list-style none
+	margin 0; padding 0
+
+.list-unordered
+	@extend .list-clean
+
+	li
+		position relative
+		padding 0 0 2px 16px
+		font-size 16px
+
+		&:before
+			@extend .icomoon
+			@extend .icon-arrow-right:before
+			absolute top 2px left -5px
+			font-size 18px; line-height 20px
+			color LA_RIOJA
+
+		li
+			&:before
+				color #CCC
+
+			small
+				font-size 9px
+
+	ul
+		@extend .list-clean
+
+#wrap
+	position relative
+	width 940px
+	margin 0 auto; padding 115px 20px 0
+	overflow hidden
+
+.header
+	fixed top left 50%; z-index 10
+	size 940px 75px
+	margin 0 0 10px -490px; padding 30px 20px 0
+	line-height 40px
+	background rgba(255,255,255,0.9)
+
+	h1
+		float left
+		margin 0
+
+		> span
+			font-size 11px
+			color #999
+
+		a
+			color LA_RIOJA
+
+			&:hover
+			&:focus
+				color DARK_EBONY
+
+ul.header-links
+	@extend .list-clean
+	float left
+	margin 5px 0 0 20px
+
+	li
+		float left
+
+	a
+		float left
+		margin-right 15px
+		font-size 24px
+
+.header-nav
+	float right
+	margin-top 8px
+	font-size 19px
+
+	ul
+		@extend .list-clean
+
+	li
+		float left
+		margin-left 25px
+
+.section
+	margin-bottom 40px
+
+.intro
+	.inlines
+		margin 40px 0
+
+	.inline
+		display inline-block
+		vertical-align middle
+		margin-left 20px
+
+		&:first-child
+			margin-left 0
+
+	p
+		font-size 20px
+
+.ik_select_link
+	padding 10px 35px 10px 15px
+	background CLOVER
+	border-radius 5px
+	color #FFF
+
+	&:after
+		@extend .icomoon
+		@extend .icon-arrow-down:before
+		absolute top 50% right 10px
+		font-size 20px; line-height 24px
+		margin-top -11px
+
+	&.ik_select_link_focus
+		box-shadow inset 0 0 0 2px CLOVER, inset 0 0 0 3px #FFF
+
+	&.ik_select_link_disabled
+		opacity 0.5
+
+.ik_select_link_text
+	display block
+	overflow hidden
+	white-space nowrap
+	text-overflow ellipsis
+
+.ik_select_dropdown
+	top 41px
+	background lighten(CLOVER, 50%)
+	border-radius 5px
+
+	p
+		margin 0; padding 5px 15px
+
+.ik_select_filter_wrap
+.ik_select_nothing_found
+	padding 5px 15px
+
+.ik_select_filter
+	padding 3px 14px
+	border 1px solid #333
+	border-radius 5px
+	font-weight 300
+
+	&:focus
+		outline:none
+
+.ik_select_list
+	padding 5px 0
+	color #FFF
+
+	ul
+		@extend .list-clean
+
+	.ik_select_option
+		padding 0 15px
+
+		&.ik_select_hover
+			background lighten(CLOVER, 10%)
+
+	.ik_select_option_disabled
+		opacity 0.5
+
+	.ik_select_optgroup
+		padding 5px 15px
+
+		.ik_select_option
+			margin 0 -15px; padding 0 30px
+
+	.ik_select_optgroup_label
+		padding-bottom 2px
+		font-size 12px
+		color rgba(255,255,255,0.5)
+
+.ik_select_list
+	background CLOVER
+	border-radius 5px
+	cursor default
+
+.intro-select1-link
+.intro-select1-dd .ik_select_list
+	border-radius 5px
+	background SYCAMORE
+	font-size 20px; line-height 24px
+	color #FFF
+
+.intro-select1-link
+	position relative
+	padding 20px 50px 20px 30px
+
+	&:after
+		right 15px
+
+	&.ik_select_link_focus
+		box-shadow inset 0 0 0 2px DARK_EBONY, inset 0 0 0 3px #FFF
+
+.intro-select1-dd
+	top 71px
+
+	.ik_select_list
+		padding 5px 0
+
+		li
+			padding 2px 50px 2px 30px
+
+			&.ik_select_hover
+				background lighten(DARK_EBONY, 10%)
+
+.intro-select2-link
+	perspective 700
+	padding 0
+	background none
+
+	&:after
+		display none
+
+	.ik_select_link_inner
+		@extend .intro-select1-link
+		padding-right 48px; padding-left 28px
+		border 2px solid CLOVER
+		border-radius 30px
+		background LA_RIOJA
+
+		&:after
+			@extend .ik_select_link:after
+
+	&.transition .ik_select_link_inner
+		transition transform 0.2s, box-shadow 0.2s
+
+	&.ik_select_link_focus
+		box-shadow none
+
+		.ik_select_link_inner
+			box-shadow inset 0 0 0 2px CLOVER
+
+	&.animate .ik_select_link_inner
+		box-shadow 0 2px 5px rgba(0,0,0,0.5)
+		transform scale(1.1)
+
+.intro-select2-dd
+	top 5px
+	background none
+	opacity 0
+
+	.ik_select_list
+		@extend .intro-select1-dd .ik_select_list
+		padding 0
+		overflow hidden
+		border 2px solid CLOVER
+		border-radius 30px
+		background LA_RIOJA
+
+		li
+			padding 20px 48px 20px 28px
+
+			&.ik_select_hover
+				background darken(LA_RIOJA, 10%)
+
+	&.transition
+		transition opacity 0.2s, top 0.2s
+
+	&.animate
+		opacity 1
+
+.intro-select-osx-link
+.intro-select-osx-dd
+	font 13px/19px "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Lucida, sans-serif
+
+.intro-select-osx-link
+	position relative
+	height 19px
+	padding 0 22px 0 7px
+	border 1px solid #9c9c9c
+	border-radius 4px
+	background #ffffff
+	background unquote('url(data image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIyNSUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiNmNWY1ZjUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI3NSUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZWVlZWVlIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==)')
+	background linear-gradient(#ffffff 25%, #f5f5f5 49%, #ececec 50%, #ececec 75%, #eeeeee 100%)
+	box-shadow 0 1px 0 #f0f0f0, inset 0 0 0 1px rgba(255,255,255,0.22)
+	color #444
+
+	&:after
+		display none
+
+	.ik_select_link_text:after
+	.ik_select_link_text:before
+		@extend .icomoon
+		position absolute
+		top 50%; right 4px
+		font-size 10px; line-height 10px
+		color #434343
+
+	.ik_select_link_text:after
+		@extend .icon-arrow-up:before
+		margin-top -7px
+
+	.ik_select_link_text:before
+		@extend .icon-arrow-down:before
+		margin-top -1px
+
+	&.ik_select_link_focus
+		box-shadow 0 0 5px SYCAMORE
+
+.intro-select-osx-dd
+	top -2px
+	background none
+
+	.ik_select_list
+		padding 4px 0
+		border none
+		border-radius 5px
+		background #FFF
+		box-shadow 0 10px 15px rgba(0,0,0,0.32), 0 0 0 1px rgba(0,0,0,0.08)
+		color #444
+
+		li
+			position relative
+			padding 0 21px
+
+			&.ik_select_hover
+				background #6288f7
+				background unquote('url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYyODhmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyMjYwZjYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)')
+				background linear-gradient(#6288f7, #2260f6)
+				box-shadow 0 -1px 0 rgba(0,0,0,0.1) inset, 0 1px 0 rgba(0,0,0,0.1) inset
+				color #FFF
+
+			&.ik_select_active span:after
+				content "\2713"
+				absolute top left 5px
+
+.intro-select-link
+	top -2px
+
+.intro-select-link-link
+.intro-select-link-dd
+	font-size 20px; line-height 24px
+
+.intro-select-link-link
+	padding 0
+	border-bottom 1px dashed
+	border-radius 0
+	background none
+	cursor pointer
+	color #444
+
+	&:after
+		display none
+
+	&:hover
+	&.ik_select_link_focus
+		box-shadow none
+		color #F00
+
+.intro-select-link-dd
+	top 30px; left -5px
+	background none
+
+	.ik_select_list
+		border solid #CCC
+		border-width 1px 0
+		border-radius 0
+		background #FFF
+		color #444
+
+		li
+			padding 2px 5px
+			cursor pointer
+
+			&.ik_select_hover
+				background none
+				color SYCAMORE
+
+.intro-select-ie-link
+.intro-select-ie-dd
+	font-weight normal; font-size 12px; line-height 18px
+
+.intro-select-ie-link
+	position relative
+	padding 1px 16px 0 3px
+	border 1px solid
+	border-color #808080 #d4d0c8 #d4d0c8 #808080
+	border-radius 0
+	background #FFF
+	box-shadow inset 1px 1px 0 #404040
+	color #000
+	-webkit-font-smoothing none
+
+	&:after
+		@extend .icomoon
+		@extend .icon-arrow-down:before
+		absolute top 1px right 0; bottom 0
+		width 14px
+		margin 0
+		border 1px solid
+		border-color #d4d0c8 #808080 #808080 #d4d0c8
+		background #d4d0c8
+		box-shadow inset 1px 1px #FFF
+		font-size 12px; line-height 18px
+		text-align center
+		color #000
+
+	&.ik_select_link_focus
+		background #356dc3
+		box-shadow none
+		color #FFF
+
+.intro-select-ie-dd
+	top auto
+	background none
+
+	.ik_select_list
+		padding 0
+		border 1px solid #91abc2
+		border-radius 0
+		background #FFF
+		color #000
+		-webkit-font-smoothing none
+
+		li
+			padding 1px 18px 1px 2px
+
+			&.ik_select_hover
+				padding 0 1px
+				border 1px dotted #9d8c73
+				background #356dc3
+				color #FFF
+
+.features-link
+	border-bottom 1px dashed
+
+.features
+	&.transition
+		transition all 0.4s
+
+	.col
+		float left
+		width 470px
+
+	strong
+		font-weight 500
+
+.install
+	ul
+		@extend .list-clean
+
+	li
+		margin-bottom 1em
+
+.options
+	p
+		margin-bottom 1em
+
+	dl
+		margin 0
+
+	dt
+		padding-top 16px
+		border-top 1px solid #CCC
+
+		&:first-child
+			border none
+
+	dd
+		margin 0; padding 0 0 16px 16px
+		color #666
+
+.examples-options
+.examples-callbacks
+.examples-api
+	.ik_select
+		margin-bottom 20px
+
+	p
+		color #666
+
+		.dot
+			margin 0 5px
+
+.dot
+	display inline-block
+	size 8px
+	border-radius 4px
+	background #A00
+
+.examples-api
+	.select-wrap2
+		height 60px
+
+	.select-wrap
+		position relative
+
+		&.floating
+			fixed top 105px left; z-index 10
+			width 100%
+			background rgba(255,255,255,0.9)
+
+		.limit
+			width 940px
+			margin 0 auto
+
+	.required
+		color DARK_EBONY
+
+	.optional
+		color SYCAMORE
+
+	.list-examples
+		.btn-code
+			color #999
+
+			&:hover
+			&:focus
+				color CLOVER
+
+			&:active
+			&:active *
+				color DARK_EBONY
+
+		.method
+			color LA_RIOJA
+
+		.value
+			color DARK_EBONY
+
+		[data-reset="true"]:after
+			@extend .dot
+			content " "
+
+.examples-select-link
+	background SYCAMORE
+
+	&.ik_select_link_focus
+		box-shadow inset 0 0 0 2px SYCAMORE, inset 0 0 0 3px #FFF
+
+.examples-select-dd .ik_select_list
+	background SYCAMORE
+
+	li.ik_select_hover
+		background lighten(SYCAMORE, 10%)
+
+.btn
+	border none
+	background none
+	cursor pointer
+	color LA_RIOJA
+
+.btn-code
+	@extend .font-monotype
+	padding 0
+	text-align left
+
+	&:hover
+	&:focus
+		color DARK_EBONY
+
+	&:active
+		color DARK_FERN
+
+	.title
+		color #444
+
+.footer
+	overflow hidden
+	padding 20px 0
+
+	.author
+		float right
+
+.clearfix:before
+.clearfix:after
+	content " "
+	display table
+
+.clearfix:after
+	clear both
+
+.clearfix
+	*zoom 1

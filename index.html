@@ -2,31 +2,94 @@
 <html lang="en-EN">
 <head>
 	<meta charset="UTF-8">
-	<meta name="description" content="Stylize selects across all browsers with little effort">
+	<meta name="description" content="Stylize selects across all browsers with ease">
 	<meta name="keywords" content="select,stylize,jquery,javascript,ikselect">
 	<meta name="author" content="Igor Kozlov">
-	<title>ikSelect 0.9.5</title>
-	<link rel="stylesheet" href="css/normalize.min.css" media="all">
-	<link rel="stylesheet" href="css/ikSelect.css" media="all">
-	<link rel="stylesheet" href="css/ikSelectOSX.css" media="all">
-	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/tomorrow.min.css">
+	<title>ikSelect 1.0.0</title>
+	<link rel="stylesheet" href="//yandex.st/highlightjs/7.3/styles/tomorrow.min.css">
 	<link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
 <div id="wrap">
-	<div id="header">
-		<div class="limit">
-			<h1>ikSelect 0.9.5</h1>
+	<header class="header">
+		<h1>
+			<a href="index.html">
+				ikSelect
+			</a>
+			<span>1.0.0</span>
+		</h1>
 
-			<p>Stylize selects across all browsers with little effort.</p>
-		</div>
-	</div>
+		<ul class="header-links">
+			<li><a href="https://github.com/Igor10k/ikSelect" title="GitHub"><i class="icon-github"></i></a></li>
+			<li><a href="https://github.com/Igor10k/ikSelect/zipball/master" title="Download"><i class="icon-cloud-download"></i></a></li>
+		</ul>
 
-	<div class="features">
-		<div class="limit clearfix">
-			<h2>Features</h2>
+		<nav class="header-nav">
+			<ul>
+				<li><a href="#intro">Intro</a></li>
+				<li><a href="#features">Features</a></li>
+				<li><a href="#install">Installation</a></li>
+				<li><a href="#options">Options</a></li>
+				<li><a href="#callbacks">Callbacks</a></li>
+				<li><a href="#api">API</a></li>
+				<li><a href="#examples">Examples</a></li>
+			</ul>
+		</nav>
+	</header><!--/.header-->
+
+	<section id="intro" class="section intro">
+		<p>ikSelect helps you stylize selects</p>
+
+		<div class="inlines">
+			<div class="inline">
+				<select class="intro-select1">
+					<option>like this</option>
+					<option>not bad</option>
+					<option>isn't it?</option>
+					<option>try filter</option>
+					<option>type something</option>
+				</select>
+			</div><!--/.inline-->
+			<div class="inline">
+				<select class="intro-select2">
+					<option>or this</option>
+					<option>use keyboard</option>
+					<option>looks good</option>
+					<option>or maybe not</option>
+				</select>
+			</div><!--/.inline-->
+			<div class="inline">
+				<select class="intro-select-osx">
+					<option>or this</option>
+					<option>OS X like selects</option>
+					<option>crossbrowser</option>
+				</select>
+			</div><!--/.inline-->
+			<div class="inline">
+				<select class="intro-select-link">
+					<option>or this</option>
+					<option>if you want it</option>
+					<option>to look like a link</option>
+				</select>
+			</div><!--/.inline-->
+			<div class="inline">
+				<select class="intro-select-ie">
+					<option>or even this</option>
+					<option>if you hate the world</option>
+					<option>or just for lulz</option>
+				</select>
+			</div><!--/.inline-->
+		</div><!--/.inlines-->
+
+		<p>Not convinced? Check the <a href="#features" class="features-link">Features</a> list or the <a href="examples.html">Examples</a> page!</p>
+	</section><!--/.intro-->
+
+	<section id="features" class="section features" data-hidden="true">
+		<h2>Features</h2>
+		<div class="clearfix">
 			<div class="col">
-				<ul>
+				<ul class="list-unordered">
+					<li>works in all popular browsers including IE6+</li>
 					<li><strong>custom syntax</strong> support</li>
 					<li>works perfect as an <strong>inline-block</strong></li>
 					<li><strong>no z-index bugs</strong> in IE</li>
@@ -42,7 +105,7 @@
 				</ul>
 			</div>
 			<div class="col">
-				<ul>
+				<ul class="list-unordered">
 					<li>
 						<strong>automatic calculations</strong>
 						<ul>
@@ -67,612 +130,318 @@
 					</li>
 				</ul>
 			</div>
-		</div>
-	</div><!--/.features-->
+		</div><!--/.clearfix-->
+	</section><!--/.features-->
 
-	<div class="options">
-		<div class="limit clearfix">
-			<div class="col">
-				<h2>Options</h2>
-				<p>All the options can be set using HTML5 <strong>data-</strong> attributes or as an object passed to the plugin. For the <strong>data-</strong> attibutes use lowercase!</p>
-				<dl>
-					<dt>syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'</dt>
-					<dd>
-						Passing custom syntax to create fake select.<br>
-						The only condition is that "ik_select_link_text" should be inside "ik_select_link" and "ik_select_list" should be inside "ik_select_block".<br>
-						Other than that any syntax can be passed to plugin.
-					</dd>
-					<dt>autoWidth: true(/false)</dt>
-					<dd>Set width of the select according to the longest option.</dd>
-					<dt>ddFullWidth: true(/false)</dt>
-					<dd>Set width of the dropdown according to the longest option.</dd>
-					<dt>equalWidths: true(/false)</dt>
-					<dd>Make the fake select and the dropdown of the same width.</dd>
-					<dt>customClass: ""</dt>
-					<dd>Add custom class to the fake select's wrapper.</dd>
-					<dt>ddCustomClass: ""</dt>
-					<dd>Add custom class to the fake select's dropdown.</dd>
-					<dt>ddMaxHeight: 200</dt>
-					<dd>Maximum allowed height for dropdown.</dd>
-					<dt>filter: false(/true)</dt>
-					<dd>Appends filter text input.</dd>
-					<dt>nothingFoundText: "Nothing found"</dt>
-					<dd>The text to show when filter is on and nothing is found.</dd>
-				</dl>
-			</div>
-			<div class="col">
-				<h2>Callbacks and events</h2>
-				<dl>
-					<dt>onShow: function (inst) {} <span>- also available as a <strong>ikshow</strong> event</span></dt>
-					<dd>Called when dropdown shows up.</dd>
-					<dt>onHide: function (inst) {} <span>- also available as a <strong>ikhide</strong> event</span></dt>
-					<dd>Called when dropdown hides.</dd>
-					<dt>onKeyDown: function (inst) {} <span>- also available as a <strong>ikkeydown</strong> event</span></dt>
-					<dd>Called when any key on a keyboard is pressed.</dd>
-					<dt>onKeyUp: function (inst) {} <span>- also available as a <strong>ikkeyup</strong> event</span></dt>
-					<dd>Called when any key on a keyboard is released.</dd>
-					<dt>onHoverMove: function (hoverEl, inst) {} <span>- also available as a <strong>ikhovermove</strong> event</span></dt>
-					<dd>Called when any hover state of an option changes.</dd>
-				</dl>
-			</div>
-		</div>
-	</div><!--/.options-->
-
-	<div class="api options">
-		<div class="limit clearfix">
-			<div class="col">
-				<h2>API</h2>
-				<dl>
-					<dt>$.ikSelect("set_defaults", &lt;settings&gt;)</dt>
-					<dd>Override defaults for new instances.</dd>
-
-					<dt>$(selector).ikSelect("reset")</dt>
-					<dd>Recreates content in the dropdown.</dd>
-
-					<dt>$(selector).ikSelect("redraw")</dt>
-					<dd>
-						Recalculates dimensions for the dropdown.<br>
-						<strong>Use this if the parent was hidden right after the animation begins.</strong>
-					</dd>
-
-					<dt>$(selector).ikSelect("add_options", &lt;optionsObject&gt;)</dt>
-					<dd>Add options by providing option values and strings.<br> Specify optgroup index if needed.</dd>
-
-					<dt>$(selector).ikSelect("remove_options", &lt;optionsArray&gt;)</dt>
-					<dd>Remove options using array of values.</dd>
-
-					<dt>$(selector).ikSelect("select", &lt;optionValue&gt;)</dt>
-					<dd>Change selected option by value.</dd>
-
-					<dt>$(selector).ikSelect("show_dropdown")</dt>
-					<dd>
-						Show dropdown assosiated with the passed select.<br>
-						<em>On mobile devices this method shows the fake dropdown, not the native one!</em>
-					</dd>
-
-					<dt>$(selector).ikSelect("hide_dropdown")</dt>
-					<dd>
-						Hide dropdown assosiated with the passed select.
-					</dd>
-
-					<dt>$(selector).ikSelect("disable")</dt>
-					<dd>Disable select.</dd>
-
-					<dt>$(selector).ikSelect("enable")</dt>
-					<dd>Enable select.</dd>
-
-					<dt>$(selector).ikSelect("toggle")</dt>
-					<dd>Disables enabled and enables disabled select.</dd>
-
-					<dt>$(selector).ikSelect("disable_options", &lt;optionsArray&gt;)</dt>
-					<dd>Disable specific options.</dd>
-
-					<dt>$(selector).ikSelect("enable_options", &lt;optionsArray&gt;)</dt>
-					<dd>Enable specific options.</dd>
-
-					<dt>$(selector).ikSelect("disable_optgroups", &lt;optgroupIndex&gt;)</dt>
-					<dd>Disable specific optgroups.</dd>
-
-					<dt>$(selector).ikSelect("enable_optgroups", &lt;optgroupIndex&gt;)</dt>
-					<dd>Enable specific optgroups.</dd>
-
-					<dt>$(selector).ikSelect("detach")</dt>
-					<dd>Detach plugin from select and remove all traces.</dd>
-				</dl>
-			</div>
-			<div class="col">
-				<h2>API Legend</h2>
-				<dl>
-					<dt>&lt;optionsArray&gt;</dt>
-					<dd>
-						<pre>[&lt;optionValue&gt;, ...]</pre>
-					</dd>
-					<dt>&lt;optionsObject&gt;</dt>
-					<dd>
-						<pre>{
-	&lt;optionValue&gt;: &lt;optionString&gt;,
-	...
-}</pre>
-					</dd>
-					<dt>&lt;optionsObject&gt;</dt>
-					<dd>
-						<pre>{
-	&lt;optgroupIndex&gt;: {
-		&lt;optionValue&gt;: &lt;optionString&gt;,
-		...
-		},
-	...
-}</pre>
-					</dd>
-				</dl>
-			</div>
-		</div>
-	</div><!--/.api-->
-
-	<div class="browsers">
-		<div class="limit">
-			<h2>Tested in</h2>
-			<p>Safari, Chrome, Firefox, Opera, IE6+</p>
-		</div>
-	</div>
-
-	<div class="note">
-		<div class="limit">
-			<p>What you see is just an example of what could be achieved that works best in modern browsers with Unicode fonts. Although the script itself works great even in IE 6.</p>
-			<p>Don't use the provided theme as is on production, because it relies heavily on CSS3 and the tick symbol (✓) that is used in the dropdown is usually not available on Windows machines.</p>
-			<p>Instead make your own theme, that will be more cross-browser friendly.</p>
-		</div>
-	</div>
-
-	<div class="examples">
-		<div class="limit">
-			<h2>Examples</h2>
-
-			<div><input type="text" id="tab_test1" class="inp_text" value="use this to test navigation using tab"></div>
-		</div>
-
-		<div class="row odd">
-			<div class="limit">
-				<div class="select_custom_syntax_wrap">
-					<h3>custom syntax (adding arrows without :before and :after)</h3>
-					by the way you can easily use these selects inline
-					<select class="select_custom_syntax">
-						<option value="value1">option 1</option>
-						<option value="value2" selected="selected">option 2 with quite a long name</option>
-						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence...</option>
-						<option value="value4">o4</option>
-					</select>
-					just like that
-				</div><!--/.select_custom_syntax_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_custom_syntax").ikSelect({
-	syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="arr_t"&gt;&amp;#x25B2;&lt;/span&gt;&lt;span class="arr_b"&gt;&amp;#x25BC;&lt;/span&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
+	<section id="install" class="section install">
+		<h2>Installation</h2>
+		<ul class="list-unordered">
+			<li>
+				<p>Include jQuery if it's still not included. The easiest way is to use some public CDN.</p>
+				<pre><code class="html">&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;</code></pre>
+			</li>
+			<li>
+				<p>Download latest ikSelect script from <a href="https://github.com/Igor10k/ikSelect/zipball/master">here</a></p>
+			</li>
+			<li>
+				<p>Include ikSelect script after jQuery</p>
+				<pre><code class="html">&lt;script src="ikSelect.min.js"&gt;&lt;/script&gt;</code></pre>
+			</li>
+			<li>
+				<p>Initialize the script somewhere. Better do it after the DOM is ready.</p>
+				<pre><code class="javascript">$(function () {
+	$('select').ikSelect();
 });</code></pre>
-				</div>
-
-				<button class="button show_dropdown">show dropdown</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_custom_syntax").ikSelect("show_dropdown");</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="limit">
-				<div class="select_autowidth1_wrap">
-					<h3>optgroups and autowidth</h3>
-					<select class="select_autowidth select_autowidth1">
-						<optgroup label="optgroup1">
-							<option value="value1">option 1</option>
-							<option value="value2">option 2 with quite a long name</option>
-						</optgroup>
-						<optgroup label="optgroup2">
-							<option value="value3" selected="selected">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-							<option value="value4">o4</option>
-						</optgroup>
-						<optgroup label="optgroup3">
-							<option value="value111">dummy option 1</option>
-							<option value="value112">dummy option 2</option>
-						</optgroup>
-						<option value="113">option out of optgroup</option>
-					</select>
-				</div><!--/.select_autowidth1_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_autowidth1").ikSelect();</code></pre>
-				</div>
-
-				<button class="button change_selection">change selection to the one with value "value4"</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_autowidth1").ikSelect("select", "value4");</code></pre>
-				</div>
-
-				<button class="button add_options_to_fake">add "option5" with value "value5" to "optgroup1" and "option6" with value "value6" to "optgroup2"</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_autowidth1").ikSelect("add_options", {
-	0: {
-		"value5": "option5"
-	},
-	1: {
-		"value6": "option6"
-	}
-});</code></pre>
-				</div>
-
-				<button class="button remove_value4_value5">remove options with values "value4" and "value5"</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_autowidth1").ikSelect("remove_options", ["value4", "value5"]);</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row odd">
-			<div class="limit">
-				<div class="select_dd_autowidth_wrap">
-					<h3>fixed width for fake select, autowidth for dropdown</h3>
-					<select class="select_dd_autowidth">
-						<option value="value1">option 1</option>
-						<option value="value2">option 2 with quite a long name</option>
-						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence...</option>
-						<option value="value4">o4</option>
-					</select>
-				</div><!--/.select_dd_autowidth_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_dd_autowidth").ikSelect({
-	autoWidth: false
-});</code></pre>
-				</div>
-
-				<button class="button add_options_to_fake2">add "option5" with value "value5"</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_dd_autowidth").ikSelect("add_options", {
-	"value5": "option5"
-});</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="limit">
-				<div class="select_noautowidth_wrap">
-					<h3>no autowidth</h3>
-					<select class="select_noautowidth">
-						<option value="value1">option 1</option>
-						<option value="value2">option 2 with quite a long name</option>
-						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-						<option value="value4">o4</option>
-					</select>
-				</div><!--/.select_noautowidth_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_noautowidth").ikSelect({
-	autoWidth: false,
-	ddFullWidth: false
-});</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row odd">
-			<div class="limit">
-				<div class="select_custom_class_wrap">
-					<h3>custom class</h3>
-					<select class="select_custom_class">
-						<option value="value1">option 1</option>
-						<option value="value2">option 2 with quite a long name</option>
-						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-						<option value="value4">o4</option>
-					</select>
-				</div><!--/.select_custom_class_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_custom_class").ikSelect({
-	customClass: "select_black",
-	ddCustomClass: "select_black_block"
-});</code></pre>
-				</div>
-
-				<button class="button add_1000_options">add 1000 options to the fake select</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">var options_obj = {};
-for(var i=5; i&lt;1005; i++){
-	optionValue = 'value'+ i;
-	options_obj[optionValue] = 'option'+ i;
+			</li>
+			<li>
+				<p>Add some CSS</p>
+				<pre><code class="css">.ik_select {
+	/*
+	Wraps all the plugin's HTML code.
+	Probably you should not add any styles here
+	*/
 }
-
-var d0 = new Date();
-$(".select_custom_class").ikSelect("add_options", options_obj);
-var d1 = new Date();
-$(this).append(", "+ (d1-d0) +"ms");</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="limit">
-				<div class="select_add_option_wrap">
-					<h3>add option with JS to original select and then reset the fake one</h3>
-					<select class="select_add_option">
-						<option value="value1">option 1</option>
-						<option value="value2">option 2 with quite a long name</option>
-						<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-						<option value="value4">o4</option>
-					</select>
-				</div><!--/.select_add_option_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_add_option").ikSelect();</code></pre>
-				</div>
-
-				<button class="button add_option_to_real">add option "option 5" to the real select and reset the fake one</button>
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">option_index = 5;
-	$(".add_option_to_real").click(function(){
-	$(".select_add_option").append("&lt;option value='value"+ option_index +"'&gt;option "+ option_index +"&lt;/option&gt;");
-	option_index++;
-	$(this).html('add option "option '+ option_index +'" to the real select and reset the fake one');
-	$(".select_add_option").ikSelect("reset");
-});</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row odd">
-			<div class="limit clearfix">
-				<div class="col">
-					<div class="select_autowidth_noddfullwidth_wrap">
-						<h3>autowidth in limited space and ddFullWidth:false</h3>
-						<select class="select_autowidth_noddfullwidth">
-							<option value="value1">option 1</option>
-							<option value="value2">option 2 with quite a long name</option>
-							<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-							<option value="value4">o4</option>
-						</select>
-					</div><!--/.select_autowidth_noddfullwidth_wrap-->
-
-					<div class="code">
-						<h4>view source</h4>
-						<pre><code class="javascript">$(".select_autowidth_noddfullwidth").ikSelect({
-	ddFullWidth: false
-});</code></pre>
-					</div>
-				</div>
-				<div class="col">
-					<div class="select_autowidth2_wrap">
-						<h3>autowidth in limited space</h3>
-						<select class="select_autowidth2">
-							<option value="value1">option 1</option>
-							<option value="value2">option 2 with quite a long name</option>
-							<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-							<option value="value4">o4</option>
-						</select>
-					</div><!--/.select_autowidth2_wrap-->
-
-					<div class="code">
-						<h4>view source</h4>
-						<pre><code class="javascript">$(".select_autowidth2").ikSelect();</code></pre>
-					</div>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="limit">
-				<div class="select_1000_wrap">
-					<h3>generating a fake select from the select with 1000 options</h3>
-					<select class="select_1000" style="width:200px;">
-
-					</select>
-				</div><!--/.select_1000_wrap-->
-
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_1000").each(function(){
-	var html = "";
-	for(var i=0; i<1000; i++){
-		if(i==4){
-			html += '&lt;option selected="selected" value="value'+ i +'"&gt;option '+ i +'&lt;/option&gt;';
-		} else{
-			html += '&lt;option value="value'+ i +'"&gt;option '+ i +'&lt;/option&gt;';
-		}
+	.ik_select_link{
+		/* Fake select you click on to open the dropdown */
 	}
-	$(this).append(html);
-});</code></pre>
-				</div>
+	.ik_select_link_focus{
+		/* Focused state of the fake select */
+	}
+	.ik_select_link_disabled{
+		/* Disabled state of the fake select */
+	}
+		.ik_select_link_text {
+			/*
+			Wrapper for the text inside the link.
+			It's best to add some width limiting rules here like
+			display:block;
+			overflow:hidden;
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			*/
+		}
 
-				<button class="button generate_fake">generate fake select</button>
+	.ik_select_block{
+		/*
+		Dropdown wrapper. Needed for script calculations.
+		You should not add any visual styles here.
+		You can shift the position of the dropdown
+		by changing top and left values like
+		top: -2px;
+		left: -5px;
+		*/
+	}
+		.ik_select_list{
+			/*
+			Wrapper for the options list.
+			Now that's a good place to add visual styles.
+			*/
+		}
+			.ik_select_optgroup {
+				/* Optgroup */
+			}
+				.ik_select_optgroup_label{
+					/* Optgroup label */
+				}
+				.ik_select_option {
+					/* Option */
+				}
+				.ik_select_hover{
+					/* The hovered state of an option */
+				}
+				.ik_select_active {
+					/* The active state of an option */
+				}
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_1000").ikSelect();</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
+		.ik_select_filter_wrap {
+			/* Wrapper for the filter input */
+		}
+		.ik_select_filter{
+			/* Filter input */
+		}
+		.ik_nothing_found {
+			/* Block that's shown when there's nothing found. */
+		}</code></pre>
+			</li>
+		</ul>
+	</section><!--/.install-->
 
-		<div class="row odd">
-			<div class="limit">
-				<div class="hidden_wrap">
-					<h3>hidden select's parent</h3>
-					<div class="select_hidden_wrap" style="display:none;">
-						<select class="select_hidden">
-							<option value="value1">option 1</option>
-							<option value="value2">option 2 with quite a long name</option>
-							<option value="value3">option 3 with a very long name that contains many letters almost like a sentence...</option>
-							<option value="value4">o4</option>
-						</select>
-					</div>
-				</div><!--/.select_hidden_wrap-->
+	<section id="options" class="section options">
+		<h2>Options</h2>
+		<p>
+			All the options can be set using HTML5 <strong>data-</strong> attributes or as an object passed to the plugin.
+			For the <strong>data-</strong> attibutes use lowercased options!
+			<em>(data-autowidth="true", data-customclass="someclass", etc)</em>
+		</p>
+		<pre><code class="javascript">syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
+	/*
+	Custom syntax for the fake select.
+	The only condition is that "ik_select_link_text" should be inside of "ik_select_link" and
+	"ik_select_list" should be inside of "ik_select_block".
+	*/
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_hidden").ikSelect();</code></pre>
-				</div>
+autoWidth: true,
+	/* Set width of the select according to the longest option. */
 
-				<button class="button show_select">show select</button>
+ddFullWidth: true,
+	/* Set width of the dropdown according to the longest option. */
 
-				<div class="code">
-					<h4>view source</h4>
-				<pre><code class="javascript">$(".select_hidden_wrap").fadeIn();
-$(".select_hidden").ikSelect("redraw");</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
+equalWidths: true,
+	/* Add dropdown's scrollbar width to the fake select's width. */
 
-		<div class="row">
-			<div class="limit">
-				<div class="select_disable_wrap">
-					<h3>disabling different things</h3>
-					<select class="select_disable">
-						<optgroup label="optgroup1">
-							<option value="value1">option 1</option>
-							<option value="value2">option 2 with quite a long name</option>
-						</optgroup>
-						<optgroup label="optgroup2">
-							<option value="value3">option 3 with a very long name that contains many letters almost like a sentence... well ok, it's already a sentence... some more words.. will there be an ending..</option>
-							<option value="value4" selected="selected">o4</option>
-						</optgroup>
-						<optgroup label="optgroup3">
-							<option value="value111">dummy option 1</option>
-							<option value="value112">dummy option 2</option>
-						</optgroup>
-					</select>
-				</div><!--/.select_disable_wrap-->
+dynamicWidth: false,
+	/* Adjust fake select's width according to its contents. */
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect();</code></pre>
-				</div>
+extractLink: false,
+	/* Tells if fake select should be moved to body when clicked along with the dropdown */
 
-				<button class="button disable_select">disable select</button>
+customClass: '',
+	/* Add custom class to the fake select's wrapper. */
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("disable");</code></pre>
-				</div>
+linkCustomClass: '',
+	/*
+	Add custom class to the fake select.
+	Uses customClass with '-link' appended if only the former presents.
+	*/
 
-				<button class="button enable_select">enable select</button>
+ddCustomClass: '',
+	/*
+	Add custom class to the fake select's dropdown.
+	Uses customClass with '-dd' appended if only the former presents.
+	*/
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("enable");</code></pre>
-				</div>
+ddMaxHeight: 200,
+	/* Maximum allowed height for dropdown. */
 
-				<button class="button toggle_select">toggle select</button>
+isDisabled: false,
+	/*
+	Set the initial state of the select.
+	Overrides the *disabled* attribute.
+	*/
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("toggle");</code></pre>
-				</div>
+filter: false,
+	/* Appends filter text input. */
 
-				<button class="button disable_optgroup">disable first optgroup</button>
+nothingFoundText: 'Nothing found'
+	/* The text to show when filter is on and nothing is found. */</code></pre>
+	</section><!--/.options-->
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("disable_optgroups", [0]);</code></pre>
-				</div>
+	<section id="callbacks" class="section callbacks">
+		<h2>Callbacks and events</h2>
+		<p>
+			After each callback there's also an event emitted.
+			Just replace <strong>on</strong> with <strong>ik</strong> and use lowercase.
+			<em>(ikshow, ikkeydown, etc)</em></p>
+		<pre><code class="javascript">onShow: function (inst) {}
+	/* Called just after dropdown was showed. */
 
-				<button class="button enable_optgroup">enable first optgroup</button>
+onHide: function (inst) {}
+	/* Called just after dropdown was hidden. */
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("enable_optgroups", [0]);</code></pre>
-				</div>
+onKeyDown: function (inst) {}
+	/* Called when a key on a keyboard is pressed. */
 
-				<button class="button disable_option">disable third option</button>
+onKeyUp: function (inst) {}
+	/* Called when a key on a keyboard is released. */
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("disable_options", ['value3']);</code></pre>
-				</div>
+onHoverMove: function (inst) {}
+	/* Called when some other option is hovered. */</code></pre>
+	</section><!--/.callbacks-->
 
-				<button class="button enable_option">enable third option</button>
+	<section id="api" class="section api">
+		<h2>API</h2>
+		<pre><code class="javascript">$.ikSelect.extendDefaults(settings);
+	/* Override defaults for new instances. */
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("enable_options", ['value3']);</code></pre>
-				</div>
+$(selector).ikSelect('reset');
+	/* Recreates fake select from scratch. */
 
-				<button class="button detach">detach</button>
+$(selector).ikSelect('redraw');
+	/*
+	Recalculates dimensions for the dropdown.
+	Use this if select's parent was hidden when ikSelect was applied to it
+	right after *show()*, *fadeIn()* or whatever you are using there.
+	*/
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_disable").ikSelect("detach");</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
+$(selector).ikSelect('addOptions', optionObject[, optionIndex, optgroupIndex]);
+$(selector).ikSelect('addOptions', optionObjectsArray[, optionIndex, optgroupIndex]);
+	/*
+	Add one or many options.
+	By default appends to the dropdown's root.
+	Optionally, tell at what index the option should appear.
+	Optionally, tell to optgroup at what index to add the option.
+	optionIndex is relative to optgroupIndex when the latter presents.
+	*/
 
-		<div class="row odd">
-			<div class="limit">
-				<div class="select_filter_wrap">
-					<h3>select with filter</h3>
-					<select class="select_filter">
-						<option value="value1">Albania</option>
-						<option value="value2">Egipt</option>
-						<option value="value3">Turkey</option>
-						<option value="value4">USA</option>
-						<option value="value5">Uganda</option>
-					</select>
-				</div><!--/.select_filter_wrap-->
+$(selector).ikSelect('addOptgroups', optgroupObject[, optgroupIndex]);
+$(selector).ikSelect('addOptgroups', optgroupObjectsArray[, optgroupIndex]);
+	/*
+	Add one or many optgroups.
+	By default appends to the dropdown's root.
+	Optionally, tell at what index the optgroup should appear.
+	*/
 
-				<div class="code">
-					<h4>view source</h4>
-					<pre><code class="javascript">$(".select_filter").ikSelect({
-	filter: true
-});</code></pre>
-				</div>
-			</div><!--/.limit-->
-		</div><!--/.row-->
-	</div><!--/.examples-->
+$(selector).ikSelect('removeOptions', optionIndex[, optgroupIndex]);
+$(selector).ikSelect('removeOptions', optionIndexesArray[, optgroupIndex]);
+	/*
+	Remove one or many options by index.
+	Optionally, set *optgroupIndex* to look for indexes within particular optgroup.
+	Set *optgroupIndex* as -1 to look only within root.
+	*/
 
-	<div class="links features">
-		<div class="limit">
-			<h2>Links</h2>
-			<ul>
-				<li><a href="https://github.com/Igor10k/ikSelect">github</a></li>
-				<li><a href="https://github.com/Igor10k/ikSelect/zipball/master">download</a></li>
-			</ul>
-		</div>
-	</div>
+$(selector).ikSelect('removeOptgroups', optgroupIndex);
+$(selector).ikSelect('removeOptgroups', optgroupIndexesArray);
+	/* Remove one or many optgroups by index. */
 
-	<div id="footer">
-		<div class="limit clearfix">
-			<div class="support">
-				Webmoney: <strong>Z334495514328</strong>, E409956596538, R339823641213<br>
-				Thanks for your support.
-			</div>
-			<div class="author">author: <a href="http://i10k.ru">i10k.ru</a></div>
-		</div>
-	</div>
+$(selector).ikSelect('select', optionValue[, isIndex]);
+	/*
+	Change selected option using option's value by default
+	or index if *isIndex* is *true*.
+	*/
+
+$(selector).ikSelect('showDropdown');
+	/*
+	Show fake select's dropdown.
+	Caution: on mobile devices this method shows the fake dropdown, not the native one
+	that is shown by default when tapping on the fake select itself.
+	*/
+
+$(selector).ikSelect('hideDropdown');
+	/* Hide fake select's dropdown. */
+
+$(selector).ikSelect('disable');
+	/*
+	Disable select.
+	Also adds 'ik_select_link_disabled' class to the 'ik_select_link'.
+	*/
+
+$(selector).ikSelect('enable');
+	/*
+	Enable select.
+	Also removes 'ik_select_link_disabled' class from the 'ik_select_link'.
+	*/
+
+$(selector).ikSelect('toggle'[, enableOrDisable]);
+	/*
+	Toggle select's state.
+	Optionally, set *enableOrDisable* as *true* or *false* to specify needed state.
+	*/
+
+$(selector).ikSelect('disableOptions', optionIndexOrValue[, isIndex]);
+$(selector).ikSelect('disableOptions', optionIndexesOrValuesArray[, isIndex]);
+	/*
+	Disable one or many options using option values by default
+	or option indexes if *isIndex* is *true*
+	*/
+
+$(selector).ikSelect('enableOptions', optionIndexOrValue[, isIndex]);
+$(selector).ikSelect('enableOptions', optionIndexesOrValuesArray[, isIndex]);
+	/*
+	Enable one or many options using option values by default
+	or option indexes if *isIndex* is *true*
+	*/
+
+$(selector).ikSelect('toggleOptions', optionIndexOrValue[, isIndex, enableOrDisable]);
+$(selector).ikSelect('toggleOptions', optionIndexesOrValuesArray[, isIndex, enableOrDisable]);
+	/*
+	Toggle one or many optgroups' state.
+	Optionally, set *enableOrDisable* as true/false to specify needed state.
+	*/
+
+$(selector).ikSelect('disableOptgroups', optgroupIndex);
+$(selector).ikSelect('disableOptgroups', optgroupIndexesArray);
+	/* Disable one or many optgroups. */
+
+$(selector).ikSelect('enableOptgroups', optgroupIndex);
+$(selector).ikSelect('enableOptgroups', optgroupIndexesArray);
+	/* Enable one or many optgroups. */
+
+$(selector).ikSelect('toggleOptgroups', optgroupIndex[, enableOrDisable]);
+$(selector).ikSelect('toggleOptgroups', optgroupIndexesArray[, enableOrDisable]);
+	/*
+	Toggle one or many optgroups' state.
+	Optionally, set *enableOrDisable* as true/false to specify needed state.
+	*/
+
+$(selector).ikSelect('detach');
+	/* Detach plugin from select and remove all traces. */</code></pre>
+	</section><!--/.api-->
+
+	<section id="examples" class="section examples">
+		<h2>Examples</h2>
+		<p>Check the <a href="examples.html">Examples</a> page.</p>
+	</section><!--/.examples-->
+
+	<footer class="footer">
+		<div class="author">author: <a href="http://igorkozlov.me">igorkozlov.me</a></div>
+	</footer><!--/.footer-->
 </div><!--/#wrap-->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="//yandex.st/highlightjs/7.3/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
 <script src="js/jquery.ikSelect.js"></script>
-<script src="js/examples.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="en-EN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Stylize selects across all browsers with ease">
+	<meta name="keywords" content="select,stylize,jquery,javascript,ikselect">
+	<meta name="author" content="Igor Kozlov">
+	<title>ikSelect 1.0.0</title>
+	<link rel="stylesheet" href="//yandex.st/highlightjs/7.3/styles/tomorrow.min.css">
+	<link rel="stylesheet" href="css/style.css" media="all">
+</head>
+<body>
+<div id="wrap">
+	<header class="header">
+		<h1>
+			<a href="index.html">
+				ikSelect
+			</a>
+			/
+			Examples
+		</h1>
+
+		<ul class="header-links">
+			<li><a href="https://github.com/Igor10k/ikSelect" title="GitHub"><i class="icon-github"></i></a></li>
+			<li><a href="https://github.com/Igor10k/ikSelect/zipball/master" title="Download"><i class="icon-cloud-download"></i></a></li>
+		</ul>
+
+		<nav class="header-nav">
+			<ul>
+				<li><a href="#options">Options</a></li>
+				<li><a href="#callbacks">Callbacks</a></li>
+				<li><a href="#api">API</a></li>
+			</ul>
+		</nav>
+	</header><!--/.header-->
+
+	<section id="options" class="section examples-options">
+		<h2>Options</h2>
+
+		<select>
+			<optgroup label="Seven Wonders of the Ancient World">
+				<option>Great Pyramid of Giza</option>
+				<option>Hanging Gardens of Babylon</option>
+				<option>Statue of Zeus at Olympia</option>
+				<option>Temple of Artemis at Ephesus</option>
+				<option>Mausoleum at Halicarnassus</option>
+				<option>Colossus of Rhodes</option>
+				<option>Lighthouse of Alexandria</option>
+			</optgroup>
+			<optgroup label="Seven Natural Wonders of the World">
+				<option>Grand Canyon</option>
+				<option>Great Barrier Reef</option>
+				<option>Harbor of Rio de Janeiro</option>
+				<option>Mount Everest</option>
+				<option>Aurora</option>
+				<option>Parícutin volcano</option>
+				<option>Victoria Falls</option>
+			</optgroup>
+		</select>
+
+		<p>Click on a row for an example that will affect the select above.</p>
+
+		<ul class="list-unordered list-examples">
+			<li>
+				<button class="btn btn-code"
+					data-value=   '&lt;div class="ik_select_link"&gt;&lt;div class="ik_select_link_text"&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="ik_select_dropdown"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
+					data-altvalue='&lt;div class="ik_select_link"&gt;&lt;div class="ik_select_link_text"&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="ik_select_dropdown"&gt;&lt;p&gt;Please, choose an option&lt;/p&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'>
+					<span class="title"><span class="key">syntax</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="true"
+					data-altvalue="false">
+					<span class="title"><span class="key">autoWidth</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="true"
+					data-altvalue="false">
+					<span class="title"><span class="key">ddFullWidth</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="true"
+					data-altvalue="false">
+					<span class="title"><span class="key">equalWidths</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="false"
+					data-altvalue="true">
+					<span class="title"><span class="key">dynamicWidth</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="false"
+					data-altvalue="true">
+					<span class="title"><span class="key">extractLink</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value=""
+					data-altvalue="examples-select">
+					<span class="title"><span class="key">customClass</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value=""
+					data-altvalue="examples-select-link">
+					<span class="title"><span class="key">linkCustomClass</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value=""
+					data-altvalue="examples-select-dd">
+					<span class="title"><span class="key">ddCustomClass</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="200"
+					data-altvalue="400">
+					<span class="title"><span class="key">ddMaxHeight</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="false"
+					data-altvalue="true">
+					<span class="title"><span class="key">isDisabled</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="false"
+					data-altvalue="true">
+					<span class="title"><span class="key">filter</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="Nothing found"
+					data-altvalue="I tried, but found nothing">
+					<span class="title"><span class="key">nothingFoundText</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+		</ul>
+	</section><!--/.options-->
+
+	<section id="callbacks" class="section examples-callbacks">
+		<h2>Callbacks and events</h2>
+
+		<select>
+			<optgroup label="Seven Wonders of the Ancient World">
+				<option>Great Pyramid of Giza</option>
+				<option>Hanging Gardens of Babylon</option>
+				<option>Statue of Zeus at Olympia</option>
+				<option>Temple of Artemis at Ephesus</option>
+				<option>Mausoleum at Halicarnassus</option>
+				<option>Colossus of Rhodes</option>
+				<option>Lighthouse of Alexandria</option>
+			</optgroup>
+			<optgroup label="Seven Natural Wonders of the World">
+				<option>Grand Canyon</option>
+				<option>Great Barrier Reef</option>
+				<option>Harbor of Rio de Janeiro</option>
+				<option>Mount Everest</option>
+				<option>Aurora</option>
+				<option>Parícutin volcano</option>
+				<option>Victoria Falls</option>
+			</optgroup>
+		</select>
+
+		<p>Click on a row for an example that will affect the select above.</p>
+
+		<ul class="list-unordered list-examples">
+			<li>
+				<button class="btn btn-code"
+					data-value="function (inst) {}"
+					data-altvalue="function (inst) { alert('onShow'); }">
+					<span class="title"><span class="key">onShow</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="function (inst) {}"
+					data-altvalue="function (inst) { alert('onHide'); }">
+					<span class="title"><span class="key">onHide</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="function (inst) {}"
+					data-altvalue="function (inst) { alert('onKeyDown'); }">
+					<span class="title"><span class="key">onKeyDown</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="function (inst) {}"
+					data-altvalue="function (inst) { alert('onKeyUp'); }">
+					<span class="title"><span class="key">onKeyUp</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-value="function (inst) {}"
+					data-altvalue="function (inst) { alert('onHoverMove'); }">
+					<span class="title"><span class="key">onHoverMove</span>:</span> <span class="value"></span>
+				</button>
+			</li>
+		</ul>
+	</section>
+
+	<section id="api" class="section examples-api">
+		<h2>API</h2>
+
+		<div class="select-wrap2">
+			<div class="select-wrap">
+				<div class="limit">
+					<select>
+						<optgroup label="Seven Wonders of the Ancient World">
+							<option value="1-1">Great Pyramid of Giza</option>
+							<option value="1-2">Hanging Gardens of Babylon</option>
+							<option value="1-3">Statue of Zeus at Olympia</option>
+							<option value="1-4">Temple of Artemis at Ephesus</option>
+							<option value="1-5">Mausoleum at Halicarnassus</option>
+							<option value="1-6">Colossus of Rhodes</option>
+							<option value="1-7">Lighthouse of Alexandria</option>
+						</optgroup>
+						<optgroup label="Seven Natural Wonders of the World">
+							<option value="2-1">Grand Canyon</option>
+							<option value="2-2">Great Barrier Reef</option>
+							<option value="2-3">Harbor of Rio de Janeiro</option>
+							<option value="2-4">Mount Everest</option>
+							<option value="2-5">Aurora</option>
+							<option value="2-6">Parícutin volcano</option>
+							<option value="2-7">Victoria Falls</option>
+						</optgroup>
+						<optgroup label="New7Wonders of Nature">
+							<option value="3-1">Iguazu Falls</option>
+							<option value="3-2">Jeju Island</option>
+							<option value="3-3">Komodo Island</option>
+							<option value="3-4">Puerto Princesa Underground River</option>
+							<option value="3-5">Table Mountain</option>
+							<option value="3-6">Halong Bay</option>
+							<option value="3-7">Amazon Rainforest</option>
+						</optgroup>
+					</select>
+				</div><!--/.limit-->
+			</div><!--/.select-wrap-->
+		</div>
+
+		<p>Click on a row for an example that will affect the select above. Another click returns the method description.</p>
+		<p>Options marked by <span class="dot"></span> for example purposes replace the select with a new instance before running.</p>
+		<p>Some attributes are <code class="required">required</code> and some are <code class="optional">optional</code>.</p>
+
+		<ul class="list-unordered list-examples">
+			<li>
+				<button class="btn btn-code"
+					data-extend="true"
+					data-altvalue="{ dynamicWidth: true }">
+				$.ikSelect.extendDefaults(<span class="value">settings</span>);</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true">
+					$(selector).ikSelect();
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'reset'</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'redraw'</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="{ value: 'Inserted option', label: 'Inserted option' }, 2, 0">
+					$(selector).ikSelect(<span class="method">'addOptions'</span><span class="value">, optionObject<span class="optional">, optionIndex, optgroupIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[{ value: 'Inserted array option', label: 'Inserted array option' }, { value: 'Inserted array option 2', label: 'Inserted array option 2' }]">
+					$(selector).ikSelect(<span class="method">'addOptions'</span><span class="value">, optionObjectsArray<span class="optional">, optionIndex, optgroupIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="{ label: 'Inserted optgroup' }, 0">
+					$(selector).ikSelect(<span class="method">'addOptgroups'</span><span class="value">,  optgroupObject<span class="optional">, optgroupIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[{ label: 'Inserted array optgroup' }, { label: 'Inserted array optgroup 2' }]">
+					$(selector).ikSelect(<span class="method">'addOptgroups'</span><span class="value">, optgroupObjectsArray<span class="optional">, optgroupIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="0">
+					$(selector).ikSelect(<span class="method">'removeOptions'</span><span class="value">, optionIndex<span class="optional">, optgroupIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[0, 1], 1">
+					$(selector).ikSelect(<span class="method">'removeOptions'</span><span class="value">, optionIndexesArray<span class="optional">, optgroupIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="0">
+					$(selector).ikSelect(<span class="method">'removeOptgroups'</span><span class="value">, optgroupIndex</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[0, 1]">
+					$(selector).ikSelect(<span class="method">'removeOptgroups'</span><span class="value">, optgroupIndexesArray</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="'2-2'">
+					$(selector).ikSelect(<span class="method">'select'</span><span class="value">, optionIndexOrValue<span class="optional">, isIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'showDropdown'</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'hideDropdown'</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'disable'</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'enable'</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'toggle'</span><span class="value"><span class="optional">, enableOrDisable</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="'1-1'">
+					$(selector).ikSelect(<span class="method">'disableOptions'</span><span class="value">, optionIndexOrValue<span class="optional">, isIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[2, 3], true">
+					$(selector).ikSelect(<span class="method">'disableOptions'</span><span class="value">, optionIndexesOrValuesArray<span class="optional">, isIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="'1-1'">
+					$(selector).ikSelect(<span class="method">'enableOptions'</span><span class="value">, optionIndexOrValue<span class="optional">, isIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[2, 3], true">
+					$(selector).ikSelect(<span class="method">'enableOptions'</span><span class="value">, optionIndexesOrValuesArray<span class="optional">, isIndex</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="'1-2'">
+					$(selector).ikSelect(<span class="method">'toggleOptions'</span><span class="value">, optionIndexOrValue<span class="optional">, isIndex, enableOrDisable</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="['2-2', '2-3']">
+					$(selector).ikSelect(<span class="method">'toggleOptions'</span><span class="value">, optionIndexesOrValuesArray<span class="optional">, isIndex, enableOrDisable</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="0">
+					$(selector).ikSelect(<span class="method">'disableOptgroups'</span><span class="value">, optgroupIndex</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[1, 2]">
+					$(selector).ikSelect(<span class="method">'disableOptgroups'</span><span class="value">, optgroupIndexesArray</span>);
+				</button>
+			</li>
+
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="0">
+					$(selector).ikSelect(<span class="method">'enableOptgroups'</span><span class="value">, optgroupIndex</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[1, 2]">
+					$(selector).ikSelect(<span class="method">'enableOptgroups'</span><span class="value">, optgroupIndexesArray</span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="0">
+					$(selector).ikSelect(<span class="method">'toggleOptgroups'</span><span class="value">, optgroupIndex<span class="optional">, enableOrDisable</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code"
+					data-reset="true"
+					data-altvalue="[1, 2]">
+					$(selector).ikSelect(<span class="method">'toggleOptgroups'</span><span class="value">, optgroupIndexesArray<span class="optional">, enableOrDisable</span></span>);
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-code">
+					$(selector).ikSelect(<span class="method">'detach'</span>);
+				</button>
+			</li>
+		</ul>
+	</section>
+
+	<footer class="footer">
+		<div class="author">author: <a href="http://igorkozlov.me">igorkozlov.me</a></div>
+	</footer><!--/.footer-->
+</div><!--/#wrap-->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="//yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="js/jquery.ikSelect.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
