@@ -1,6 +1,6 @@
-/*! ikSelect 1.0.0
-    Copyright (c) 2013 Igor Kozlov
-    http://igorkozlov.me */
+/*! ikSelect 1.0.1
+	Copyright (c) 2013 Igor Kozlov
+	http://igorkozlov.me */
 
 ;(function ($, window, document, undefined) {
 	var $window = $(window);
@@ -27,10 +27,41 @@
 
 	var instOpened; // instance of the currently opened select
 
-	$.browser = $.browser || {};
-	$.browser.webkit = $.browser.webkit || (/webkit/i.test(navigator.userAgent.toLowerCase()));
-	$.browser.mobile = (/iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase()));
-	$.browser.operamini = Object.prototype.toString.call(window.operamini) === '[object OperaMini]';
+	// browser detection part was taken from jQuery migrate
+	// https://github.com/jquery/jquery-migrate/blob/e6bda6a84c294eb1319fceb48c09f51042c80892/src/core.js
+	var uaMatch = function (ua) {
+		ua = ua.toLowerCase();
+
+		var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+			/(webkit)[ \/]([\w.]+)/.exec(ua) ||
+			/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+			/(msie) ([\w.]+)/.exec(ua) ||
+			ua.indexOf('compatible') < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+			[];
+
+		return {
+			browser: match[1] || '',
+			version: match[2] || '0'
+		};
+	};
+
+	if (! $.browser) {
+		var matched = uaMatch(navigator.userAgent);
+		var browser = {};
+
+		if (matched.browser) {
+			browser[matched.browser] = true;
+			browser.version = matched.version;
+		}
+
+		if (browser.chrome) {
+			browser.webkit = true;
+		} else if (browser.webkit) {
+			browser.safari = true;
+		}
+
+		$.browser = browser;
+	}
 
 	function IkSelect(element, options) {
 		var dataOptions = {}; // parsed data- attributes
@@ -264,10 +295,16 @@
 				}
 				break;
 			default:
-				if (type === 'keyup' && $(this).is(this.$el)) {
+				if (type === 'keyup' && $handle.is(this.$el)) {
 					this._syncOriginalOption();
 				}
 				break;
+			}
+
+			// mozilla ignores preventDefault for select navigation
+			// this ensures that original select is in sync
+			if (type === 'keyup' && $.browser.mozilla) {
+				this._syncFakeOption();
 			}
 
 			if (type === 'keydown') {

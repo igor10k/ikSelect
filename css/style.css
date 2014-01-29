@@ -45,6 +45,7 @@ table{border-collapse:collapse;border-spacing:0}
 .icon-arrow-right:before,.list-unordered li:before{content:"\e603"}
 .icon-arrow-up:before,.intro-select-osx-link .ik_select_link_text:after{content:"\e604"}
 html{background:#fff;font:200 16px/1.3 'Helvetica Neue',Helvetica,Arial,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif;color:#444}
+body{cursor:default}
 .font-monotype,pre,code,pre code,.btn-code{font:14px/1.3 Menlo,"Courier New",Courier,FreeMono,"Nimbus Mono L","Liberation Mono",monospace}
 pre,code,pre code{margin:0;padding:0;-moz-tab-size:4;-o-tab-size:4;tab-size:4}
 a{text-decoration:none;color:#a59641;}
