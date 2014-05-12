@@ -1,4 +1,4 @@
-/*! ikSelect 1.0.1
+/*! ikSelect 1.0.2
 	Copyright (c) 2013 Igor Kozlov
 	http://igorkozlov.me */
 
@@ -62,6 +62,9 @@
 
 		$.browser = browser;
 	}
+
+	$.browser.mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile/i.test(navigator.userAgent);
+	$.browser.operamini = Object.prototype.toString.call(window.operamini) === "[object OperaMini]";
 
 	function IkSelect(element, options) {
 		var dataOptions = {}; // parsed data- attributes

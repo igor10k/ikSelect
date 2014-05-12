@@ -1,4 +1,4 @@
-# [ikSelect 1.0.1](http://igor10k.github.com/ikSelect/)
+# [ikSelect 1.0.2](http://igor10k.github.com/ikSelect/)
 
 ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.github.com/ikSelect/) for more info.
 
