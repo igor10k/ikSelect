@@ -81,7 +81,7 @@ ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.git
 				*/
 			}
 
-		.ik_select_block{
+		.ik_select_dropdown{
 			/*
 			Dropdown wrapper. Needed for script calculations.
 			You should not add any visual styles here.
@@ -131,11 +131,11 @@ For the **data-** attibutes use lowercased options!
 *(data-autowidth="true", data-customclass="someclass", etc)*
 
 ```javascript
-syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_block"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
+syntax: '&lt;div class="ik_select_link"&gt;&lt;span class="ik_select_link_text"&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class="ik_select_dropdown"&gt;&lt;div class="ik_select_list"&gt;&lt;/div&gt;&lt;/div&gt;'
 	/*
 	Custom syntax for the fake select.
 	The only condition is that "ik_select_link_text" should be inside of "ik_select_link" and
-	"ik_select_list" should be inside of "ik_select_block".
+	"ik_select_list" should be inside of "ik_select_dropdown".
 	*/
 
 autoWidth: true,
