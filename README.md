@@ -61,13 +61,13 @@ ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.git
 		Probably you should not add any styles here
 		*/
 	}
-		.ik_select_link{
+		.ik_select_link {
 			/* Fake select you click on to open the dropdown */
 		}
-		.ik_select_link_focus{
+		.ik_select_link_focus {
 			/* Focused state of the fake select */
 		}
-		.ik_select_link_disabled{
+		.ik_select_link_disabled {
 			/* Disabled state of the fake select */
 		}
 			.ik_select_link_text {
@@ -81,7 +81,7 @@ ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.git
 				*/
 			}
 
-		.ik_select_dropdown{
+		.ik_select_dropdown {
 			/*
 			Dropdown wrapper. Needed for script calculations.
 			You should not add any visual styles here.
@@ -91,7 +91,7 @@ ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.git
 			left: -5px;
 			*/
 		}
-			.ik_select_list{
+			.ik_select_list {
 				/*
 				Wrapper for the options list.
 				Now that's a good place to add visual styles.
@@ -100,13 +100,16 @@ ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.git
 				.ik_select_optgroup {
 					/* Optgroup */
 				}
-					.ik_select_optgroup_label{
+					.ik_select_optgroup_label {
 						/* Optgroup label */
 					}
 					.ik_select_option {
 						/* Option */
 					}
-					.ik_select_hover{
+						.ik_select_option_label {
+							/* Option label */
+						}
+					.ik_select_hover {
 						/* The hovered state of an option */
 					}
 					.ik_select_active {
@@ -116,7 +119,7 @@ ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.git
 			.ik_select_filter_wrap {
 				/* Wrapper for the filter input */
 			}
-			.ik_select_filter{
+			.ik_select_filter {
 				/* Filter input */
 			}
 			.ik_nothing_found {
