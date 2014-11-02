@@ -87,7 +87,8 @@
 
 	$.extend(IkSelect.prototype, {
 		init: function () {
-			this.$wrapper = $('<div class="ik_select">' + this.options.syntax + '</div>'); // wrapper for the fake select and the fake dropdown
+			var originalClasses = $(this.el).attr('class');
+			this.$wrapper = $('<div class="ik_select ' + originalClasses + '">' + this.options.syntax + '</div>'); // wrapper for the fake select and the fake dropdown
 			this.$link = $('.ik_select_link', this.$wrapper); // fake select
 			this.$linkText = $('.ik_select_link_text', this.$wrapper); // fake select's text
 			this.$dropdown = $('.ik_select_dropdown', this.$wrapper); // fake dropdown
