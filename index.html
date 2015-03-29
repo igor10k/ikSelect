@@ -5,7 +5,7 @@
 	<meta name="description" content="Stylize selects across all browsers with ease">
 	<meta name="keywords" content="select,stylize,jquery,javascript,ikselect">
 	<meta name="author" content="Igor Kozlov">
-	<title>ikSelect 1.0.2</title>
+	<title>ikSelect 1.0.3</title>
 	<link rel="stylesheet" href="//yandex.st/highlightjs/7.3/styles/tomorrow.min.css">
 	<link rel="stylesheet" href="css/style.css" media="all">
 </head>
@@ -16,7 +16,7 @@
 			<a href="index.html">
 				ikSelect
 			</a>
-			<span>1.0.2</span>
+			<span>1.0.3</span>
 		</h1>
 
 		<ul class="header-links">
@@ -295,7 +295,10 @@ nothingFoundText: 'Nothing found'
 			After each callback there's also an event emitted.
 			Just replace <strong>on</strong> with <strong>ik</strong> and use lowercase.
 			<em>(ikshow, ikkeydown, etc)</em></p>
-		<pre><code class="javascript">onShow: function (inst) {}
+		<pre><code class="javascript">onInit: function (inst) {}
+	/* Called just after plugin is initialized. */
+
+onShow: function (inst) {}
 	/* Called just after dropdown was showed. */
 
 onHide: function (inst) {}

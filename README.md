@@ -1,4 +1,4 @@
-# [ikSelect 1.0.2](http://igor10k.github.com/ikSelect/)
+# [ikSelect 1.0.3](http://igor10k.github.com/ikSelect/)
 
 ikSelect helps you stylize selects. Check the plugin's [page](http://igor10k.github.com/ikSelect/) for more info.
 
@@ -195,6 +195,9 @@ Just replace **on** with **ik** and use lowercase.
 *(ikshow, ikkeydown, etc)*
 
 ```javascript
+onInit: function (inst) {}
+	/* Called just after plugin is initialized. */
+
 onShow: function (inst) {}
 	/* Called just after dropdown was showed. */
 

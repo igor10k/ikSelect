@@ -1,4 +1,4 @@
-/*! ikSelect 1.0.2
+/*! ikSelect 1.0.3
 	Copyright (c) 2013 Igor Kozlov
 	http://igorkozlov.me */
 
@@ -18,6 +18,7 @@
 		filter: false,
 		nothingFoundText: 'Nothing found',
 		isDisabled: false,
+		onInit: function() {},
 		onShow: function () {},
 		onHide: function () {},
 		onKeyUp: function () {},
@@ -167,6 +168,9 @@
 
 			// move original select inside the wrapper
 			this.$el.appendTo(this.$wrapper);
+
+			this.options.onInit(this);
+			this.$el.trigger('ikinit', this);
 		},
 
 		// click listener for fake select
@@ -621,7 +625,8 @@
 		// hides dropdown
 		hideDropdown: function () {
 			if (this.options.filter) {
-				this.$filter.val('').keyup();
+				this.$filter.val('');
+				this._filterKeyup();
 			}
 
 			this.$dropdown.hide().appendTo(this.$wrapper).css({
