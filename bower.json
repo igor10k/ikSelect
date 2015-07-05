@@ -1,0 +1,31 @@
+{
+  "name": "ikselect",
+  "version": "1.0.3",
+  "description": "Stylize selects across all browsers with ease",
+  "keywords": [
+    "select",
+    "stylize",
+    "jquery",
+    "javascript",
+    "ikselect"
+  ],
+  "homepage": "http://igor10k.github.com/ikSelect/",
+  "authors": [
+    "i10k <me@igorkozlov.me>"
+  ],
+  "main": "src/jquery.ikSelect.js",
+  "moduleType": [
+    "amd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Igor10k/ikSelect.git"
+  },
+  "dependencies": {
+    "jquery": ">= 1.8.0"
+  },
+  "license": "MIT",
+  "ignore": [
+    "node_modules"
+  ]
+}
