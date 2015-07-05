@@ -2,7 +2,13 @@
 	Copyright (c) 2013 Igor Kozlov
 	http://igorkozlov.me */
 
-;(function ($, window, document, undefined) {
+;(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], factory);
+	} else {
+		factory(jQuery);
+	}
+}(function ($) {
 	var $window = $(window);
 	var defaults = {
 		syntax: '<div class="ik_select_link"><div class="ik_select_link_text"></div></div><div class="ik_select_dropdown"><div class="ik_select_list"></div></div>',
@@ -1043,4 +1049,4 @@
 			instOpened.hideDropdown();
 		}
 	});
-})(jQuery, window, document);
+}));
