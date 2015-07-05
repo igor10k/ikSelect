@@ -15,6 +15,7 @@
 		linkCustomClass: '',
 		ddCustomClass: '',
 		ddMaxHeight: 200,
+		extraWidth: 0,
 		filter: false,
 		nothingFoundText: 'Nothing found',
 		isDisabled: false,
@@ -65,7 +66,7 @@
 	}
 
 	$.browser.mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile/i.test(navigator.userAgent);
-	$.browser.operamini = Object.prototype.toString.call(window.operamini) === "[object OperaMini]";
+	$.browser.operamini = Object.prototype.toString.call(window.operamini) === '[object OperaMini]';
 
 	function IkSelect(element, options) {
 		var dataOptions = {}; // parsed data- attributes
@@ -532,7 +533,7 @@
 				this.$dropdown.show().width(9999);
 				this.$listInner.css('float', 'left');
 				this.$list.css('float', 'left');
-				maxWidthOuter = this.$list.outerWidth(true);
+				maxWidthOuter = this.$list.outerWidth(true) + (this.options.extraWidth || 0);
 				scrollbarWidth = this.$listInner.width() - this.$listInnerUl.width();
 				this.$list.css('float', '');
 				this.$listInner.css('float', '');
@@ -630,9 +631,10 @@
 			}
 
 			this.$dropdown.hide().appendTo(this.$wrapper).css({
-				'left': '',
-				'top': ''
+				left: '',
+				top: ''
 			});
+
 			if (this.options.extractLink) {
 				this.$wrapper.outerWidth(this.$wrapper.data('outerWidth'));
 				this.$wrapper.height('');
@@ -643,6 +645,7 @@
 					zIndex: ''
 				}).prependTo(this.$wrapper);
 			}
+
 			instOpened = null;
 			this.$el.focus();
 

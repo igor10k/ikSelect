@@ -4,8 +4,8 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		stylus: {
 			dist: {
-				src: ['css/style.styl'],
-				dest: 'css/style.css'
+				src: ['docs/css/style.styl'],
+				dest: 'docs/css/style.css'
 			}
 		},
 		uglify: {
@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				files: {
-					'js/jquery.ikSelect.min.js': ['js/jquery.ikSelect.js']
+					'dist/jquery.ikSelect.min.js': ['src/jquery.ikSelect.js']
 				}
 			}
 		},
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			stylus: {
-				files: 'css/*.styl',
+				files: 'docs/css/*.styl',
 				tasks: ['stylus']
 			},
 			livereload: {
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
 				options: {
 					livereload: true
 				},
-				files: ['*.html', 'js/*.js']
+				files: ['*.html', '**/*.js']
 			}
 		}
 	});

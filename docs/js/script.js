@@ -1,4 +1,8 @@
 $(function () {
+	$.ikSelect.extendDefaults({
+		extraWidth: 1
+	});
+
 	var $sectionSet = $('.section');
 
 	$('.intro-select1').ikSelect({
@@ -133,7 +137,7 @@ $(function () {
 				var $value = $('.value', $button);
 
 				var renderValue = function () {
-					$value.text(typeof currentValue === 'string' ? ("'" + currentValue + "'") : currentValue);
+					$value.text(typeof currentValue === 'string' ? ('\'' + currentValue + '\'') : currentValue);
 				};
 
 				var storeValue = function () {
