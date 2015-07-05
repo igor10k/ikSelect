@@ -1,4 +1,4 @@
-/*! ikSelect 1.0.3
+/*! ikSelect 1.1.0
 	Copyright (c) 2013 Igor Kozlov
 	http://igorkozlov.me */
 
